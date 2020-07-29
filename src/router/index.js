@@ -17,6 +17,7 @@ const routes = [
     redirect: '/home',
     children: [
       { path: '/home', name: 'home', component: () => import('./../views/home/index.vue') },
+      { path: '/login', name: 'login', component: () => import('./../views/login.vue') },
       // 活动
       { path: '/activity', name: 'activity', component: () => import('./../views/activity/index.vue') },
       { path: '/activityDetail', name: 'activityDetail', component: () => import('./../views/activity/activityDetail/activityDetail.vue') },
