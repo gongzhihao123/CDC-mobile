@@ -21,3 +21,12 @@ export function apiGetArticlePage (pageNo, pageSize, data) {
     .then(res => res.data)
     .catch((e) => {})
 }
+export function apiArticleReading (articleId) {
+  return request({
+    url: '/api/article/reading/' + articleId,
+    method: 'post',
+    isNeedLogin: true
+  })
+    .then(res => res.data)
+    .catch((e) => {})
+}

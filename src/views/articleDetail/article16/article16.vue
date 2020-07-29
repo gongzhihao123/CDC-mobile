@@ -10,18 +10,18 @@
           <div class="articleTitle">1.什么样的课桌椅更有利于保护视力与预防近视？</div>
           <p>与孩子身高相匹配的课桌椅可以有效保护视力，预防近视。生活中，我们经常见到这样的情景，孩子趴在餐桌上或者坐在床上写作业、学习，有的是因为家里空间的限制，也有的是因为家长不够重视。很多父母在家装中对孩子的考量很周全了，但却忽略了孩子家庭学习阅读的灯光、学习桌椅的布置。</p>
           <div class="articleTitle">2.什么是正确的桌椅高度？</div>
-          <image mode="widthFix"  v-if="imgList.length > 0" :src="imgList[0]"></image>
+          <img v-if="imgList.length > 0" :src="readPath + imgList[0]"/>
           <p>不合适的桌椅会对坐姿、视距造成很大的影响，导致近视和脊柱弯曲等疾病的发生，家里要配备学习专用的课桌椅，而不能用餐桌，餐椅或者是床来代替。</p>
-          <image mode="widthFix"  v-if="imgList.length > 0" :src="imgList[1]"></image>
+          <img v-if="imgList.length > 0" :src="readPath + imgList[1]"/>
           <p>因为餐桌、餐椅经常会过高，床软而且低，都不能替代正规的课桌椅。对于有可调式桌椅的家庭，可以根据孩子的身高，按照中小学课桌椅尺寸与学生身高对照表找到适合孩子的桌面高和座面高。</p>
-          <image mode="widthFix"  v-if="imgList.length > 0" :src="imgList[2]"></image>
+          <img v-if="imgList.length > 0" :src="readPath + imgList[2]"/>
           <p>那么，什么是正确的桌椅高度呢？正确的桌椅高度应该能使人坐着的时候保持两个基本垂直：1当两脚平放在地面时，大腿与小腿能够基本垂直。2当两臂自然下垂时，上臂与小臂基本垂直，这时桌面高度应该刚好与小臂下平面接触。</p>
-          <image mode="widthFix"  v-if="imgList.length > 0" :src="imgList[3]"></image>
+          <img v-if="imgList.length > 0" :src="readPath + imgList[3]"/>
           <div class="articleTitle">3.如何调整桌椅的高度？</div>
           <p>对于有可调试桌椅的家庭，可以根据孩子的身高进行调试，找到适合孩子的桌面高和座面高。
   桌面高：桌面近胸缘距离地面的高度
   座面高：椅前缘离地面的高度</p>
-          <image mode="widthFix"  v-if="imgList.length > 0" :src="imgList[4]"></image>
+          <img v-if="imgList.length > 0" :src="readPath + imgList[4]"/>
           <p>家长可使用简单的方法来调整家里的课桌椅，如果桌子高了就尽可能使用高一点的椅子，使用高一点的椅子之后要在脚下垫一个脚垫，要使脚能平放在脚垫上，保持大腿和小腿垂直。当桌子或者椅子过矮的时候，要将桌子或者是椅子垫高。</p>
           <p>孩子处在生长发育阶段，身高每年都在变化，而与孩子身高不匹配的课桌椅，不仅会影响孩子视力，还会导致弯腰驼背，因此，要根据孩子身高定期调整课桌椅，避免“过期”桌椅。</p>
           <div class="articleTitle">4.学校课桌椅设置</div>
@@ -32,16 +32,46 @@
   </div>
 </template>
 <script>
+import { apiArticleReading } from '@/services/api/index_cs'
 export default {
   data () {
     return {
       imgList: [
-        this.readPath + '/common/attachment?filepath=/articleimage/16/' + 1 + '.png',
-        this.readPath + '/common/attachment?filepath=/articleimage/16/' + 2 + '.png',
-        this.readPath + '/common/attachment?filepath=/articleimage/16/' + 3 + '.png',
-        this.readPath + '/common/attachment?filepath=/articleimage/16/' + 4 + '.png',
-        this.readPath + '/common/attachment?filepath=/articleimage/16/' + 5 + '.png'
-      ]
+        'articleimage/16/' + 1 + '.png',
+        'articleimage/16/' + 2 + '.png',
+        'articleimage/16/' + 3 + '.png',
+        'articleimage/16/' + 4 + '.png',
+        'articleimage/16/' + 5 + '.png'
+      ],
+      timer: '',
+      time: '',
+      clickCount: 0
+    }
+  },
+  computed: {
+    readPath () {
+      return window.location.origin + '/activity/common/attachment?filepath='
+    }
+  },
+  mounted () {
+    this.initTimer()
+  },
+  beforeDestroy () {
+    this.destoryTimer()
+  },
+  methods: {
+    initTimer () {
+      this.timer = setInterval(() => { this.getReading() }, 10000)
+    },
+    destoryTimer () {
+      clearInterval(this.timer)
+    },
+    getReading () {
+      apiArticleReading(16)
+        .then(res => {})
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
