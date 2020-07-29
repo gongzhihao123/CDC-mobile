@@ -30,7 +30,20 @@ const routes = [
       { path: '/article18', name: 'article18', component: () => import('./../views/articleDetail/article18/article18.vue') },
       { path: '/article19', name: 'article19', component: () => import('./../views/articleDetail/article19/article19.vue') },
       { path: '/article20', name: 'article20', component: () => import('./../views/articleDetail/article20/article20.vue') },
-      { path: '/article21', name: 'article21', component: () => import('./../views/articleDetail/article21/article21.vue') }
+      { path: '/article21', name: 'article21', component: () => import('./../views/articleDetail/article21/article21.vue') },
+      // 打卡&分享
+      { path: '/clockIn', name: 'clockIn', component: () => import('./../views/clockIn/clockIn.vue') },
+      { path: '/record', name: 'record', component: () => import('./../views/clockIn/record/record.vue') },
+      { path: '/share', name: 'share', component: () => import('./../views/share/share.vue') },
+      { path: '/clockShare', name: 'clockShare', component: () => import('./../views/clockShare/clockShare.vue') },
+      // 健康小达人
+      { path: '/healthDarren', name: 'healthDarren', component: () => import('./../views/healthDarren/healthDarren.vue') },
+      // 我的
+      { path: '/ours', name: 'ours', component: () => import('./../views/ours/ours.vue') },
+      { path: '/bindUser', name: 'bindUser', component: () => import('./../views/ours/bindUser/bindUser.vue') },
+      { path: '/punchRecord', name: 'punchRecord', component: () => import('./../views/ours/punchRecord/punchRecord.vue') },
+      { path: '/userActivityRecord', name: 'userActivityRecord', component: () => import('./../views/ours/userActivityRecord/userActivityRecord.vue') },
+      { path: '/userSwitch', name: 'userSwitch', component: () => import('./../views/ours/userSwitch/userSwitch.vue') }
     ]
   }
 ]
