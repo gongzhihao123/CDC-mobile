@@ -2,18 +2,13 @@
   <div class="home">
     <div class="container">
       <text class="stickyTitle">健康知识</text>
-      <van-button type="primary">主要按钮</van-button>
-      <van-button type="info">信息按钮</van-button>
-      <van-button type="default">默认按钮</van-button>
-      <van-button type="warning">警告按钮</van-button>
-      <van-button type="danger">危2按钮</van-button>
       <div bindtap="hidenModals">
         <div class="homeBackground">
           <img class="homeBackgroundImg" src="./../../assets/img/homeBackground.png" />
           <div class="rotation">
             <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" v-for="(item, index) in imgUrl" :key="index">
               <van-swipe-item >
-                <img :src="item.src" />
+                <img :src="item" />
               </van-swipe-item>
               <van-swipe-item>
                 <img src="./../../assets/img/banner3.png" />
@@ -45,8 +40,8 @@ export default {
         isFixedTop: false,
         readFile: '',
         imgUrl: [
-          { src: 'https://img.yzcdn.cn/vant/apple-1.jpg' },
-          { src: 'https://img.yzcdn.cn/vant/apple-2.jpg' }
+          'https://img.yzcdn.cn/vant/apple-1.jpg',
+          'https://img.yzcdn.cn/vant/apple-2.jpg'
         ]
       }
     }
