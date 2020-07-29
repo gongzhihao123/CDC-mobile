@@ -12,12 +12,8 @@ export function apiGetActivityList (param) {
     .catch((e) => {})
 }
 export function apiGetArticlePage (pageNo, pageSize, data) {
-  return request({
-    url: '/api/article/articlePage/' + pageNo + '/' + pageSize,
-    method: 'get',
-    data: data,
-    isNeedLogin: true
-  })
+  console.log(data)
+  return request.get('/api/article/articlePage/' + pageNo + '/' + pageSize, { params: data })
     .then(res => res.data)
     .catch((e) => {})
 }

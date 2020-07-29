@@ -9,7 +9,7 @@
 <script>
 // @ is an alias to /src
 import Footer from './../components/common/footer'
-import { apiTest, apiList } from '@/services/api/index'
+import { apiTest } from '@/services/api/index'
 
 export default {
   name: 'index',
@@ -21,24 +21,11 @@ export default {
       // let data = {
       //   channelIds: 5
       // }
-      apiList(1, 5, { channelIds: 5 })
-        .then((res) => {
-          console.log('sd', res)
-        })
     },
     getList () {
-      apiList({
-        pageNo: 1,
-        pageSize: 10,
-        applyState: 1
-      })
-        .then((res) => {
-          console.log('sss', res)
-        })
     }
   },
   mounted () {
-    this.getApi()
   }
 }
 </script>
@@ -47,10 +34,6 @@ export default {
 .index {
   height: 100%;
   background: #fff;
-  .hello{
-    font-size: 18px;
-    color:red;
-  }
 }
 
 </style>
