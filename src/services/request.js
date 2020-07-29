@@ -11,7 +11,9 @@ import { Toast } from 'vant'
 // import { getToken } from './common.js'
 const request = axios.create({
   baseURL: config.default, // 获取基础公共路径,
-  header: 'Content-Security-Policy: upgrade-insecure-requests',
+  headers: {
+    'Content-Type': 'application/json;charse=UTF-8'
+  },
   timeout: 10000 // 允许超时时限设置10s
 })
 
@@ -35,7 +37,7 @@ request.interceptors.request.use(function (config) {
       config.method === 'delete' ||
       config.method === 'patch'
   ) {
-    config.data = queryString.stringify(config.data)
+    config.data = JSON.stringify(config.data)
   } else {
     if (!config.data) {
       config.data = ''

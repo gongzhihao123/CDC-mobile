@@ -6,7 +6,7 @@ export function apiLogin (param) {
   return request({
     url: '/api/login/login',
     method: 'post',
-    param: param,
+    data: param,
     isNeedLogin: true
   })
     .then(res => res.data)
@@ -14,11 +14,11 @@ export function apiLogin (param) {
 }
 
 // 注册
-export function apiReg (param) {
+export function apiReg (data) {
   return request({
     url: '/api/login/wechatUser',
     method: 'post',
-    param: param,
+    data: data,
     isNeedLogin: true
   })
     .then(res => res.data)
@@ -29,7 +29,7 @@ export function apiList (pageNo, pageSize, data) {
   return request({
     url: '/api/article/articlePage/' + pageNo + '/' + pageSize,
     method: 'get',
-    params: data,
+    data: data,
     isNeedLogin: true
   })
     .then(res => res.data)

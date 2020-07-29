@@ -39,7 +39,12 @@ export default {
       } else {
         apiReg({ account: this.userName })
           .then(res => {
-            if (res.code === 1) {}
+            if (res.code === 1) {
+              this.$toast(res.message)
+              this.isReg = false
+            } else {
+              this.$toast(res.message)
+            }
           })
       }
     },
@@ -67,6 +72,7 @@ export default {
         })
           .then((res) => {
             if (res.code === 1) {
+              this.$toast(res.message)
               this.$router.push('/home')
               sessionStorage.setItem('userName', this.userName)
             }
@@ -87,7 +93,7 @@ export default {
   .login .form-item button { height: 50px; border: 0; border-radius: 25px; font-size: 18px; color: #1f6f4a; outline: none; cursor: pointer; background-color: #fff; }
   .login .username { background: url(./../assets/img/emil.png) 20px 14px no-repeat; }
   .login .password { background: url(./../assets/img/password.png) 23px 11px no-repeat; }
-  .login .tip { display: none; position: absolute; left: 20px; top: 52px; font-size: 14px; color: #f50; }
+  .login .tip { position: absolute; left: 20px; top: 52px; font-size: 14px; color: #f50; }
   .login .reg-bar { margin: 20px auto 0; font-size: 14px; overflow: hidden;}
   .login .reg-bar span { color: #fff; text-decoration: none; }
   .login .reg-bar span:hover { text-decoration: underline; }

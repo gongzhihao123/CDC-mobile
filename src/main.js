@@ -17,10 +17,11 @@ import {
   Sticky,
   List,
   Col,
-  Row
+  Row,
+  Toast
 } from 'Vant'
 Vue
-  .use(Button).use(Swipe).use(SwipeItem).use(Sticky).use(List).use(Col).use(Row)
+  .use(Button).use(Swipe).use(SwipeItem).use(Sticky).use(List).use(Col).use(Row).use(Toast)
 
 FastClick.attach(document.body)
 
