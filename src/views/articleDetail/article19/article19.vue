@@ -7,12 +7,8 @@
         </div>
         <div class="infoContent">
           <div class='div_img' v-for="(image, index) in imgList" :item="image" :key="index">
-              <img :src="readPath + image"/>
+              <van-image lazy-load :src="readPath + image"/>
           </div>
-          <!-- <img src="./../../../assets/img/banner1.jpeg"/>
-          <div class="articleTitle">措施十：严格强化监督问责</div>
-          <img src="./../../../assets/img/banner1.png"/>
-          <p>学校：建立并严格落实各区、学校、班级每年开展儿童青少年近视防控工作评议考核制度。将儿童青少年近视防控工作、总体近视率和体质健康状况纳入学校绩效考核，对儿童青少年体质健康水平下降的区、校依法依规予以问责。学校对视力明显下降的学生家长和班主任进行约谈。</p> -->
         </div>
     </div>
   </div>

@@ -18,10 +18,12 @@ import {
   List,
   Col,
   Row,
-  Toast
+  Toast,
+  Image as VanImage,
+  Lazyload
 } from 'Vant'
 Vue
-  .use(Button).use(Swipe).use(SwipeItem).use(Sticky).use(List).use(Col).use(Row).use(Toast)
+  .use(Button).use(Swipe).use(SwipeItem).use(Sticky).use(List).use(Col).use(Row).use(Toast).use(VanImage).use(Lazyload)
 
 FastClick.attach(document.body)
 
