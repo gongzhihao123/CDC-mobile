@@ -30,3 +30,13 @@ export function apiArticleReading (articleId) {
     .then(res => res.data)
     .catch((e) => {})
 }
+export function apiGetSharePageByActivity (pageNo, pageSize, data) {
+  return request({
+    url: '/api/share/sharePage/' + pageNo + '/' + pageSize,
+    method: 'get',
+    data: data,
+    isNeedLogin: true
+  })
+    .then(res => res.data)
+    .catch((e) => {})
+}
