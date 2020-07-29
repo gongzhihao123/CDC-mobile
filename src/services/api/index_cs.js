@@ -5,7 +5,7 @@ export function apiGetActivityList (param) {
   return request({
     url: '/api/join/activityList',
     method: 'get',
-    param: param,
+    data: param,
     isNeedLogin: true
   })
     .then(res => res.data)
@@ -15,7 +15,7 @@ export function apiGetArticlePage (pageNo, pageSize, data) {
   return request({
     url: '/api/article/articlePage/' + pageNo + '/' + pageSize,
     method: 'get',
-    params: data,
+    data: data,
     isNeedLogin: true
   })
     .then(res => res.data)
