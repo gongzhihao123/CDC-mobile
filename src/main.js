@@ -9,6 +9,14 @@ import './lib/rem.js'
 import './assets/style/index.css'
 
 import FastClick from 'fastclick'
+import {
+  Button,
+  Swipe,
+  SwipeItem
+} from 'Vant'
+import 'vant/lib/index.css'
+Vue
+  .use(Button).use(Swipe).use(SwipeItem)
 
 FastClick.attach(document.body)
 
