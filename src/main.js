@@ -9,14 +9,18 @@ import './lib/rem.js'
 import './assets/style/index.css'
 
 import FastClick from 'fastclick'
+import 'vant/lib/index.css'
 import {
   Button,
   Swipe,
-  SwipeItem
+  SwipeItem,
+  Sticky,
+  List,
+  Col,
+  Row
 } from 'Vant'
-import 'vant/lib/index.css'
 Vue
-  .use(Button).use(Swipe).use(SwipeItem)
+  .use(Button).use(Swipe).use(SwipeItem).use(Sticky).use(List).use(Col).use(Row)
 
 FastClick.attach(document.body)
 

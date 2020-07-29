@@ -54,7 +54,7 @@ module.exports = {
   },
   devServer: {
     host: '0.0.0.0',
-    port: 8088, // 端口号
+    port: 8080, // 端口号
     https: false, // https:{type:Boolean}
     open: true, // 配置自动启动浏览器  open: 'Google Chrome'-默认启动谷歌
     hot: true,
@@ -65,7 +65,7 @@ module.exports = {
         ws: true, // 代理的WebSockets
         changeOrigin: true, // 允许websockets跨域
         pathRewrite: {
-          '^/activity': ''
+          '^/activity': '/activity'
         }
       }
     }
