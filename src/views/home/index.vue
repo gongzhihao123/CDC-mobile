@@ -1,38 +1,36 @@
 <template>
   <div class="home">
     <div class="container">
-      <div bindtap="hidenModals">
-        <div class="homeBackground">
-          <img class="homeBackgroundImg" src="./../../assets/img/homeBackground.png" />
-          <div class="rotation">
-            <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-              <van-swipe-item v-for="(image, index) in imgUrls" :key="index">
-                <img :src="readPath + image.carouselImg" />
-              </van-swipe-item>
-              <van-swipe-item>
-                <img src="./../../assets/img/banner3.png" />
-              </van-swipe-item>
-            </van-swipe>
-          </div>
-          <div class="stickyTitle">
-            <van-sticky>
-              <p @click="getArticleList">基础用法</p>
-            </van-sticky>
-          </div>
-          <div class="articleList">
-            <van-list
-              v-model="listLoading"
-              :finished="listFinished"
-              finished-text="没有更多了"
-            >
-              <van-row  v-for="article in articleList" :key="article.id" :title="article.title" >
-                <van-col span="6"><img :src="readPath + article.thumbnailPath" /></van-col>
-                <van-col span="1"></van-col>
-                <van-col span="13"><span>{{ article.title }}</span></van-col>
-                <van-col span="4"><span>浏览{{ article.clickCount }}次</span></van-col>
-              </van-row>
-            </van-list>
-          </div>
+      <div class="home-header">首页</div>
+      <div class="homeBackground">
+        <div class="rotation">
+          <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+            <van-swipe-item v-for="(image, index) in imgUrls" :key="index">
+              <img :src="readPath + image.carouselImg" />
+            </van-swipe-item>
+            <van-swipe-item>
+              <img src="./../../assets/img/banner3.png" />
+            </van-swipe-item>
+          </van-swipe>
+        </div>
+        <div class="stickyTitle">
+          <van-sticky>
+            <p @click="getArticleList">基础用法</p>
+          </van-sticky>
+        </div>
+        <div class="articleList">
+          <van-list
+            v-model="listLoading"
+            :finished="listFinished"
+            finished-text="没有更多了"
+          >
+            <van-row  v-for="article in articleList" :key="article.id" :title="article.title" @click="clickArticle(article.id)">
+              <van-col span="6"><img :src="readPath + article.thumbnailPath" /></van-col>
+              <van-col span="1"></van-col>
+              <van-col span="12" class="homeArtcileInfoTitle"><span>{{ article.title }}</span></van-col>
+              <van-col span="5" class="homeArtcileInfoliu"><span>浏览{{ article.clickCount }}次</span></van-col>
+            </van-row>
+          </van-list>
         </div>
       </div>
     </div>
@@ -41,7 +39,8 @@
 <script>
 import {
   apiGetActivityList,
-  apiGetArticlePage
+  apiGetArticlePage,
+  apiClickArticle
 } from '@/services/api/index_cs'
 export default {
   data () {
@@ -56,6 +55,7 @@ export default {
       imgUrls: [],
       pageNo: 1,
       pageSize: 7,
+      total: '',
       articleList: [],
       listLoading: false,
       listFinished: false,
@@ -86,15 +86,94 @@ export default {
       apiGetArticlePage(this.pageNo, this.pageSize, { channelIds: 5 })
         .then(res => {
           this.articleList = res.data.records
-          console.log(this.articleList)
         })
         .catch(e => {
           console.log(e)
         })
+    },
+    /**
+     * 点击文章
+     */
+    clickArticle (e) {
+      apiClickArticle(e)
+        .then(res => {
+          this.goArticleDetail(e)
+        })
+    },
+    /**
+     * 跳转到文章
+     */
+    goArticleDetail (e) {
+      this.$router.push('/article' + e)
     }
   },
   mounted () {
     this.getSwipeData()
+    this.getArticleList()
   }
 }
 </script>
+<style lang="scss">
+.home {
+  .container {
+    .home-header {
+      font-size: 16px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background: url(./../../assets/img/homeHeader.png) no-repeat;
+      background-size: 100% 100%;
+    }
+    .homeBackground {
+      .rotation {
+        background: url(./../../assets/img/homeBackground.png) no-repeat;
+        background-size: 100% 100%;
+        .van-swipe {
+          margin: 0 10px;
+          padding-bottom: 10px;
+        }
+      }
+    }
+    .stickyTitle {
+      margin: 10px;
+      .van-sticky {
+        > p {
+          font-size: 36rpx;
+          font-family: PingFang SC;
+          font-weight: bold;
+          color: rgba(51,51,51,1);
+        }
+      }
+    }
+    .articleList {
+      margin: 0 10px;
+      .van-list {
+        .van-row {
+          margin-bottom: 10px;
+          .van-col {
+            .homeArtcileInfoTitle {
+              margin-bottom: 10rpx;
+              font-size: 32rpx;
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: rgba(51,51,51,1);
+              > span {
+                margin-top: 10px;
+              }
+            }
+            .homeArtcileInfoliu {
+              margin-top: 50rpx;
+              font-size: 24rpx;
+              font-family: PingFang SC;
+              font-weight: 400;
+              color: rgba(153,153,153,1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>

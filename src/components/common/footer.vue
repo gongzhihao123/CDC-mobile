@@ -39,7 +39,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  border-top: 1px solid #ccc;
+  background: #fff;
   ul {
     width: 100%;
     height: 100%;

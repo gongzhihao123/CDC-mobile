@@ -24,14 +24,3 @@ export function apiReg (data) {
     .then(res => res.data)
     .catch((e) => {})
 }
-
-export function apiList (pageNo, pageSize, data) {
-  return request({
-    url: '/api/article/articlePage/' + pageNo + '/' + pageSize,
-    method: 'get',
-    data: data,
-    isNeedLogin: true
-  })
-    .then(res => res.data)
-    .catch((e) => {})
-}
