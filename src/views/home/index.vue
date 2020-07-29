@@ -24,7 +24,7 @@
             :finished="listFinished"
             finished-text="没有更多了"
           >
-            <van-row  v-for="article in articleList" :key="article.id" :title="article.title" >
+            <van-row  v-for="article in articleList" :key="article.id" :title="article.title" @click="clickArticle(article.id)">
               <van-col span="6"><img :src="readPath + article.thumbnailPath" /></van-col>
               <van-col span="1"></van-col>
               <van-col span="12" class="homeArtcileInfoTitle"><span>{{ article.title }}</span></van-col>
@@ -39,7 +39,8 @@
 <script>
 import {
   apiGetActivityList,
-  apiGetArticlePage
+  apiGetArticlePage,
+  apiClickArticle
 } from '@/services/api/index_cs'
 export default {
   data () {
@@ -54,6 +55,7 @@ export default {
       imgUrls: [],
       pageNo: 1,
       pageSize: 7,
+      total: '',
       articleList: [],
       listLoading: false,
       listFinished: false,
@@ -88,6 +90,21 @@ export default {
         .catch(e => {
           console.log(e)
         })
+    },
+    /**
+     * 点击文章
+     */
+    clickArticle (e) {
+      apiClickArticle(e)
+        .then(res => {
+          this.goArticleDetail(e)
+        })
+    },
+    /**
+     * 跳转到文章
+     */
+    goArticleDetail (e) {
+      this.$router.push('/article' + e)
     }
   },
   mounted () {

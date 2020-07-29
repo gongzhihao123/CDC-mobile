@@ -40,9 +40,8 @@ request.interceptors.request.use(function (config) {
     if (!config.data) {
       config.data = ''
     }
-    console.log(config)
   }
-
+  console.log(config)
   // 加载动画
   Toast.loading({
     duration: 0,
