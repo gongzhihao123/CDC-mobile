@@ -18,7 +18,10 @@ export default {
   },
   methods: {
     getApi () {
-      apiTest()
+      // let data = {
+      //   channelIds: 5
+      // }
+      apiList(1, 5, { channelIds: 5 })
         .then((res) => {
           console.log('sd', res)
         })
@@ -35,6 +38,7 @@ export default {
     }
   },
   mounted () {
+    this.getApi()
   }
 }
 </script>
@@ -42,6 +46,7 @@ export default {
 <style lang="scss">
 .index {
   height: 100%;
+  background: #fff;
   .hello{
     font-size: 18px;
     color:red;

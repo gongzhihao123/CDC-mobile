@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import index from '../views/index.vue'
+import login from '../views/login.vue'
 
 Vue.use(VueRouter)
 
@@ -12,12 +13,18 @@ VueRouter.prototype.replace = function replace (location) {
 const routes = [
   {
     path: '/',
+    redirect: '/login',
+    component: login,
+    children: [
+      { path: '/login', name: 'login', component: () => import('./../views/login.vue') }
+    ]
+  },
+  {
+    path: '/home',
     name: 'index',
     component: index,
-    redirect: '/home',
     children: [
       { path: '/home', name: 'home', component: () => import('./../views/home/index.vue') },
-      { path: '/login', name: 'login', component: () => import('./../views/login.vue') },
       // 活动
       { path: '/activity', name: 'activity', component: () => import('./../views/activity/index.vue') },
       { path: '/activityDetail', name: 'activityDetail', component: () => import('./../views/activity/activityDetail/activityDetail.vue') },
