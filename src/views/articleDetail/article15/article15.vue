@@ -3,7 +3,7 @@
     <div class="info">
         <div class="infoTitle">
           <p> 夏天护眼小知识</p>
-          <p decode="true"> {{ time }} &nbsp;&nbsp; 浏览{{ clickCount }}次 </p>
+          <p> {{ articletime }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 浏览{{ clickCount }}次 </p>
         </div>
         <div class="infoContent">
           <p>炎炎夏日，阳光炙烤着大地，也炙烤着人们的双眼，很多同学在室外，或者长时间待在空调房里，眼睛会出现各种不适，对生活和学习都会产生不小的影响。
@@ -38,7 +38,7 @@ export default {
         'articleimage/15/' + 4 + '.png'
       ],
       timer: '',
-      time: '',
+      articletime: '',
       clickCount: 0
     }
   },
@@ -48,6 +48,7 @@ export default {
     }
   },
   mounted () {
+    this.articletime = this.$route.query.time
     this.initTimer()
   },
   beforeDestroy () {
@@ -70,3 +71,30 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.articleDetail {
+  padding: 0 10px;
+  .info {
+    .infoTitle {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0;
+      p:first-child {
+        font-size: 20px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: rgba(51,51,51,1);
+        padding-bottom: 8px;
+        border-bottom: 1px solid #ccc;
+      }
+      p:last-child {
+        margin-top: 8px;
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: rgba(153,153,153,1);
+      }
+    }
+  }
+}
+</style>

@@ -24,7 +24,7 @@
             :finished="listFinished"
             finished-text="没有更多了"
           >
-            <van-row  v-for="article in articleList" :key="article.id" :title="article.title" @click="clickArticle(article.id)">
+            <van-row  v-for="article in articleList" :key="article.id" :title="article.title" @click="clickArticle(article)">
               <van-col span="6"><img :src="readPath + article.thumbnailPath" /></van-col>
               <van-col span="1"></van-col>
               <van-col span="12" class="homeArtcileInfoTitle"><span>{{ article.title }}</span></van-col>
@@ -95,7 +95,7 @@ export default {
      * 点击文章
      */
     clickArticle (e) {
-      apiClickArticle(e)
+      apiClickArticle(e.id)
         .then(res => {
           this.goArticleDetail(e)
         })
@@ -104,7 +104,8 @@ export default {
      * 跳转到文章
      */
     goArticleDetail (e) {
-      this.$router.push('/article' + e)
+      const time = e.publishedTime[0] + '-' + e.publishedTime[1] + '-' + e.publishedTime[2] + ' ' + e.publishedTime[3] + ':' + e.publishedTime[4] + ':' + e.publishedTime[5]
+      this.$router.push({ path: '/article' + e.id, query: { time: time } })
     }
   },
   mounted () {
