@@ -26,7 +26,7 @@ const routes = [
     children: [
       { path: '/home', name: 'home', component: () => import('./../views/home/index.vue') },
       // 活动
-      { path: '/activity', name: 'activity', component: () => import('./../views/activity/index.vue') },
+      { path: '/joinActivity', name: 'joinActivity', component: () => import('./../views/joinActivity/index.vue') },
       { path: '/activityDetail', name: 'activityDetail', component: () => import('./../views/activity/activityDetail/activityDetail.vue') },
       { path: '/activityList', name: 'activityList', component: () => import('./../views/activity/activityList/activityList.vue') },
       { path: '/activitySuggest1', name: 'activitySuggest1', component: () => import('./../views/activity/activitySuggest1/activitySuggest1.vue') },
