@@ -15,7 +15,7 @@
         </div>
         <div class="stickyTitle">
           <van-sticky>
-            <p @click="getArticleList">基础用法</p>
+            <p @click="getArticleList">健康知识</p>
           </van-sticky>
         </div>
         <div class="articleList">
@@ -86,6 +86,7 @@ export default {
       apiGetArticlePage(this.pageNo, this.pageSize, { channelIds: 5 })
         .then(res => {
           this.articleList = res.data.records
+          this.listFinished = true
         })
         .catch(e => {
           console.log(e)
@@ -105,7 +106,7 @@ export default {
      */
     goArticleDetail (e) {
       const time = e.publishedTime[0] + '-' + e.publishedTime[1] + '-' + e.publishedTime[2] + ' ' + e.publishedTime[3] + ':' + e.publishedTime[4] + ':' + e.publishedTime[5]
-      this.$router.push({ path: '/article' + e.id, query: { time: time } })
+      this.$router.push({ path: '/article' + e.id, query: { time: time, clickCount: e.clickCount } })
     }
   },
   mounted () {

@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <!-- <p class="hello" @click="getApi">Hello</p> -->
-    <router-view></router-view>
+    <router-view class="indexHome"></router-view>
     <Footer></Footer>
   </div>
 </template>
@@ -34,6 +34,9 @@ export default {
 .index {
   height: 100%;
   background: #fff;
+  .indexHome {
+    margin-bottom: 70px;
+  }
 }
 
 </style>

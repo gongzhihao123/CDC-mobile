@@ -45,6 +45,11 @@ export function apiJoinActivity (data) {
 
 export function apiJoinClockin (data) {
   return request.post('/api/join/clockin', { param: data })
+}
+
+// 举报确定
+export function apiReportHandle (url, data) {
+  return request.post('/api/share/report/' + url, data)
     .then(res => res.data)
     .catch((e) => {})
 }

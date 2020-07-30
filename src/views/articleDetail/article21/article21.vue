@@ -3,7 +3,7 @@
     <div class="info">
         <div class="infoTitle">
           <p>孩子胖胖的才健康？</p>
-          <p decode="true"> {{ time }} &nbsp;&nbsp; 浏览{{ clickCount }}次 </p>
+          <p> {{ articletime }} &nbsp;&nbsp; 浏览{{ clickCount }}次 </p>
         </div>
         <div class="infoContent">
           <p>在很多家长，尤其是爷爷奶奶们的观念里，孩子瘦=弱=不健康，胖=壮=健康。</p>
@@ -14,25 +14,26 @@
 
           <p>现在告诉大家一个身体质量指数公式，用宝宝的体重除以身高的平方得出的这个数字就是宝宝的体质指数，然后再对照这张表格中的数字就可以相对科学的判断，自家宝宝是否是肥胖宝宝了。</p>
           <p>对于男孩而言，身体质量指数超过下面这些指标，就属于肥胖宝宝了，需要及时减肥：</p>
-          <p class="articleDetailcenter">
-          三岁时超过18.1
-  四岁超过17.8
-  五岁超过17.9
-  六岁超过18.4
-  七岁超过19.2
-  八岁超过20.1
-  九岁超过21.1
-  十岁超过22.2</p>
+          <div class="articleDetailcenter">
+            <span>三岁时超过18.1</span>
+            <span>四岁超过17.8</span>
+            <span>五岁超过17.9</span>
+            <span>六岁超过18.4</span>
+            <span>七岁超过19.2</span>
+            <span>八岁超过20.1</span>
+            <span>九岁超过21.1</span>
+            <span>十岁超过22.2</span>
+          </div>
           <p>对于女孩而言，身体质量指数超过下面这些指标，属于肥胖宝宝了，也需要及时减肥：</p>
-          <p class="articleDetailcenter">
-  三岁时超过18.3
-  四岁超过18.1
-  五岁超过18.2
-  六岁超过18.4
-  七岁超过18.8
-  八岁超过19.5
-  九岁超过20.4
-  十岁超过21.5</p>
+          <div class="articleDetailcenter">
+          <span>三岁时超过18.3</span>
+          <span>四岁超过18.1</span>
+          <span>五岁超过18.2</span>
+          <span>六岁超过18.4</span>
+          <span>七岁超过18.8</span>
+          <span>八岁超过19.5</span>
+          <span>九岁超过20.4</span>
+          <span>十岁超过21.5</span></div>
           <p>既然孩子肥胖有了这些标准，那什么才导致了孩子肥胖呢？</p>
           <div class="articleTitle">1.不合理饮食危害大</div>
           <p>导致肥胖的最大原因就是不正确饮食，对于儿童来说更是如此。那么，家长又如何为宝宝配比健康科学的食物和食量？家长们可以根据中国儿童平衡膳食算盘的六五四三二一原则，搭配和控制孩子每天的饮食，来预防孩子肥胖。</p>
@@ -80,7 +81,7 @@ export default {
         'articleimage/21/' + 5 + '.png'
       ],
       timer: '',
-      time: '',
+      articletime: '',
       clickCount: 0
     }
   },
@@ -90,6 +91,8 @@ export default {
     }
   },
   mounted () {
+    this.articletime = this.$route.query.time
+    this.clickCount = this.$route.query.clickCount
     this.initTimer()
   },
   beforeDestroy () {
@@ -112,3 +115,62 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.articleDetail {
+  padding: 0 10px;
+  .info {
+    .infoTitle {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0;
+      p:first-child {
+        font-size: 20px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: rgba(51,51,51,1);
+        padding-bottom: 8px;
+        border-bottom: 1px solid #ccc;
+      }
+      p:last-child {
+        margin-top: 8px;
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: rgba(153,153,153,1);
+      }
+    }
+    .infoContent {
+      p {
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: rgba(51,51,51,1);
+        line-height: 23px;
+        text-indent: 32px;
+        display: block;
+        margin-bottom: 15px;
+      }
+      .articleTitle {
+        margin: 15px 0 10px 0;
+        color: #333;
+        font-weight: 500;
+        font-size: 18px;
+      }
+      .articleDetailcenter {
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: rgba(51,51,51,1);
+        line-height: 23px;
+        text-indent: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+</style>

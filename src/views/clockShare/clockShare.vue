@@ -1,5 +1,6 @@
 <template>
   <div class="clockShare">
+    <div class="clockShareHeader">活动详情</div>
     <div class="activlty">
       <van-tabs v-model="active" v-on:change="tabChange">
         <van-tab v-for="activity in activityList" :key="activity.id" :name="activity.id" :title="activity.title"></van-tab>
@@ -13,27 +14,37 @@
         :error.sync="error"
         error-text="请求失败，点击重新加载"
       >
-        <div class="clockShareInfo" v-for="share in shareList" :key="share.id" >
+        <div class="clockShareInfo" v-for="(share, index) in shareList" :key="index" >
+          <!-- <van-image class="clockShareInfoTitleImg" :src="readPath + share.wechatUserImg"></van-image> -->
           <div class="clockShareInfoMain">
             <div class="clockShareInfoHeader">{{ share.studentName }}</div>
             <p>{{ share.content }}</p>
             <div v-if="share.contentImg" class="clockShareInfoMainImgBox">
-            <van-image class="clockShareInfoMainImg" :src="readPath + share.contentImg"></van-image>
-          </div>
-          <div class="clockShareInfoFoot">
-          <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
-          <div class="articleOperation">
-            <div>
-              <van-button @click="showReportPopup" round type="danger" :icon="require('./../../assets/img/articleReport.png')">举报</van-button>
+              <van-image class="clockShareInfoMainImg" fit="cover" @click="imgPreview(share.contentImg)" :src="readPath + share.contentImg"></van-image>
             </div>
-            <div>
-              <van-button @click="showThumbsupPopup" round type="info" :icon="require('./../../assets/img/articleParise.png')">点赞</van-button>
-              <p>{{ share.thumbsupNumber }}</p>
+            <div class="clockShareInfoFoot">
+              <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
+              <div class="articleOperation">
+                <div>
+                  <!-- <i @click="showReportPopup">举报</i> -->
+                  <van-button @click="showReportPopup" :icon="require('./../../assets/img/articleReport.png')">点赞</van-button>
+                </div>
+                <div>
+                  <!-- <i @click="showThumbsupPopup">点赞</i> -->
+                  <van-button @click="showThumbsupPopup" :icon="require('./../../assets/img/articleParise.png')">点赞</van-button>
+                  <p>{{ share.thumbsupNumber }}</p>
+                </div>
+              </div>
             </div>
-            <van-popup v-model="reportShow">内1容</van-popup>
-            <van-popup v-model="thumbsupShow">内2容</van-popup>
-          </div>
-        </div>
+            <!-- 举报 -->
+            <van-dialog v-model="reportShow" title="举报" show-cancel-button @confirm="reportHandleDefine" @cancel="reportHandleClose" @close="reportHandleClose">
+              <div class="articlePopupContent">
+                <van-radio-group v-model="reason" direction="horizontal">
+                  <van-radio v-for="item in classify" :key="item.id" :name="item.id">{{ item.name }}</van-radio>
+                </van-radio-group>
+                <van-field v-model="reasonContent" rows="3" autosize label="" type="textarea" placeholder="请输入留言" />
+              </div>
+            </van-dialog>
           </div>
         </div>
       </van-list>
@@ -41,9 +52,11 @@
   </div>
 </template>
 <script>
+import { ImagePreview } from 'vant'
 import {
   apiGetActivityList,
-  apiGetSharePageByActivity
+  apiGetSharePageByActivity,
+  apiReportHandle
 } from '@/services/api/index_cs'
 export default {
   data () {
@@ -55,17 +68,19 @@ export default {
         { id: '4', name: '病毒木马', checked: false },
         { id: '5', name: '其他', checked: false }
       ],
+      reason: '',
+      reasonContent: '',
       active: 1,
       activityList: [],
       shareList: [],
       pageNo: 0,
-      pageSize: 5,
+      pageSize: 4,
+      total: '',
       activityId: '',
       loading: false,
       finished: false,
       error: false,
-      reportShow: false,
-      thumbsupShow: false
+      reportShow: false
     }
   },
   computed: {
@@ -75,10 +90,11 @@ export default {
   },
   methods: {
     // 获取活动列表
-    getActivityList () {
-      apiGetActivityList()
+    async getActivityList () {
+      await apiGetActivityList()
         .then(res => {
           this.activityList = res.data
+          this.activityId = res.data[0].id
         })
         .catch(e => {
           console.log(e)
@@ -89,15 +105,20 @@ export default {
       this.activityId = tabName
       this.getShareList()
     },
-    getShareList () {
-      apiGetSharePageByActivity(this.pageNo, this.pageSize, { activityId: this.activityId })
+    async getShareList () {
+      await apiGetSharePageByActivity(this.pageNo, this.pageSize, { activityId: this.activityId })
         .then(res => {
-          this.shareList = res.data.records
-          this.loading = false
+          if (res.code === 1) {
+            this.shareList = res.data.records
+            this.loading = false
+            this.total = res.data.total
+            if (this.shareList.length >= this.total) {
+              this.finished = true
+            }
+          }
         })
         .catch(e => {
           this.error = true
-          console.log(e)
         })
       this.finished = true
     },
@@ -106,10 +127,159 @@ export default {
     },
     showThumbsupPopup () {
       this.thumbsupShow = true
+    },
+    /**
+       * 举报确认
+       */
+    reportHandleDefine () {
+      const data = {
+        reason: this.reason,
+        reasonContent: this.reasonContent,
+        studentId: this.studentId,
+        studentName: this.studentName
+      }
+      apiReportHandle(1, data)
+        .then(res => {
+          if (res.code === 1) {
+            console.log(res)
+          }
+        })
+    },
+    /**
+     * 举报弹窗关闭
+     */
+    reportHandleClose () {
+      this.reportShow = false
+      this.reason = ''
+      this.reasonContent = ''
+    },
+    imgPreview (url) {
+      const arr = []
+      const imgUrl = window.location.origin + '/activity/common/attachment?filepath=' + url
+      arr.push(imgUrl)
+      ImagePreview(arr)
     }
   },
-  mounted () {
-    this.getActivityList()
+  async mounted () {
+    await this.getActivityList()
+    await this.getShareList()
   }
 }
 </script>
+<style lang="scss">
+.clockShare {
+  .clockShareHeader {
+    display: flex;
+    justify-content: center;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(45deg, #51D0A5,#1cbbb4)
+  }
+  .share {
+    padding: 0 10px;
+    .clockShareInfo {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px 15px 10px;
+      border-bottom: 1PX solid #E5E5E5;
+      .clockShareInfoTitleImg {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+      }
+      .clockShareInfoMain {
+        width: 100%;
+        .clockShareInfoHeader {
+          color: #2DB58F;
+          font-size: 16px;
+          margin-bottom: 5px;
+        }
+        .clockShareInfoMainImgBox {
+          height: 150px;
+          width: 100%;
+          margin: 10px 0;
+          overflow: hidden;
+          .van-image {
+            height: 150px;
+          }
+        }
+        > p {
+          line-height: 23px;
+          color: #333333;
+          font-size: 16px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .clockShareInfoFoot {
+          width: 100%;
+          margin-top: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .articleOperation {
+            display: flex;
+            div {
+              .van-button {
+                border: none;
+                padding: 0 8px 0 0;
+                .van-button__content {
+                  display: flex;
+                  flex-direction: row-reverse;
+                  .van-icon {
+                    margin-left: 3px;
+                  }
+                }
+              }
+            }
+            div:last-child {
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+        .van-overlay {
+          opacity: .3;
+        }
+        .van-dialog {
+          .van-dialog__header {
+            padding-top: 15px;
+            line-height: 15px;
+          }
+          .van-dialog__content {
+            .articlePopupContent {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              .van-radio-group {
+                margin: 5px 8px;
+                .van-radio {
+                  > span {
+                    font-size: 13px;
+                  }
+                  .van-radio__icon {
+                    font-size: 16px;
+                  }
+                }
+              }
+              .van-cell{
+                padding: 10px 8px;
+                .van-field__value {
+                  background: rgba(240,241,243,1);
+                  border-radius: 12px;
+                  padding: 5px 8px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>

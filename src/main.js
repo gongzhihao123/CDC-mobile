@@ -27,7 +27,11 @@ import {
   Cell,
   CellGroup,
   Icon,
-  Uploader
+  Uploader,
+  Dialog,
+  Radio,
+  RadioGroup,
+  Field
 } from 'Vant'
 Vue
   .use(Button).use(Swipe).use(SwipeItem)
@@ -36,6 +40,8 @@ Vue
   .use(Lazyload).use(Tab).use(Tabs)
   .use(Popup).use(Cell).use(CellGroup)
   .use(Icon).use(Uploader)
+  .use(Dialog).use(RadioGroup).use(Radio)
+  .use(Field)
 
 FastClick.attach(document.body)
 
