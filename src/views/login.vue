@@ -75,8 +75,9 @@ export default {
           .then((res) => {
             if (res.code === 1) {
               this.$toast(res.message)
-              this.$router.push('/home')
               sessionStorage.setItem('userName', this.userName)
+              sessionStorage.setItem('token', res.data)
+              this.$router.push('/home')
             }
           })
       }
