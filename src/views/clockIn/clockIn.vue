@@ -13,19 +13,19 @@
         </div>
         <div class="clockInFill" style="height: 100rpx;"></div>
         <div class="clockInButtonGroup">
-            <van-button class="clockInButton" disabled="disableFlag"  v-on:click="clockInButton" >
+            <van-button class="clockInButton" :disabled="disableFlag"  v-on:click="clockInButton" >
                 打卡
             </van-button>
-            <van-button class="clockInButton" disabled="disableFlag"  v-on:click="goShare" >
+            <van-button class="clockInButton" :disabled="disableFlag"  v-on:click="goShare" >
                 去分享
             </van-button>
         </div>
-        <van-popup position="center" visible="clockInDialog" bind:close="clockInClose">
+        <van-overlay v-model="showClockInDialog" closeable round >11111
             <div class="clockInPopup">
                 <van-image class="popupImg" :src="require('./../../assets/img/clockInSuccess.png')"></van-image>
                 <p>恭喜您打卡成功，获得相应积分！</p>
             </div>
-        </van-popup>
+        </van-overlay>
     </div>
   </div>
 </template>
@@ -36,7 +36,11 @@ import {
 } from '@/services/api/index_cs'
 export default {
   data () {
-    return {}
+    return {
+      showClockInDialog: false,
+      disableFlag: false,
+      isShowWeightRecord: ''
+    }
   },
   methods: {
     // 打卡按钮
@@ -47,10 +51,10 @@ export default {
         studentId: studentInfo.studentId
       }
       apiJoinClockin().then(res => {
-        if (res.code === 1) {
-          this.clockInDialog = true
+        if (res.data.code === 1) {
+          this.showClockInDialog = true
         } else {
-          this.$toast(res.message)
+          this.$toast(res.data.message)
         }
       })
         .catch(e => {
@@ -62,7 +66,7 @@ export default {
      */
     goShare () {
       this.$router.push({ path: './../share/share?activityId=' + this.activityId })
-      this.clockInDialog = false
+      this.showClockInDialog = false
     }
   }
 }
