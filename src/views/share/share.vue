@@ -1,71 +1,37 @@
 <template>
-  <div>
-    <div class="activlty">
-      <van-tabs v-model="active" v-on:change="tabChange">
-        <van-tab v-for="activity in activityList" :key="activity.id" :name="activity.id" :title="activity.title"></van-tab>
-      </van-tabs>
+  <div class="share">
+    <div>
+        <van-field type="textarea" show-word-limit maxlength="80" placeholder="在这里写点有意思的东西分享吧" />
     </div>
-    <div class="share">
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        :error.sync="error"
-        error-text="请求失败，点击重新加载"
-      >
-        <div class="clockShareInfo" v-for="share in shareList" :key="share.id" >
-          <div class="clockShareInfoMain">
-            <div class="clockShareInfoHeader">{{ share.studentName }}</div>
-            <p>{{ share.content }}</p>
-            <div v-if="share.contentImg" class="clockShareInfoMainImgBox">
-            <van-image class="clockShareInfoMainImg" :src="readPath + share.contentImg"></van-image>
-          </div>
-          <div class="clockShareInfoFoot">
-          <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
-          <div class="articleOperation">
-            <div>
-              <van-button @click="showReportPopup" round type="danger" :icon="require('./../../assets/img/articleReport.png')">举报</van-button>
-            </div>
-            <div>
-              <van-button @click="showThumbsupPopup" round type="info" :icon="require('./../../assets/img/articleParise.png')">点赞</van-button>
-              <p>{{ share.thumbsupNumber }}</p>
-            </div>
-            <van-popup v-model="reportShow">内1容</van-popup>
-            <van-popup v-model="thumbsupShow">内2容</van-popup>
-          </div>
+    <div class="shareUpload">
+        <div class="uploadTitle">
+          <van-image class="uploadTitleImg" :src="require('./../../assets/img/recordRaio.png')" />
+          <p>上传图片</p>
         </div>
-          </div>
+        <div>
+            <van-uploader
+              max="1"
+              v-model="uploadFileList"
+              url="commonUrl + '/common/attachment'"
+              :after-read="afterRead">
+            <van-image :src="require('./../../assets/img/upload.png')" />
+        </van-uploader>
         </div>
-      </van-list>
+    </div>
+    <div class="sharePopupButton">
+        <van-button type="info" v-on:click="shareConfirm">发布</van-button>
     </div>
   </div>
 </template>
 <script>
 import {
-  apiGetActivityList,
-  apiGetSharePageByActivity
+  apiUploadFile,
+  apiSubminShare
 } from '@/services/api/index_cs'
 export default {
   data () {
     return {
-      classify: [
-        { id: '1', name: '色情低俗', checked: false },
-        { id: '2', name: '政治敏感', checked: false },
-        { id: '3', name: '广告垃圾信息', checked: false },
-        { id: '4', name: '病毒木马', checked: false },
-        { id: '5', name: '其他', checked: false }
-      ],
-      active: 1,
-      activityList: [],
-      shareList: [],
-      pageNo: 0,
-      pageSize: 5,
-      activityId: '',
-      loading: false,
-      finished: false,
-      error: false,
-      reportShow: false,
-      thumbsupShow: false
+      uploadFileList: []
     }
   },
   computed: {
@@ -74,42 +40,47 @@ export default {
     }
   },
   methods: {
-    // 获取活动列表
-    getActivityList () {
-      apiGetActivityList()
+    afterRead (file) {
+      // 此时可以自行将文件上传至服务器
+      apiUploadFile(file).then(res => {
+        console.log(res)
+      })
+    },
+    /**
+     * 分享提交
+     */
+    shareConfirm () {
+      if (!this.data.content) {
+        this.$toast('分享内容需超过十个字符')
+        return
+      }
+      const studentInfo = '' // wx.getStorageSync('studentInfo')
+      const userInfo = '' // wx.getStorageSync('userInfo')
+      const data = {
+        activityId: this.activityId,
+        contentImg: this.uploadFileUrl.join(),
+        content: this.content,
+        studentId: studentInfo.studentId,
+        studentName: studentInfo.studentName,
+        wechatUserImg: userInfo.avatarUrl
+      }
+      apiSubminShare(data)
         .then(res => {
-          this.activityList = res.data
+          this.$toast(res.data.message)
+          if (res.data.code === 1) {
+            /**
+            wx.reLaunch({
+              url: './../clockShare/clockShare'
+            })
+            */
+          }
         })
         .catch(e => {
           console.log(e)
         })
-    },
-    // 标签切换
-    tabChange (tabName) {
-      this.activityId = tabName
-      this.getShareList()
-    },
-    getShareList () {
-      apiGetSharePageByActivity(this.pageNo, this.pageSize, { activityId: this.activityId })
-        .then(res => {
-          this.shareList = res.data.records
-          this.loading = false
-        })
-        .catch(e => {
-          this.error = true
-          console.log(e)
-        })
-      this.finished = true
-    },
-    showReportPopup () {
-      this.reportShow = true
-    },
-    showThumbsupPopup () {
-      this.thumbsupShow = true
     }
   },
   mounted () {
-    this.getActivityList()
   }
 }
 </script>

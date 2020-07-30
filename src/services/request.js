@@ -43,7 +43,6 @@ request.interceptors.request.use(function (config) {
   }
   const tempUrl = config.url.slice(0, 21)
   if (!tempUrl === '/api/article/clicking') {
-    console.log('sd')
     // 加载动画
     Toast.loading({
       duration: 0,
@@ -51,6 +50,9 @@ request.interceptors.request.use(function (config) {
       forbidClick: true,
       message: '加载中...'
     })
+  }
+  if (config.url === '/common/attachment') {
+    config.headers['Content-Type'] = 'multipart/form-data'
   }
   return config
 }, function (error) {

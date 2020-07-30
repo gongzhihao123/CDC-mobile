@@ -31,7 +31,8 @@ import {
   Dialog,
   Radio,
   RadioGroup,
-  Field
+  Field,
+  Overlay
 } from 'Vant'
 Vue
   .use(Button).use(Swipe).use(SwipeItem)
@@ -41,7 +42,7 @@ Vue
   .use(Popup).use(Cell).use(CellGroup)
   .use(Icon).use(Uploader)
   .use(Dialog).use(RadioGroup).use(Radio)
-  .use(Field)
+  .use(Field).use(Overlay)
 
 FastClick.attach(document.body)
 

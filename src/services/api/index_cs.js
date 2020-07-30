@@ -53,3 +53,24 @@ export function apiReportHandle (url, data) {
     .then(res => res.data)
     .catch((e) => {})
 }
+
+// 举报确定
+export function apiSubminAntifatData (antifatDataId, data) {
+  return request.post('/api/join/antifatData/' + antifatDataId, data)
+    .then(res => res.data)
+    .catch((e) => {})
+}
+
+// 上传文件
+export function apiUploadFile (file) {
+  return request.post('/common/attachment', file)
+    .then(res => res.data)
+    .catch((e) => {})
+}
+
+// 上传分享
+export function apiSubminShare (activityId, data) {
+  return request.post('/api/join/share/' + activityId, data)
+    .then(res => res.data)
+    .catch((e) => {})
+}
