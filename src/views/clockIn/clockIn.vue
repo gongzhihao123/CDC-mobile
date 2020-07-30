@@ -6,7 +6,7 @@
         <div class="clockInList" >
           <iframe src="//player.bilibili.com/player.html?aid=838903282&bvid=BV1G54y1S7CR&cid=216039436&page=1" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
         </div>
-        <div class="weightRecord" v-if="isShowWeightRecord != 1" bindtap="navClockInGoRecord">
+        <div class="weightRecord" v-if="isShowWeightRecord != 1" @click="navClockInGoRecord">
             <div class="weightRecordNow">
                 <p>当前身高体重</p>
             </div>
@@ -39,10 +39,54 @@ export default {
     return {
       showClockInDialog: false,
       disableFlag: false,
-      isShowWeightRecord: ''
+      isShowWeightRecord: '',
+      activityId: '',
+      activityType: '',
+      antifatDataId: '',
+      isBefore: false
+    }
+  },
+  mounted () {
+    const isBefore = this.$route.query.isBefore
+    if (isBefore) {
+      this.isBefore = isBefore
+    }
+    const antifatDataId = this.$route.query.antifatDataId
+    if (antifatDataId) {
+      this.antifatDataId = antifatDataId
+    }
+    this.activityId = this.$route.query.activityId
+    this.activityType = this.$route.query.activityType
+
+    if (this.activityType * 1 === 2) {
+      this.isShowWeightRecord = sessionStorage.getItem('isShowWeightRecord')
+      if (this.isShowWeightRecord === 1) {
+        // 第二次
+        this.judgeDate()
+      } else {
+        this.isShowWeightRecord = 0
+      }
+    } else {
+      this.isShowWeightRecord = 1
     }
   },
   methods: {
+    /**
+     * 判断当前时间是否在结束日期内
+     */
+    judgeDate () {
+      const nowDay = new Date().getDate()
+      const nowMonth = new Date().getMonth() + 1
+      if (nowMonth === 8) {
+        if (nowDay === 29 || nowDay === 30 || nowDay === 31) {
+          this.isShowWeightRecord = 2
+        } else {
+          this.isShowWeightRecord = 1
+        }
+      } else {
+        this.isShowWeightRecord = 1
+      }
+    },
     // 打卡按钮
     clockInButton () {
       const studentInfo = {} // wx.getStorageSync('studentInfo')
@@ -63,6 +107,10 @@ export default {
     },
     dialogConfirmButton () {
       this.showClockInDialog = false
+    },
+    // 跳转记录页
+    navClockInGoRecord () {
+      this.$router.push({ path: '/record', query: { isBefore: this.isBefore, antifatDataId: this.antifatDataId } })
     },
     /**
      * 跳转分享

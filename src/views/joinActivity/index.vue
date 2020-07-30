@@ -36,8 +36,9 @@ export default {
           console.log(e)
         })
     },
+    // 跳转活动详情
     goActivityDetail (activityid, activityType) {
-      this.$router.push({ path: '/activityDetail', query: { activityid: activityid, activityType: activityType } })
+      this.$router.push({ path: '/activityDetail', query: { activityid: activityid, activityType: activityType, activityTitle: this.activityTitle } })
     }
   },
   mounted () {

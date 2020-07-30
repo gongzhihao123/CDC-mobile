@@ -38,7 +38,8 @@ export function apiGetSharePageByActivity (pageNo, pageSize, data) {
 }
 
 export function apiJoinActivity (data) {
-  return request.post('/api/join/join', { param: data })
+  console.log(data)
+  return request.post('/api/join/join', data)
     .then(res => res.data)
     .catch((e) => {})
 }
@@ -64,6 +65,13 @@ export function apiSubminAntifatData (antifatDataId, data) {
 // 上传文件
 export function apiUploadFile (data) {
   return request.post('/common/attachment', data)
+    .then(res => res.data)
+    .catch((e) => {})
+}
+
+// 删除文件
+export function apidelFile (data) {
+  return request.delete('/common/attachment', data)
     .then(res => res.data)
     .catch((e) => {})
 }

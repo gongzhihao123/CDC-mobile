@@ -20,6 +20,9 @@
           </div>
         </div>
       </div>
+      <div class="joinActivityButton">
+        <div @click="joinActivity">参加活动</div>
+      </div>
       <div class="activityContent">
         <div class="stickyTitle">
           <van-sticky>
@@ -57,6 +60,7 @@ export default {
   data () {
     return {
       activityType: '',
+      activityTitle: '',
       activityId: '',
       isBefore: '',
       pageNo: 1,
@@ -75,11 +79,11 @@ export default {
   async mounted () {
     this.activityId = this.$route.query.activityId
     this.activityType = this.$route.query.activityType
+    this.activityTitle = this.$route.query.activityTitle
     await this.getArticleList()
   },
   methods: {
     navMoreDetail () {
-      console.log('asd')
       this.$router.push({ path: '/activitySuggest' + this.activityType, query: { activityId: this.activityId } })
     },
     async getArticleList () {
@@ -95,12 +99,11 @@ export default {
     },
     // 参加活动
     joinActivity () {
-      const studentInfo = {}// wx.getStorageSync('studentInfo')
-      const that = this
+      const currentChildId = sessionStorage.getItem('currentChildId')
       const data = {
         activityId: this.activityId,
         activityTitle: this.activityTitle,
-        studentId: studentInfo.studentId
+        studentId: currentChildId
       }
       apiJoinActivity(data)
         .then((res) => {
@@ -113,12 +116,11 @@ export default {
                 isBefore = true
               } else {
                 isBefore = false
-                // wx.setStorageSync('beforeRrcord', res.data)
               }
               antifatDataId = res.data.id
-              this.$router.push({ path: './../../clockIn/clockIn?activityId=' + this.activityId + '&isBefore=' + isBefore + '&antifatDataId=' + antifatDataId + '&activityType=' + this.activityType })
+              this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, isBefore: this.isBefore, antifatDataId: this.antifatDataId, activityType: this.activityType } })
             } else {
-              this.$router.push({ path: './../../clockIn/clockIn?activityId=' + this.activityId + '&activityType=' + this.activityType })
+              this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
             }
           }
         })
@@ -196,6 +198,18 @@ export default {
         }
       }
     }
+    .joinActivityButton {
+      padding: 0 20px;
+      div {
+        padding: 10px 8px;
+        margin: 6px;
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+        background: linear-gradient(45deg, #07e6da,#1cbbb4);
+        border-radius: 20px;
+      }
+    }
     .activityContent {
       .stickyTitle {
         margin: 10px;
@@ -238,22 +252,6 @@ export default {
             }
           }
         }
-      }
-    }
-    .activityFoot {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      padding: 0 20px;
-      .activityFootButton {
-        padding: 10px 8px;
-        margin: 6px;
-        font-size: 14px;
-        text-align: center;
-        color: #fff;
-        background: linear-gradient(45deg, #07e6da,#1cbbb4);
-        border-radius: 20px;
       }
     }
   }
