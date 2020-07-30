@@ -41,14 +41,17 @@ request.interceptors.request.use(function (config) {
       config.data = ''
     }
   }
-  console.log(config)
-  // 加载动画
-  Toast.loading({
-    duration: 0,
-    mask: false,
-    forbidClick: true,
-    message: '加载中...'
-  })
+  const tempUrl = config.url.slice(0, 21)
+  if (!tempUrl === '/api/article/clicking') {
+    console.log('sd')
+    // 加载动画
+    Toast.loading({
+      duration: 0,
+      mask: false,
+      forbidClick: true,
+      message: '加载中...'
+    })
+  }
   return config
 }, function (error) {
   // 对请求错误做些什么
