@@ -1,12 +1,9 @@
 <template>
   <div class="healthDarren">
+    <div class="joinActivityHeader">健康小达人</div>
     <div class="healthDarrenMain">
         <div class="healthDarrenMainheader">
             <img :src="require('./../../assets/img/healthDarrenHeader.png')" />
-            <div>
-                <p>健康小达人</p>
-                <p>评选活动</p>
-            </div>
         </div>
         <div class="Organizer">
             <p>主办单位：北京市怀柔区疾病预防控制中心</p>
@@ -38,126 +35,106 @@ export default {
 </script>
 <style lang="scss">
 .healthDarren {
-  padding: 30rpx 32rpx;
-  .healthDarrenMainheader {
-    height: 240rpx;
-    border-radius: 20rpx 20rpx 0 0;
-    overflow: hidden;
-    position: relative;
-    img {
-      height: 240rpx;
-      width: 100%;
-      z-index: -1;
+  .joinActivityHeader {
+    display: flex;
+    justify-content: center;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(45deg, #51D0A5,#1cbbb4)
+  }
+  .healthDarrenMain {
+    padding: 10px;
+    .healthDarrenMainheader {
+      background: #FEF6E6;
     }
-    > div {
-      position: absolute;
-      right: 60rpx;
-      top: 64rpx;
-      display: flex;
-      flex-direction: column;
-      p {
-        font-size: 46rpx;
+    .Organizer {
+      background: #FEF6E6;
+      padding: 9px 15px;
+      > p {
+        font-size:14px;
+        font-family:PingFang SC;
+        font-weight:500;
+        padding-bottom: 6px;
+        color:rgba(51,51,51,1);
+      }
+    }
+    .healthDarrenMainInfo {
+      border-top: 1PX solid #999999;
+      padding: 10px;
+      background: #FEF6E6;
+      > p {
+        font-size:14px;
         font-family:PingFang SC;
         font-weight:bold;
-        color:rgba(255,255,255,1);
-        line-height:62rpx;
+        color:rgba(51,51,51,1);
+      }
+      .healthDarrenMainDetail {
+        p {
+          margin-top: 5px;
+          text-indent: 32px;
+          font-size:14px;
+          font-family:PingFang SC;
+          font-weight:400;
+          color:rgba(51,51,51,1);
+          line-height:20px;
+        }
       }
     }
   }
-  .Organizer {
-    padding: 18rpx 30rpx 0;
-    background: #FEF6E6;
-    p {
-    display: block;
-    font-size:28rpx;
-    font-family:PingFang SC;
-    font-weight:500;
-    color:rgba(51,51,51,1);
-    }
-    p:last-child {
-      padding-bottom: 18rpx;
-      border-bottom: 1px solid #999999;
-    }
-  }
 }
 
-.healthDarrenMainInfo {
-    padding: 30rpx;
-    background: #FEF6E6;
-    > p {
-      font-size:28rpx;
-      font-family:PingFang SC;
-      font-weight:bold;
-      color:rgba(51,51,51,1);
-    }
-    p {
-      text-indent: 64rpx;
-      display: inline-block;
-      font-size:26rpx;
-      font-family:PingFang SC;
-      font-weight:400;
-      color:rgba(51,51,51,1);
-      line-height:40rpx;
-    }
-}
+// .healthContentList {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: flex-end;
+//   padding: 0 36rpx;
+//   margin:  16rpx 0;
+// }
 
-.healthContent .wux-cell-group__hd {
-  font-size:36rpx;
-  font-family:PingFang SC;
-  font-weight:bold;
-  color:rgba(51,51,51,1);
-}
+// .healthArticleLogo {
+//   width: 160rpx;
+//   height: 120rpx;
+// }
 
-.healthContentList {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 36rpx;
-  margin:  16rpx 0;
-}
+// .healthArticleList {
+//   display: flex;
+//   align-items: center;
+// }
 
-.healthArticleLogo {
-  width: 160rpx;
-  height: 120rpx;
-}
+// .healthArticleListInfo {
+//     margin-left: 20rpx;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-around;
+//     p:first-child {
+//       font-size:32rpx;
+//       font-family:PingFang SC;
+//       font-weight:bold;
+//       color:rgba(51,51,51,1);
+//     }
+//     p:last-child {
+//       font-size:28rpx;
+//       font-family:PingFang SC;
+//       font-weight:500;
+//       color:rgba(102,102,102,1);
+//     }
+// }
 
-.healthArticleList {
-  display: flex;
-  align-items: center;
-}
+// .healthArticleListBro {
+//   margin-bottom: 24rpx;
+//   font-size:24rpx;
+//   font-family:PingFang SC;
+//   font-weight:400;
+//   color:rgba(153,153,153,1);
+// }
 
-.healthArticleListInfo {
-    margin-left: 20rpx;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    p:first-child {
-      font-size:32rpx;
-      font-family:PingFang SC;
-      font-weight:bold;
-      color:rgba(51,51,51,1);
-    }
-    p:last-child {
-      font-size:28rpx;
-      font-family:PingFang SC;
-      font-weight:500;
-      color:rgba(102,102,102,1);
-    }
-}
+// .wux-cell-group .wux-cell-group__bd:after {
+//   display: none;
+// }
 
-.healthArticleListBro {
-  margin-bottom: 24rpx;
-  font-size:24rpx;
-  font-family:PingFang SC;
-  font-weight:400;
-  color:rgba(153,153,153,1);
-}
-
-.wux-cell-group .wux-cell-group__bd:after {
-  display: none;
-}
-
-.noContentNotice {
-  text-align: center;
-}
+// .noContentNotice {
+//   text-align: center;
+// }
 </style>

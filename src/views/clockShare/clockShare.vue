@@ -26,11 +26,9 @@
               <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
               <div class="articleOperation">
                 <div>
-                  <!-- <i @click="showReportPopup">举报</i> -->
-                  <van-button @click="showReportPopup" :icon="require('./../../assets/img/articleReport.png')">点赞</van-button>
+                  <van-button @click="showReportPopup" :icon="require('./../../assets/img/articleReport.png')">举报</van-button>
                 </div>
                 <div>
-                  <!-- <i @click="showThumbsupPopup">点赞</i> -->
                   <van-button @click="showThumbsupPopup" :icon="require('./../../assets/img/articleParise.png')">点赞</van-button>
                   <p>{{ share.thumbsupNumber }}</p>
                 </div>
