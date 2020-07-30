@@ -62,11 +62,24 @@ export function apiSubminAntifatData (antifatDataId, data) {
 }
 
 // 上传文件
-export function apiUploadFile (file) {
-  return request.post('/common/attachment', file)
+export function apiUploadFile (data) {
+  return request.post('/common/attachment', data)
     .then(res => res.data)
     .catch((e) => {})
 }
+
+// // 登录
+// export function apiUploadFile (param) {
+//   console.log(param.get(''))
+//   return request({
+//     url: '/common/attachment',
+//     method: 'post',
+//     data: param,
+//     isNeedLogin: true
+//   })
+//     .then(res => res.data)
+//     .catch((e) => {})
+// }
 
 // 上传分享
 export function apiSubminShare (activityId, data) {
