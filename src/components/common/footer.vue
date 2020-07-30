@@ -14,8 +14,8 @@ export default {
     return {
       footList: [
         { name: '首页', path: '/home', img: require('./../../assets/img/homeLogo.png'), active: require('./../../assets/img/homeLogoActive.png') },
-        { name: '参加活动', path: '/activity', img: require('./../../assets/img/activityLogo.png'), active: require('./../../assets/img/activityLogoActive.png') },
-        { name: '打卡分享', path: 'clockShare', img: require('./../../assets/img/clockShareLogo.png'), active: require('./../../assets/img/clockShareLogoActive.png') },
+        { name: '参加活动', path: '/joinActivity', img: require('./../../assets/img/activityLogo.png'), active: require('./../../assets/img/activityLogoActive.png') },
+        { name: '打卡分享', path: '/clockShare', img: require('./../../assets/img/clockShareLogo.png'), active: require('./../../assets/img/clockShareLogoActive.png') },
         { name: '健康小达人', path: '/healthDarren', img: require('./../../assets/img/healthLogo.png'), active: require('./../../assets/img/healthLogoActive.png') },
         { name: '我的', path: '/ours', img: require('./../../assets/img/oursLogo.png'), active: require('./../../assets/img/oursLogoActive.png') }
       ]
