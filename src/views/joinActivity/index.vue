@@ -2,8 +2,8 @@
   <div class="joinActivity">
     <div class="joinActivityHeader">活动专区</div>
       <div class="activityContent">
-          <div v-for="activity in activityList" :key="activity.id" v-on:click="openActivityDetail(activity.id, activity.type)">
-              <div class="activityContentBox" >
+          <div v-for="activity in activityList" :key="activity.id">
+              <div class="activityContentBox" @click="goActivityDetail(activity.id, activity.type)">
                   <van-image :src="readPath + activity.entranceImg"></van-image>
               </div>
           </div>
@@ -36,8 +36,8 @@ export default {
           console.log(e)
         })
     },
-    openActivityDetail (activityId, activityType) {
-      this.$router.push({ path: '/activityDetail', query: { activityId: activityId, activityType: activityType } })
+    goActivityDetail (activityid, activityType) {
+      this.$router.push({ path: '/activityDetail', query: { activityid: activityid, activityType: activityType } })
     }
   },
   mounted () {
