@@ -32,7 +32,8 @@ import {
   Radio,
   RadioGroup,
   Field,
-  Overlay
+  Overlay,
+  Calendar
 } from 'Vant'
 Vue
   .use(Button).use(Swipe).use(SwipeItem)
@@ -42,7 +43,7 @@ Vue
   .use(Popup).use(Cell).use(CellGroup)
   .use(Icon).use(Uploader)
   .use(Dialog).use(RadioGroup).use(Radio)
-  .use(Field).use(Overlay)
+  .use(Field).use(Overlay).use(Calendar)
 
 FastClick.attach(document.body)
 

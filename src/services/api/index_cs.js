@@ -79,3 +79,13 @@ export function apiGetMyChildList () {
     .then(res => res.data)
     .catch((e) => {})
 }
+export function apiGetStudentActivityList (studentId) {
+  return request.get('/api/mine/activityList/' + studentId)
+    .then(res => res.data)
+    .catch((e) => {})
+}
+export function apiGetClockinList (activityId, studentId) {
+  return request.get('/api/mine/clockinList/' + activityId + '/' + studentId)
+    .then(res => res.data)
+    .catch((e) => {})
+}
