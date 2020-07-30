@@ -34,8 +34,12 @@ request.interceptors.request.use(function (config) {
       config.method === 'delete' ||
       config.method === 'patch'
   ) {
-    config.headers['Content-Type'] = 'application/json;charse=UTF-8'
-    config.data = JSON.stringify(config.data)
+    if (config.url !== '/common/attachment') {
+      config.headers['Content-Type'] = 'application/json;charse=UTF-8'
+      config.data = JSON.stringify(config.data)
+    } else {
+      config.headers['Content-Type'] = 'multipart/form-data'
+    }
   } else {
     if (!config.data) {
       config.data = ''
@@ -50,9 +54,6 @@ request.interceptors.request.use(function (config) {
       forbidClick: true,
       message: '加载中...'
     })
-  }
-  if (config.url === '/common/attachment') {
-    config.headers['Content-Type'] = 'multipart/form-data'
   }
   return config
 }, function (error) {

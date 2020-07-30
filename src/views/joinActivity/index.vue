@@ -3,7 +3,7 @@
     <div class="joinActivityHeader">活动专区</div>
       <div class="activityContent">
           <div v-for="activity in activityList" :key="activity.id">
-              <div class="activityContentBox" @click="goActivityDetail(activity.id, activity.type)">
+              <div class="activityContentBox" @click="goActivityDetail(activity.id, activity.type, activity.title)">
                   <van-image :src="readPath + activity.entranceImg"></van-image>
               </div>
           </div>
@@ -36,8 +36,9 @@ export default {
           console.log(e)
         })
     },
-    goActivityDetail (activityid, activityType) {
-      this.$router.push({ path: '/activityDetail', query: { activityid: activityid, activityType: activityType } })
+    // 跳转活动详情
+    goActivityDetail (activityid, activityType, activityTitle) {
+      this.$router.push({ path: '/activityDetail', query: { activityId: activityid, activityType: activityType, activityTitle: activityTitle } })
     }
   },
   mounted () {

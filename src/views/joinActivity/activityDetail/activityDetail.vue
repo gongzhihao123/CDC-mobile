@@ -20,6 +20,9 @@
           </div>
         </div>
       </div>
+      <div class="joinActivityButton">
+        <div @click="joinActivity">参加活动</div>
+      </div>
       <div class="activityContent">
         <div class="stickyTitle">
           <van-sticky>
@@ -42,9 +45,6 @@
           </van-list>
         </div>
       </div>
-      <div class="activityFoot">
-        <div class="activityFootButton" v-on:click="joinActivity">参与活动</div>
-      </div>
     </div>
   </div>
 </template>
@@ -57,6 +57,7 @@ export default {
   data () {
     return {
       activityType: '',
+      activityTitle: '',
       activityId: '',
       isBefore: '',
       pageNo: 1,
@@ -73,13 +74,14 @@ export default {
     }
   },
   async mounted () {
+    console.log(this.$route)
     this.activityId = this.$route.query.activityId
     this.activityType = this.$route.query.activityType
+    this.activityTitle = this.$route.query.activityTitle
     await this.getArticleList()
   },
   methods: {
     navMoreDetail () {
-      console.log('asd')
       this.$router.push({ path: '/activitySuggest' + this.activityType, query: { activityId: this.activityId } })
     },
     async getArticleList () {
@@ -95,12 +97,12 @@ export default {
     },
     // 参加活动
     joinActivity () {
-      const studentInfo = {}// wx.getStorageSync('studentInfo')
-      const that = this
+      const currentChildId = sessionStorage.getItem('currentChildId')
       const data = {
         activityId: this.activityId,
+        activityType: this.activityType,
         activityTitle: this.activityTitle,
-        studentId: studentInfo.studentId
+        studentId: 1
       }
       apiJoinActivity(data)
         .then((res) => {
@@ -113,12 +115,11 @@ export default {
                 isBefore = true
               } else {
                 isBefore = false
-                // wx.setStorageSync('beforeRrcord', res.data)
               }
               antifatDataId = res.data.id
-              this.$router.push({ path: './../../clockIn/clockIn?activityId=' + this.activityId + '&isBefore=' + isBefore + '&antifatDataId=' + antifatDataId + '&activityType=' + this.activityType })
+              this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, isBefore: this.isBefore, antifatDataId: this.antifatDataId, activityType: this.activityType } })
             } else {
-              this.$router.push({ path: './../../clockIn/clockIn?activityId=' + this.activityId + '&activityType=' + this.activityType })
+              this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
             }
           }
         })
@@ -196,57 +197,9 @@ export default {
         }
       }
     }
-    .activityContent {
-      .stickyTitle {
-        margin: 10px;
-        .van-sticky {
-          > p {
-            font-size: 36rpx;
-            font-family: PingFang SC;
-            font-weight: bold;
-            color: rgba(51,51,51,1);
-          }
-        }
-      }
-      .articleList {
-        .van-list {
-          .activityInfo {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            .van-image {
-              width: 80px;
-              height: 60px;
-            }
-            .activityInfoContent {
-              width: 100%;
-              padding-left: 10px;
-              display: flex;
-              justify-content: space-between;
-              p {
-                font-size:16px;
-                font-family:PingFang SC;
-                font-weight:bold;
-                color:rgba(51,51,51,1);
-              }
-              span {
-                font-size:12px;
-                font-family:PingFang SC;
-                font-weight:400;
-                color:rgba(153,153,153,1);
-              }
-            }
-          }
-        }
-      }
-    }
-    .activityFoot {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      right: 0;
+    .joinActivityButton {
       padding: 0 20px;
-      .activityFootButton {
+      div {
         padding: 10px 8px;
         margin: 6px;
         font-size: 14px;

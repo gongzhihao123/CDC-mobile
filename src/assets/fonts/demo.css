@@ -195,13 +195,13 @@
   font-size: 14px;
 }
 
-.markdown h5 {
-  font-size: 12px;
-}
+// .markdown h5 {
+//   font-size: 12px;
+// }
 
-.markdown h6 {
-  font-size: 12px;
-}
+// .markdown h6 {
+//   font-size: 12px;
+// }
 
 .markdown hr {
   height: 1px;

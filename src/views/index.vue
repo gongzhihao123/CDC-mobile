@@ -2,7 +2,7 @@
   <div class="index">
     <!-- <p class="hello" @click="getApi">Hello</p> -->
     <router-view class="indexHome"></router-view>
-    <Footer v-if="isShowFoot"></Footer>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -20,16 +20,6 @@ export default {
   },
   components: {
     Footer
-  },
-  watch: {
-    $route (e) {
-      const ThisPage = e.name
-      if (ThisPage === 'home' || ThisPage === 'joinActivity' || ThisPage === 'clockShare' || ThisPage === 'healthDarren' || ThisPage === 'ours') {
-        this.isShowFoot = true
-      } else {
-        this.isShowFoot = false
-      }
-    }
   },
   methods: {
     getApi () {
