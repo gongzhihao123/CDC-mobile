@@ -25,7 +25,7 @@ request.interceptors.request.use(function (config) {
   // 接口请求统一拦截，如果所有接口都需要该参数，统一添加
   // config.data.from = 'BIYOU'
   // config.data.examId = '20190007'
-  const token = window.localStorage.getItem('accessToken')
+  const token = sessionStorage.getItem('token')
   if (token) {
     config.headers.Authorization = token
   }

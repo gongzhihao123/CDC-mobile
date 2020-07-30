@@ -87,3 +87,8 @@ export function apiSubminShare (activityId, data) {
     .then(res => res.data)
     .catch((e) => {})
 }
+export function apiGetMyChildList () {
+  return request.get('/api/mine/student')
+    .then(res => res.data)
+    .catch((e) => {})
+}
