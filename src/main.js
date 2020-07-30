@@ -25,7 +25,11 @@ import {
   Tabs,
   Popup,
   Cell,
-  CellGroup
+  CellGroup,
+  Dialog,
+  Radio,
+  RadioGroup,
+  Field
 } from 'Vant'
 Vue
   .use(Button).use(Swipe).use(SwipeItem)
@@ -33,6 +37,8 @@ Vue
   .use(Row).use(Toast).use(VanImage)
   .use(Lazyload).use(Tab).use(Tabs)
   .use(Popup).use(Cell).use(CellGroup)
+  .use(Dialog).use(RadioGroup).use(Radio)
+  .use(Field)
 
 FastClick.attach(document.body)
 

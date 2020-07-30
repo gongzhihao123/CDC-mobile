@@ -86,6 +86,7 @@ export default {
       apiGetArticlePage(this.pageNo, this.pageSize, { channelIds: 5 })
         .then(res => {
           this.articleList = res.data.records
+          this.listFinished = true
         })
         .catch(e => {
           console.log(e)

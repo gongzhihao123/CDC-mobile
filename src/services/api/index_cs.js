@@ -36,3 +36,10 @@ export function apiGetSharePageByActivity (pageNo, pageSize, data) {
     .then(res => res.data)
     .catch((e) => {})
 }
+
+// 举报确定
+export function apiReportHandle (url, data) {
+  return request.post('/api/share/report/' + url, data)
+    .then(res => res.data)
+    .catch((e) => {})
+}
