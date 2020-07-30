@@ -36,3 +36,15 @@ export function apiGetSharePageByActivity (pageNo, pageSize, data) {
     .then(res => res.data)
     .catch((e) => {})
 }
+
+export function apiJoinActivity (data) {
+  return request.post('/api/join/join', { param: data })
+    .then(res => res.data)
+    .catch((e) => {})
+}
+
+export function apiJoinClockin (data) {
+  return request.post('/api/join/clockin', { param: data })
+    .then(res => res.data)
+    .catch((e) => {})
+}

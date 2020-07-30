@@ -28,7 +28,6 @@ const routes = [
       // 活动
       { path: '/joinActivity', name: 'joinActivity', component: () => import('./../views/joinActivity/index.vue') },
       { path: '/activityDetail', name: 'activityDetail', component: () => import('./../views/joinActivity/activityDetail/activityDetail.vue') },
-      { path: '/activityList', name: 'activityList', component: () => import('./../views/joinActivity/activityList/activityList.vue') },
       { path: '/activitySuggest1', name: 'activitySuggest1', component: () => import('./../views/joinActivity/activitySuggest1/activitySuggest1.vue') },
       { path: '/activitySuggest2', name: 'activitySuggest2', component: () => import('./../views/joinActivity/activitySuggest2/activitySuggest2.vue') },
       // 文章

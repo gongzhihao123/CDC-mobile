@@ -2,7 +2,7 @@
   <div class="activity">
     <div class="activity">
       <div class="activityContent">
-          <div v-for="activity in activityList" :key="activity.id">
+          <div v-for="activity in activityList" :key="activity.id" v-on:click="openActivityDetail(activity.id, activity.type)">
               <div class="activityContentBox" >
                   <van-image :src="readPath + activity.entranceImg"></van-image>
               </div>
@@ -36,6 +36,9 @@ export default {
         .catch(e => {
           console.log(e)
         })
+    },
+    openActivityDetail (activityId, activityType) {
+      this.$router.push({ path: '/activityDetail', query: { activityId: activityId, activityType: activityType } })
     }
   },
   mounted () {

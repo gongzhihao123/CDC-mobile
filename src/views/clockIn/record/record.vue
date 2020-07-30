@@ -1,5 +1,6 @@
 <template>
-  <div class="record"></div>
+  <div class="record">
+  </div>
 </template>
 <script>
 export default {

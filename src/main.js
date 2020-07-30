@@ -25,7 +25,9 @@ import {
   Tabs,
   Popup,
   Cell,
-  CellGroup
+  CellGroup,
+  Icon,
+  Uploader
 } from 'Vant'
 Vue
   .use(Button).use(Swipe).use(SwipeItem)
@@ -33,6 +35,7 @@ Vue
   .use(Row).use(Toast).use(VanImage)
   .use(Lazyload).use(Tab).use(Tabs)
   .use(Popup).use(Cell).use(CellGroup)
+  .use(Icon).use(Uploader)
 
 FastClick.attach(document.body)
 
