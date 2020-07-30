@@ -10,37 +10,32 @@
         v-model="loading"
         :finished="finished"
         finished-text="没有更多了"
+        :error.sync="error"
+        error-text="请求失败，点击重新加载"
       >
-        <van-cell v-for="share in shareList" :key="share.id" >
-          <div class="clockShareInfo">
-            <van-image class="clockShareInfoImg" :src="share.wechatUserImg"></van-image>
-            <div class="clockShareInfoMain">
-                <div class="clockShareInfoHeader">{{ share.studentName }}</div>
-                <p>{{ share.content }}</p>
-                <div v-if="share.contentImg" class="clockShareInfoMainImgBox">
-                    <van-image class="clockShareInfoMainImg" :src="readPath + share.contentImg"></van-image>
-                </div>
-                <!-- 图片预览 -->
-                <div class="userPredivImage" wx:if="predivImageFlag" bindtap="hiddenPredivImage">
-                    <van-image src="yuLancontentImg"></van-image>
-                </div>
-                <div class="clockShareInfoFoot">
-                    <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + item.createdTime[4] + ':' + item.createdTime[5] }}</p>
-                    <div class="articleOperation">
-                        <div>
-                            <p>举报</p>
-                            <van-image src="./../../assets/img/articleReport.png"></van-image>
-                        </div>
-                        <div>
-                            <p>点赞</p>
-                            <van-image src="./../../assets/img/articleParise.png"></van-image>
-                            <p>{{ share.thumbsupNumber }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="clockShareInfo" v-for="share in shareList" :key="share.id" >
+          <div class="clockShareInfoMain">
+            <div class="clockShareInfoHeader">{{ share.studentName }}</div>
+            <p>{{ share.content }}</p>
+            <div v-if="share.contentImg" class="clockShareInfoMainImgBox">
+            <van-image class="clockShareInfoMainImg" :src="readPath + share.contentImg"></van-image>
           </div>
-        </van-cell>
+          <div class="clockShareInfoFoot">
+          <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
+          <div class="articleOperation">
+            <div>
+              <van-button @click="showReportPopup" round type="danger" :icon="require('./../../assets/img/articleReport.png')">举报</van-button>
+            </div>
+            <div>
+              <van-button @click="showThumbsupPopup" round type="info" :icon="require('./../../assets/img/articleParise.png')">点赞</van-button>
+              <p>{{ share.thumbsupNumber }}</p>
+            </div>
+            <van-popup v-model="reportShow">内1容</van-popup>
+            <van-popup v-model="thumbsupShow">内2容</van-popup>
+          </div>
+        </div>
+          </div>
+        </div>
       </van-list>
     </div>
   </div>
@@ -53,6 +48,13 @@ import {
 export default {
   data () {
     return {
+      classify: [
+        { id: '1', name: '色情低俗', checked: false },
+        { id: '2', name: '政治敏感', checked: false },
+        { id: '3', name: '广告垃圾信息', checked: false },
+        { id: '4', name: '病毒木马', checked: false },
+        { id: '5', name: '其他', checked: false }
+      ],
       active: 1,
       activityList: [],
       shareList: [],
@@ -60,7 +62,10 @@ export default {
       pageSize: 5,
       activityId: '',
       loading: false,
-      finished: false
+      finished: false,
+      error: false,
+      reportShow: false,
+      thumbsupShow: false
     }
   },
   computed: {
@@ -87,11 +92,20 @@ export default {
     getShareList () {
       apiGetSharePageByActivity(this.pageNo, this.pageSize, { activityId: this.activityId })
         .then(res => {
-          this.shareList = res.data
+          this.shareList = res.data.records
+          this.loading = false
         })
         .catch(e => {
+          this.error = true
           console.log(e)
         })
+      this.finished = true
+    },
+    showReportPopup () {
+      this.reportShow = true
+    },
+    showThumbsupPopup () {
+      this.thumbsupShow = true
     }
   },
   mounted () {
