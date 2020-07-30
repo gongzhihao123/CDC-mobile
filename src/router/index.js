@@ -27,10 +27,10 @@ const routes = [
       { path: '/home', name: 'home', component: () => import('./../views/home/index.vue') },
       // 活动
       { path: '/joinActivity', name: 'joinActivity', component: () => import('./../views/joinActivity/index.vue') },
-      { path: '/activityDetail', name: 'activityDetail', component: () => import('./../views/activity/activityDetail/activityDetail.vue') },
-      { path: '/activityList', name: 'activityList', component: () => import('./../views/activity/activityList/activityList.vue') },
-      { path: '/activitySuggest1', name: 'activitySuggest1', component: () => import('./../views/activity/activitySuggest1/activitySuggest1.vue') },
-      { path: '/activitySuggest2', name: 'activitySuggest2', component: () => import('./../views/activity/activitySuggest2/activitySuggest2.vue') },
+      { path: '/activityDetail', name: 'activityDetail', component: () => import('./../views/joinActivity/activityDetail/activityDetail.vue') },
+      { path: '/activityList', name: 'activityList', component: () => import('./../views/joinActivity/activityList/activityList.vue') },
+      { path: '/activitySuggest1', name: 'activitySuggest1', component: () => import('./../views/joinActivity/activitySuggest1/activitySuggest1.vue') },
+      { path: '/activitySuggest2', name: 'activitySuggest2', component: () => import('./../views/joinActivity/activitySuggest2/activitySuggest2.vue') },
       // 文章
       { path: '/article15', name: 'article15', component: () => import('./../views/articleDetail/article15/article15.vue') },
       { path: '/article16', name: 'article16', component: () => import('./../views/articleDetail/article16/article16.vue') },

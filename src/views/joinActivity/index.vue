@@ -3,7 +3,7 @@
     <div class="activity">
       <div class="activityContent">
           <div v-for="activity in activityList" :key="activity.id">
-              <div class="activityContentBox"  data-title="{{ activity.title }}"  data-type="{{ activity.type }}" data-id="{{ activity.id }}"  bindtap="navActivityList">
+              <div class="activityContentBox" >
                   <van-image :src="readFile + activity.entranceImg"></van-image>
               </div>
           </div>
