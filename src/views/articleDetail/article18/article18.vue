@@ -3,7 +3,7 @@
     <div class="info">
         <div class="infoTitle">
           <p>近视防控“京十条”</p>
-          <p decode="true"> {{ time }} &nbsp;&nbsp; 浏览{{ clickCount }}次 </p>
+          <p> {{ articletime }} &nbsp;&nbsp; 浏览{{ clickCount }}次 </p>
         </div>
         <div class="infoContent">
           <p>北京市教委联合十部门出台《北京市儿童青少年近视防控十条措施》，对学校和家长如何防控青少年近视提出了细化要求，学校应如何落实，家长又该如何发力呢？</p>
@@ -72,7 +72,7 @@ export default {
         'articleimage/18/' + 10 + '.png'
       ],
       timer: '',
-      time: '',
+      articletime: '',
       clickCount: 0
     }
   },
@@ -82,6 +82,8 @@ export default {
     }
   },
   mounted () {
+    this.articletime = this.$route.query.time
+    this.clickCount = this.$route.query.clickCount
     this.initTimer()
   },
   beforeDestroy () {
@@ -104,3 +106,48 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.articleDetail {
+  padding: 0 10px;
+  .info {
+    .infoTitle {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0;
+      p:first-child {
+        font-size: 20px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: rgba(51,51,51,1);
+        padding-bottom: 8px;
+        border-bottom: 1px solid #ccc;
+      }
+      p:last-child {
+        margin-top: 8px;
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: rgba(153,153,153,1);
+      }
+    }
+    .infoContent {
+      p {
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: rgba(51,51,51,1);
+        line-height: 23px;
+        text-indent: 32px;
+        display: block;
+        margin-bottom: 15px;
+      }
+      .articleTitle {
+        margin: 15px 0 10px 0;
+        color: #333;
+        font-weight: 500;
+        font-size: 18px;
+      }
+    }
+  }
+}
+</style>

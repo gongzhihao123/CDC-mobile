@@ -49,6 +49,7 @@ export default {
   },
   mounted () {
     this.articletime = this.$route.query.time
+    this.clickCount = this.$route.query.clickCount
     this.initTimer()
   },
   beforeDestroy () {
@@ -93,6 +94,28 @@ export default {
         font-family: PingFang SC;
         font-weight: 500;
         color: rgba(153,153,153,1);
+      }
+    }
+    .infoContent {
+      p {
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: rgba(51,51,51,1);
+        line-height: 23px;
+        text-indent: 32px;
+        display: block;
+        margin-bottom: 15px;
+      }
+      .articleTitle {
+        display: flex;
+        > p:first-child {
+          font-style: italic;
+          font-size: 18px;
+        }
+        > p:last-child {
+          text-indent: 8px;
+        }
       }
     }
   }
