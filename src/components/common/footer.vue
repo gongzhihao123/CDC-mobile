@@ -40,6 +40,7 @@ export default {
   right: 0;
   bottom: 0;
   background: #fff;
+  border-top: 1PX solid #ccc;
   ul {
     width: 100%;
     height: 100%;
