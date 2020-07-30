@@ -98,9 +98,9 @@ export default {
     // 参加活动
     joinActivity () {
       const currentChildId = sessionStorage.getItem('currentChildId')
-      console.log(this.activityId)
       const data = {
         activityId: this.activityId,
+        activityType: this.activityType,
         activityTitle: this.activityTitle,
         studentId: 1
       }
