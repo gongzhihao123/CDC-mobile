@@ -45,7 +45,7 @@ export function apiJoinActivity (data) {
 }
 
 export function apiJoinClockin (data) {
-  return request.post('/api/join/clockin', { param: data })
+  return request.post('/api/join/clockin', data)
 }
 
 // 举报确定
@@ -75,19 +75,6 @@ export function apidelFile (data) {
     .then(res => res.data)
     .catch((e) => {})
 }
-
-// // 登录
-// export function apiUploadFile (param) {
-//   console.log(param.get(''))
-//   return request({
-//     url: '/common/attachment',
-//     method: 'post',
-//     data: param,
-//     isNeedLogin: true
-//   })
-//     .then(res => res.data)
-//     .catch((e) => {})
-// }
 
 // 上传分享
 export function apiSubminShare (activityId, data) {

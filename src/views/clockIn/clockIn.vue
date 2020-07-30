@@ -92,9 +92,9 @@ export default {
       const studentInfo = {} // wx.getStorageSync('studentInfo')
       const data = {
         activityId: this.activityId,
-        studentId: studentInfo.studentId
+        studentId: 1
       }
-      apiJoinClockin().then(res => {
+      apiJoinClockin(data).then(res => {
         if (res.data.code === 1) {
           this.showClockInDialog = true
         } else {
@@ -116,8 +116,7 @@ export default {
      * 跳转分享
      */
     goShare () {
-      this.$router.push({ path: './../share/share?activityId=' + this.activityId })
-      this.showClockInDialog = false
+      this.$router.push({ path: '/share', query: { activityId: this.activityId } })
     }
   }
 }
@@ -171,13 +170,9 @@ export default {
       }
     }
     .clockInButtonGroup {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 20px;
+      margin-top: 20px;
       display: flex;
       justify-content: space-around;
-      z-index: 999;
       background: #fff;
       .clockInButton {
         width: 120px;

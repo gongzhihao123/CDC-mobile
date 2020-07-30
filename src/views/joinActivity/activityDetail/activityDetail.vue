@@ -45,9 +45,6 @@
           </van-list>
         </div>
       </div>
-      <div class="activityFoot">
-        <div class="activityFootButton" v-on:click="joinActivity">参与活动</div>
-      </div>
     </div>
   </div>
 </template>
@@ -77,6 +74,7 @@ export default {
     }
   },
   async mounted () {
+    console.log(this.$route)
     this.activityId = this.$route.query.activityId
     this.activityType = this.$route.query.activityType
     this.activityTitle = this.$route.query.activityTitle
@@ -100,10 +98,11 @@ export default {
     // 参加活动
     joinActivity () {
       const currentChildId = sessionStorage.getItem('currentChildId')
+      console.log(this.activityId)
       const data = {
         activityId: this.activityId,
         activityTitle: this.activityTitle,
-        studentId: currentChildId
+        studentId: 1
       }
       apiJoinActivity(data)
         .then((res) => {
@@ -208,50 +207,6 @@ export default {
         color: #fff;
         background: linear-gradient(45deg, #07e6da,#1cbbb4);
         border-radius: 20px;
-      }
-    }
-    .activityContent {
-      .stickyTitle {
-        margin: 10px;
-        .van-sticky {
-          > p {
-            font-size: 36rpx;
-            font-family: PingFang SC;
-            font-weight: bold;
-            color: rgba(51,51,51,1);
-          }
-        }
-      }
-      .articleList {
-        .van-list {
-          .activityInfo {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            .van-image {
-              width: 80px;
-              height: 60px;
-            }
-            .activityInfoContent {
-              width: 100%;
-              padding-left: 10px;
-              display: flex;
-              justify-content: space-between;
-              p {
-                font-size:16px;
-                font-family:PingFang SC;
-                font-weight:bold;
-                color:rgba(51,51,51,1);
-              }
-              span {
-                font-size:12px;
-                font-family:PingFang SC;
-                font-weight:400;
-                color:rgba(153,153,153,1);
-              }
-            }
-          }
-        }
       }
     }
   }

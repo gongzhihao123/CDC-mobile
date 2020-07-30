@@ -1,7 +1,8 @@
 <template>
   <div class="share">
-    <div>
-        <van-field type="textarea" show-word-limit maxlength="80" placeholder="在这里写点有意思的东西分享吧" />
+    <div class="joinActivityHeader">分享</div>
+    <div class="shareText">
+        <van-field type="textarea" v-model="content" show-word-limit maxlength="80" placeholder="在这里写点有意思的东西分享吧" />
     </div>
     <div class="shareUpload">
         <div class="uploadTitle">
@@ -9,17 +10,11 @@
           <p>上传图片</p>
         </div>
         <div>
-            <van-uploader
-              max="1"
-              v-model="uploadFileList"
-              url="commonUrl + '/common/attachment'"
-              :after-read="afterRead">
-            <van-image :src="require('./../../assets/img/upload.png')" />
-        </van-uploader>
+          <van-uploader v-model="uploadFileList" :after-read="onUploadShare" multiple :max-count="1" />
         </div>
     </div>
     <div class="sharePopupButton">
-        <van-button type="info" v-on:click="shareConfirm">发布</van-button>
+        <span @click="shareConfirm">发 布</span>
     </div>
   </div>
 </template>
@@ -31,7 +26,9 @@ import {
 export default {
   data () {
     return {
-      uploadFileList: []
+      uploadFileList: [],
+      content: '',
+      shareImgUrl: ''
     }
   },
   computed: {
@@ -40,11 +37,22 @@ export default {
     }
   },
   methods: {
-    afterRead (file) {
-      // 此时可以自行将文件上传至服务器
-      apiUploadFile(file).then(res => {
-        console.log(res)
-      })
+    onUploadShare (file, detail) {
+      const data = new FormData()
+      data.append('file', file.file)
+      file.status = 'uploading'
+      file.message = '上传中...'
+      apiUploadFile(data)
+        .then(res => {
+          if (res.code === 1) {
+            file.status = 'done'
+            file.message = '上传成功'
+            this.shareImgUrl = res.data.filePath
+          } else {
+            file.status = 'failed'
+            file.message = '上传失败'
+          }
+        })
     },
     /**
      * 分享提交
@@ -54,15 +62,13 @@ export default {
         this.$toast('分享内容需超过十个字符')
         return
       }
-      const studentInfo = '' // wx.getStorageSync('studentInfo')
-      const userInfo = '' // wx.getStorageSync('userInfo')
+      const studentInfo = '' // sessionStorage.getItem('curren)
       const data = {
         activityId: this.activityId,
-        contentImg: this.uploadFileUrl.join(),
+        contentImg: this.shareImgUrl,
         content: this.content,
         studentId: studentInfo.studentId,
-        studentName: studentInfo.studentName,
-        wechatUserImg: userInfo.avatarUrl
+        studentName: studentInfo.studentName
       }
       apiSubminShare(data)
         .then(res => {
@@ -84,3 +90,65 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.share {
+  .joinActivityHeader {
+    display: flex;
+    justify-content: center;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(45deg, #51D0A5,#1cbbb4)
+  }
+  .shareText {
+    .van-cell {
+      padding: 10px;
+      .van-cell__value {
+        background: #F0F1F3;
+        border-radius: 10px;
+        padding: 5px;
+      }
+    }
+  }
+  .shareUpload {
+    padding: 10px;
+    .uploadTitle {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      .uploadTitleImg {
+        width: 28px;
+        height: 28px;
+        margin-right: 5px
+      }
+    }
+    div {
+      .van-uploader {
+        margin-top: 10px;
+        border: 1PX dashed #d9d9d9;
+        .van-uploader__preview {
+          margin: 0;
+        }
+        .van-uploader__upload {
+          margin: 0;
+        }
+      }
+    }
+  }
+  .sharePopupButton {
+    margin-top: 10px;
+    padding: 0 20px;
+    span {
+      display: block;
+      padding: 10px 8px;
+      margin: 6px;
+      font-size: 14px;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(45deg, #07e6da,#1cbbb4);
+      border-radius: 20px;
+    }
+  }
+}
+</style>
