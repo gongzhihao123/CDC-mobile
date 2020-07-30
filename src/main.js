@@ -20,10 +20,19 @@ import {
   Row,
   Toast,
   Image as VanImage,
-  Lazyload
+  Lazyload,
+  Tab,
+  Tabs,
+  Popup,
+  Cell,
+  CellGroup
 } from 'Vant'
 Vue
-  .use(Button).use(Swipe).use(SwipeItem).use(Sticky).use(List).use(Col).use(Row).use(Toast).use(VanImage).use(Lazyload)
+  .use(Button).use(Swipe).use(SwipeItem)
+  .use(Sticky).use(List).use(Col)
+  .use(Row).use(Toast).use(VanImage)
+  .use(Lazyload).use(Tab).use(Tabs)
+  .use(Popup).use(Cell).use(CellGroup)
 
 FastClick.attach(document.body)
 
