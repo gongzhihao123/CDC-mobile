@@ -81,6 +81,7 @@ request.interceptors.response.use(function (response) {
   Toast.clear()
   if (error.response.status === 401) {
     window.localStorage.removeItem('token')
+    localStorage.clear()
     return router.replace('/login')
   }
   const errStr = error.toString()

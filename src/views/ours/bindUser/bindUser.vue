@@ -96,6 +96,7 @@ export default {
       sectionName: '',
       sectionId: '',
       sectionList: [],
+      sections: '',
       sectionflag: false,
       gradeName: '',
       gradeId: '',
@@ -147,6 +148,10 @@ export default {
       this.schoolName = e.name
       this.schoolId = e.id
       this.schoolflag = false
+      this.gradeName = ''
+      this.campusName = ''
+      this.sectionName = ''
+      this.className = ''
     },
     // 获取学校列表
     async getSchoolList () {
@@ -166,8 +171,11 @@ export default {
     campusConfirm (e) {
       this.campusName = e.name
       this.campusId = e.id
-      this.sectionList = e.sections.split()
+      this.sections = e.sections
       this.campusflag = false
+      this.gradeName = ''
+      this.sectionName = ''
+      this.className = ''
     },
     // 获取校区列表
     async getCampusList () {
@@ -188,19 +196,22 @@ export default {
       this.sectionName = e.name
       this.sectionId = e.id
       this.sectionflag = false
+      this.gradeName = ''
+      this.className = ''
     },
     // 获取学段列表
     getSectionList () {
+      const sectionArray = this.sections.split(',')
       const arr = []
-      for (let i = 0; i < this.sectionList.length; i++) {
+      for (let i = 0; i < sectionArray.length; i++) {
         const obj = {}
-        if (this.sectionList[i] * 1 === 1) {
+        if (sectionArray[i] * 1 === 1) {
           obj.id = 1
           obj.name = '小学'
-        } else if (this.sectionList[i] * 1 === 2) {
+        } else if (sectionArray[i] * 1 === 2) {
           obj.id = 2
           obj.name = '初中'
-        } else if (this.sectionList[i] * 1 === 3) {
+        } else if (sectionArray[i] * 1 === 3) {
           obj.id = 3
           obj.name = '高中'
         }
@@ -218,6 +229,7 @@ export default {
       this.gradeName = e.name
       this.gradeId = e.id
       this.gradeflag = false
+      this.className = ''
     },
     // 获取年级列表
     async getGradeList () {
