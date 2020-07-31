@@ -2,8 +2,8 @@
   <div class="footer">
     <ul>
       <li v-for="(item, index) in footList" :key="index" @click="nav(item.path, index)">
-        <img :src="item.path === $route.path ? footList[index].active : footList[index].img" alt="">
-        <i :class="{selectActive : $route.meta.active === item.path}">{{ item.name }}</i>
+        <img :src="item.name === $route.meta.category ? footList[index].active : footList[index].img" alt="">
+        <i :class="{selectActive : item.name === $route.meta.category}">{{ item.val }}</i>
       </li>
     </ul>
   </div>
@@ -13,11 +13,11 @@ export default {
   data () {
     return {
       footList: [
-        { name: '首页', path: '/home', img: require('./../../assets/img/homeLogo.png'), active: require('./../../assets/img/homeLogoActive.png') },
-        { name: '参加活动', path: '/joinActivity', img: require('./../../assets/img/activityLogo.png'), active: require('./../../assets/img/activityLogoActive.png') },
-        { name: '打卡分享', path: '/clockShare', img: require('./../../assets/img/clockShareLogo.png'), active: require('./../../assets/img/clockShareLogoActive.png') },
-        { name: '健康小达人', path: '/healthDarren', img: require('./../../assets/img/healthLogo.png'), active: require('./../../assets/img/healthLogoActive.png') },
-        { name: '我的', path: '/ours', img: require('./../../assets/img/oursLogo.png'), active: require('./../../assets/img/oursLogoActive.png') }
+        { name: 'home', val: '首页', path: '/home', img: require('./../../assets/img/homeLogo.png'), active: require('./../../assets/img/homeLogoActive.png') },
+        { name: 'join', val: '参加活动', path: '/joinActivity', img: require('./../../assets/img/activityLogo.png'), active: require('./../../assets/img/activityLogoActive.png') },
+        { name: 'clockShare', val: '打卡分享', path: '/clockShare', img: require('./../../assets/img/clockShareLogo.png'), active: require('./../../assets/img/clockShareLogoActive.png') },
+        { name: 'daren', val: '健康小达人', path: '/healthDarren', img: require('./../../assets/img/healthLogo.png'), active: require('./../../assets/img/healthLogoActive.png') },
+        { name: 'mine', val: '我的', path: '/ours', img: require('./../../assets/img/oursLogo.png'), active: require('./../../assets/img/oursLogoActive.png') }
       ],
       isActivie: 1
     }

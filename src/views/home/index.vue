@@ -5,10 +5,10 @@
       <div class="homeBackground">
         <div class="rotation">
           <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-            <van-swipe-item v-for="(image, index) in imgUrls" :key="index">
+            <van-swipe-item v-for="(image, index) in imgUrls" :key="index" v-on:click="goActivityDetail(image.id, image.type ,image.title)">
               <img :src="readPath + image.carouselImg" />
             </van-swipe-item>
-            <van-swipe-item>
+            <van-swipe-item v-on:click="goHealthDarren" >
               <img src="./../../assets/img/banner3.png" />
             </van-swipe-item>
           </van-swipe>
@@ -114,6 +114,12 @@ export default {
     goArticleDetail (e) {
       const time = e.publishedTime[0] + '-' + e.publishedTime[1] + '-' + e.publishedTime[2] + ' ' + e.publishedTime[3] + ':' + e.publishedTime[4] + ':' + e.publishedTime[5]
       this.$router.push({ path: '/article' + e.id, query: { time: time, clickCount: e.clickCount } })
+    },
+    goActivityDetail (activityid, activityType, activityTitle) {
+      this.$router.push({ path: '/activityDetail', query: { activityId: activityid, activityType: activityType, activityTitle: activityTitle } })
+    },
+    goHealthDarren () {
+      this.$router.push({ path: '/healthDarren' })
     }
   },
   mounted () {

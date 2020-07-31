@@ -1,6 +1,6 @@
 <template>
   <div class="healthDarren">
-    <div class="joinActivityHeader">健康小达人</div>
+    <div class="healthDarrenHeader">健康小达人</div>
     <div class="healthDarrenMain">
         <div class="healthDarrenMainheader">
             <img :src="require('./../../assets/img/healthDarrenHeader.png')" />
@@ -15,12 +15,14 @@
                 <p>一、活动主题：健康小达人评选活动</p>
                 <p>二、活动时间：2020年8月1日-2020年8月31日</p>
                 <p>三、参与人员：怀柔区在籍中小学生</p>
-                <p>四、活动安排</p>
-                <p >鼓励全区中小学生可以暑期利用摄影、绘画、征文等形式提交丰富多样的防近视、控肥胖作品，分享假期中的保护视力、健康体重的心得及收获，帮助培养学生养成良好的健康生活习惯。
-                </p>
-                <p>参赛作品要求：摄影类（每组4张以内）、绘画类（每组4张以内）、征文类字符不限，作品文件夹统一用“学校+学生姓名+作品名称+作品类型”命名，发送至hrcdcjkjq@126.com邮箱。区疾控中心将组织专家对参赛作品进行评奖评优，并适时进行表彰奖励。
-                </p>
-                <p>五、投稿要求：参赛人员于9月15日前将活动参赛作品电子版报区疾控中心邮箱hrcdcjkjq@126.com。</p>
+                <p>四、活动安排：</p>
+                <p>鼓励全区中小学生可以暑期利用摄影、绘画、征文等形式提交丰富多样的防近视、控肥胖作品，分享假期中的保护视力、健康体重的心得及收获，帮助培养学生养成良好的健康生活习惯。</p>
+                <p>五、参赛作品要求：</p>
+                <p>摄影类（每组4张以内）、绘画类（每组4张以内）、征文类字符不限，作品文件夹统一用“学校+学生姓名+作品名称+作品类型”命名，发送至hrcdcjkjq@126.com邮箱。区疾控中心将组织专家对参赛作品进行评奖评优，并适时进行表彰奖励。</p>
+                <p>六、投稿要求：</p>
+                <p>参赛人员于9月15日前将活动参赛作品电子版报区疾控中心邮箱hrcdcjkjq@126.com。</p>
+                <p>七、活动咨询：</p>
+                <p>王老师 69642117</p>
             </div>
         </div>
     </div>
@@ -35,7 +37,7 @@ export default {
 </script>
 <style lang="scss">
 .healthDarren {
-  .joinActivityHeader {
+  .healthDarrenHeader {
     display: flex;
     justify-content: center;
     height: 45px;

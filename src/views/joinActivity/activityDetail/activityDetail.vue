@@ -35,7 +35,7 @@
             :finished="listFinished"
             finished-text="没有更多了"
           >
-            <div class="activityInfo" v-for="item in articleList" :key="item.id">
+            <div class="activityInfo" v-for="item in articleList" :key="item.id" v-on:click="goArticleDetail(item)">
               <van-image :src="readPath + item.thumbnailPath" />
               <div class="activityInfoContent">
                 <p>{{ item.title }}</p>
@@ -127,6 +127,13 @@ export default {
         .catch(e => {
           console.log(e)
         })
+    },
+    /**
+     * 跳转到文章
+     */
+    goArticleDetail (e) {
+      const time = e.publishedTime[0] + '-' + e.publishedTime[1] + '-' + e.publishedTime[2] + ' ' + e.publishedTime[3] + ':' + e.publishedTime[4] + ':' + e.publishedTime[5]
+      this.$router.push({ path: '/article' + e.id, query: { time: time, clickCount: e.clickCount } })
     }
   }
 }
