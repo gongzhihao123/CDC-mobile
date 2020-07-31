@@ -1,5 +1,5 @@
 <template>
-  <div class="clockShare">
+  <div class="clockShare" ref="scroll">
     <div class="clockShareHeader">打卡分享</div>
     <div class="activlty">
       <van-tabs v-model="active" v-on:change="tabChange">
@@ -7,15 +7,7 @@
       </van-tabs>
     </div>
     <div class="share">
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        :error.sync="error"
-        error-text="请求失败，点击重新加载"
-      >
         <div class="clockShareInfo" v-for="(share, index) in shareList" :key="index" >
-          <!-- <van-image class="clockShareInfoTitleImg" :src="readPath + share.wechatUserImg"></van-image> -->
           <div class="clockShareInfoMain">
             <div class="clockShareInfoHeader">{{ share.studentName }}</div>
             <p>{{ share.content }}</p>
@@ -34,7 +26,6 @@
                 </div>
               </div>
             </div>
-            <!-- 举报 -->
             <van-dialog v-model="reportShow" title="举报" show-cancel-button @confirm="reportHandleDefine" @cancel="reportHandleClose" @close="reportHandleClose">
               <div class="articlePopupContent">
                 <van-radio-group v-model="reason" direction="horizontal">
@@ -45,7 +36,6 @@
             </van-dialog>
           </div>
         </div>
-      </van-list>
     </div>
   </div>
 </template>
@@ -74,7 +64,7 @@ export default {
       shareId: '',
       shareList: [],
       pageNo: 0,
-      pageSize: 4,
+      pageSize: 7,
       total: '',
       activityId: '',
       loading: false,
@@ -100,6 +90,15 @@ export default {
           console.log(e)
         })
     },
+    onScroll () {
+      const innerHeight = this.$refs.scroll.clientHeight
+      const outerHeight = document.documentElement.clientHeight
+      const scrollTop = document.documentElement.scrollTop
+      if (innerHeight <= outerHeight + scrollTop) {
+        this.pageNo++
+        this.getShareList()
+      }
+    },
     // 标签切换
     tabChange (tabName) {
       this.activityId = tabName
@@ -109,11 +108,10 @@ export default {
       await apiGetSharePageByActivity(this.pageNo, this.pageSize, { activityId: this.activityId })
         .then(res => {
           if (res.code === 1) {
-            this.shareList = res.data.records
-            this.loading = false
-            this.total = res.data.total
-            if (this.shareList.length >= this.total) {
-              this.finished = true
+            if (res.data.records.length > 0) {
+              this.shareList = this.shareList.concat(res.data.records)
+            } else {
+              this.$toast('已经到底啦')
             }
           }
         })
@@ -184,6 +182,7 @@ export default {
     }
   },
   async mounted () {
+    window.addEventListener('scroll', this.onScroll)
     await this.getActivityList()
     await this.getShareList()
   }
