@@ -24,12 +24,19 @@
             :finished="listFinished"
             finished-text="没有更多了"
           >
-            <van-row  v-for="article in articleList" :key="article.id" :title="article.title" @click="clickArticle(article)">
+            <!-- <van-row  v-for="article in articleList" :key="article.id" :title="article.title" @click="clickArticle(article)">
               <van-col span="6"><img :src="readPath + article.thumbnailPath" /></van-col>
               <van-col span="1"></van-col>
               <van-col span="12" class="homeArtcileInfoTitle"><span>{{ article.title }}</span></van-col>
               <van-col span="5" class="homeArtcileInfoliu"><span>浏览{{ article.clickCount }}次</span></van-col>
-            </van-row>
+            </van-row> -->
+            <div class="activityInfo"  v-for="article in articleList" :key="article.id" :title="article.title" @click="clickArticle(article)">
+              <van-image :src="readPath + article.thumbnailPath" />
+              <div class="activityInfoContent">
+                <p>{{ article.title }}</p>
+                <span>浏览{{ article.clickCount }}次</span>
+              </div>
+            </div>
           </van-list>
         </div>
       </div>
@@ -152,25 +159,35 @@ export default {
     .articleList {
       margin: 0 10px;
       .van-list {
-        .van-row {
+        .activityInfo {
+          display: flex;
           margin-bottom: 10px;
-          .van-col {
-            .homeArtcileInfoTitle {
-              margin-bottom: 10rpx;
-              font-size: 32rpx;
-              font-family: PingFang SC;
-              font-weight: bold;
-              color: rgba(51,51,51,1);
-              > span {
-                margin-top: 10px;
-              }
+          align-items: center;
+          .van-image {
+            width: 80px;
+            height: 57px;
+          }
+          .activityInfoContent {
+            width: 100%;
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            p {
+              width: 100%;
+              text-align: left;
+              font-size: 16px;
             }
-            .homeArtcileInfoliu {
-              margin-top: 50rpx;
-              font-size: 24rpx;
-              font-family: PingFang SC;
-              font-weight: 400;
-              color: rgba(153,153,153,1);
+            span {
+              width: 100%;
+              display: inline-block;
+              text-align: right;
+              margin-top: 5px;
+              font-size:14px;
+              font-family:PingFang SC;
+              font-weight:400;
+              color:rgba(153,153,153,1);
             }
           }
         }

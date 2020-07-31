@@ -235,12 +235,18 @@ export default {
             width: 100%;
             padding-left: 10px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: space-between;
             p {
+              width: 100%;
+              text-align: left;
               font-size: 16px;
             }
             span {
+              width: 100%;
+              margin-top: 5px;
+              text-align: right;
               font-size:14px;
               font-family:PingFang SC;
               font-weight:400;
