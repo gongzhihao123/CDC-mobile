@@ -40,8 +40,7 @@
 </template>
 <script>
 import {
-  apiJoinClockin,
-  apiGetSharePageByActivity
+  apiJoinClockin
 } from '@/services/api/index_cs'
 export default {
   data () {
