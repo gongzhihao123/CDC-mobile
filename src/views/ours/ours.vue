@@ -10,7 +10,6 @@
               <van-button plain type="primary">请选择孩子</van-button>
             </div>
         </div>
-        <!-- <van-image bindtap="goSwitch" class="userChange" :src="require('./../../assets/img/userSwitch.png')" /> -->
     </div>
     <!-- 用户关系 -->
     <div class="oursRelation">
