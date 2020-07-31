@@ -131,6 +131,7 @@ export default {
           if (hasChild && noCurrentChild) {
             this.chooseMyChild(this.childrenList[0])
             this.activeIndex = this.childrenList[0].id
+            sessionStorage.setItem('activeIndex', this.childrenList[0].id)
           }
         }
       }).catch(e => {
