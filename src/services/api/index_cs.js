@@ -105,3 +105,9 @@ export function apiGetClockinList (activityId, studentId) {
     .then(res => res.data)
     .catch((e) => {})
 }
+
+export function apieditPassword (data) {
+  return request.post('api/mine/resetPassword', data)
+    .then(res => res.data)
+    .catch((e) => {})
+}

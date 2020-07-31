@@ -7,10 +7,19 @@
             <van-image v-if="currentChild.studentSex * 1 === 2" :src="require('./../../assets/img/userWoman.png')" />
             <p class="userinfo-nickname" v-if="currentChild.studentId">{{ currentChild.studentName }}</p>
             <div class="todoChange" v-if="!currentChild.studentId">
-              <van-button plain type="primary">请选择孩子</van-button>
+              <van-button plain type="primary" >请选择孩子</van-button>
             </div>
         </div>
+        <div class="editPassword" @click="openEdit">
+          <span >修改密码</span>
+        </div>
     </div>
+    <van-dialog v-model="editPasswordShow" title="修改密码" @cancel="editClose" @confirm="editConfirm" show-cancel-button>
+      <div class="editContent">
+        <van-field v-model="oldPassword" type="password" label="旧密码" />
+        <van-field v-model="newPassword" type="text" label="新密码" />
+      </div>
+    </van-dialog>
     <!-- 用户关系 -->
     <div class="oursRelation">
         <div class="oursRelationHeader">
@@ -55,7 +64,8 @@
 <script>
 import {
   apiGetMyChildList,
-  apiGetStudentActivityList
+  apiGetStudentActivityList,
+  apieditPassword
 } from '@/services/api/index_cs'
 export default {
   data () {
@@ -67,7 +77,10 @@ export default {
       childrenList: [],
       currentStudentActivityList: [],
       userRelationName: '',
-      readFile: ''
+      readFile: '',
+      editPasswordShow: false,
+      oldPassword: '',
+      newPassword: ''
     }
   },
   computed: {
@@ -78,6 +91,32 @@ export default {
   methods: {
     goAdd () {
       this.$router.push('/bindUser')
+    },
+    // 修改密码
+    openEdit () {
+      this.oldPassword = ''
+      this.newPassword = ''
+      this.editPasswordShow = true
+    },
+    editClose () {
+      this.oldPassword = ''
+      this.newPassword = ''
+      this.editPasswordShow = false
+    },
+    editConfirm () {
+      const data = {
+        newPassword: this.newPassword,
+        oldPassword: this.oldPassword
+      }
+      apieditPassword(data)
+        .then(res => {
+          this.$toast(res.message)
+          if (res.code === 1) {
+            localStorage.clear()
+            this.editPasswordShow = false
+            this.$router.replace('/login')
+          }
+        })
     },
     getMyChildrenList () {
       apiGetMyChildList().then(res => {
@@ -160,6 +199,9 @@ export default {
 <style lang="scss">
 .ours {
   .oursInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: url(./../../assets/img/oursBackground.png) no-repeat;
     background-size: 100% 100%;
     .user {
@@ -176,6 +218,14 @@ export default {
         font-family:PingFang SC;
         font-weight:bold;
         color:rgba(255,255,255,1);
+      }
+    }
+    .editPassword {
+      margin-right: 20px;
+      span {
+        padding: 8px 12px;
+        color: #fff;
+        background: #5CD5A8;
       }
     }
   }
@@ -307,6 +357,24 @@ export default {
           font-family:PingFang SC;
           font-weight:bold;
           color:rgba(51,51,51,1);
+        }
+      }
+    }
+  }
+  .van-dialog {
+    .van-dialog__content {
+      .editContent {
+        .van-field {
+          .van-cell__title {
+            text-align: right;
+          }
+          .van-field__body {
+            .van-field__control {
+              background: #ccc;
+              border-radius: 10px;
+              padding: 0 10px;
+            }
+          }
         }
       }
     }
