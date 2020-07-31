@@ -70,14 +70,14 @@ export default {
   },
   methods: {
     initCurrentChild () {
-      this.userPhone = sessionStorage.getItem('userName')
-      this.$set(this.currentChild, 'studentId', sessionStorage.getItem('currentChildId'))
-      this.$set(this.currentChild, 'studentName', sessionStorage.getItem('currentChildName'))
-      this.$set(this.currentChild, 'studentSex', sessionStorage.getItem('currentChildSex'))
-      this.$set(this.currentChild, 'relation', sessionStorage.getItem('currentRelation'))
-      this.$set(this.currentChild, 'studentSchoolName', sessionStorage.getItem('currentSchoolName'))
-      this.$set(this.currentChild, 'studentGradeName', sessionStorage.getItem('currentGradeName'))
-      this.$set(this.currentChild, 'studentClassName', sessionStorage.getItem('currentClassName'))
+      this.userPhone = window.localStorage.getItem('userName')
+      this.$set(this.currentChild, 'studentId', window.localStorage.getItem('currentChildId'))
+      this.$set(this.currentChild, 'studentName', window.localStorage.getItem('currentChildName'))
+      this.$set(this.currentChild, 'studentSex', window.localStorage.getItem('currentChildSex'))
+      this.$set(this.currentChild, 'relation', window.localStorage.getItem('currentRelation'))
+      this.$set(this.currentChild, 'studentSchoolName', window.localStorage.getItem('currentSchoolName'))
+      this.$set(this.currentChild, 'studentGradeName', window.localStorage.getItem('currentGradeName'))
+      this.$set(this.currentChild, 'studentClassName', window.localStorage.getItem('currentClassName'))
     },
     goActivityDetail () {
       this.$router.push({ path: '/activityDetail', query: { activityid: this.currentActivityId, activityType: this.currentActivityType } })

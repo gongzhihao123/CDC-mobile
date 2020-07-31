@@ -68,7 +68,7 @@ export default {
     this.activityType = this.$route.query.activityType
 
     if (this.activityType * 1 === 2) {
-      this.isShowWeightRecord = sessionStorage.getItem('isShowWeightRecord')
+      this.isShowWeightRecord = window.localStorage.getItem('isShowWeightRecord')
       if (this.isShowWeightRecord === 1) {
         // 第二次
         this.judgeDate()
@@ -98,7 +98,7 @@ export default {
     },
     // 打卡按钮
     clockInButton () {
-      const currentChildId = sessionStorage.getItem('currentChildId')
+      const currentChildId = window.localStorage.getItem('currentChildId')
       const data = {
         activityId: this.activityId,
         studentId: currentChildId
