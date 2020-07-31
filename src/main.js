@@ -34,7 +34,8 @@ import {
   Field,
   Overlay,
   Calendar,
-  Picker
+  Picker,
+  DatetimePicker
 } from 'Vant'
 Vue
   .use(Button).use(Swipe).use(SwipeItem)
@@ -45,7 +46,7 @@ Vue
   .use(Icon).use(Uploader)
   .use(Dialog).use(RadioGroup).use(Radio)
   .use(Field).use(Overlay).use(Calendar)
-  .use(Picker)
+  .use(Picker).use(DatetimePicker)
 
 FastClick.attach(document.body)
 
