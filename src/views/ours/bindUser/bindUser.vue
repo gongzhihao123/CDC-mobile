@@ -53,20 +53,17 @@
       <div class="bindUserButton">
         <p @click="confirmButton">确 认</p>
       </div>
-      <van-dialog v-model="showCheckFlag" title="提示" show-cancel-button>
-         <div class="bindUserPopupContent">
-            <p>系统检测到已有孩子信息：</p>
+      <van-dialog v-model="showCheckFlag" title="" @confirm="bindUserDefine">
+         <div class="bindUserPopupContent" >
+            <p>请确认孩子信息：</p>
             <div>
-                <p>孩子姓名：{{ checkUserInfo.name }}</p>
-                <p>性别：{{ checkUserInfo.sex == 1 ? '男' : '女'  }}</p>
-                <p>出生日期：{{ checkUserInfo.birthday[0] }}年{{ checkUserInfo.birthday[1] }}月{{ checkUserInfo.birthday[2] }}日</p>
-                <p>所在学校：{{ checkUserInfo.schoolName }}</p>
-                <p>年级：{{ checkUserInfo.gradeName }}</p>
-                <p>班级：{{ checkUserInfo.className }}</p>
+              <p><span>孩子姓名：</span> {{ checkUserInfo.name }}</p>
+              <p><span>性　　别：</span>{{ checkUserInfo.sex == 1 ? '男' : '女'  }}</p>
+              <p v-if="checkUserInfo.birthday"><span>出生日期：</span>{{ checkUserInfo.birthday[0] }}年{{ checkUserInfo.birthday[1] }}月{{ checkUserInfo.birthday[2] }}日</p>
+              <p><span>所在学校：</span>{{ checkUserInfo.schoolName }}</p>
+              <p><span>年　　级：</span>{{ checkUserInfo.gradeName }}</p>
+              <p><span>班　　级：</span>{{ checkUserInfo.className }}</p>
             </div>
-        </div>
-        <div class="bindUserPopupContentButton">
-            <p bindtap="bindUserDefine">确定</p>
         </div>
       </van-dialog>
     </div>
@@ -108,7 +105,8 @@ export default {
       classId: '',
       classList: [],
       classflag: false,
-      showCheckFlag: false
+      showCheckFlag: false,
+      checkUserInfo: {}
     }
   },
   methods: {
@@ -273,8 +271,12 @@ export default {
         .then(res => {
           if (res.code === 1) {
             this.showCheckFlag = true
+            this.checkUserInfo = res.data
           }
         })
+    },
+    bindUserDefine () {
+      this.$router.push('/ours')
     }
   }
 }
@@ -321,6 +323,45 @@ export default {
         color: #fff;
         background: linear-gradient(45deg, #07e6da,#1cbbb4);
         border-radius: 20px;
+      }
+    }
+    .van-dialog {
+      .van-dialog__header {
+        padding-top: 14px;
+      }
+      .van-dialog__content {
+        display: flex;
+        justify-content: center;
+        .bindUserPopupContent {
+          > p {
+            margin: 18px 0;
+            text-align: center;
+            font-size: 14px;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: rgba(153,153,153,1);
+          }
+          > div {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+            padding: 15px;
+            background: rgba(240,241,243,1);
+            border-radius: 5px;
+            > p {
+              line-height: 1.5;
+              font-size: 14px;
+              font-family: PingFang SC;
+              font-weight: 500;
+              color: rgba(51,51,51,1);
+              > span {
+                display: inline-block;
+                width: 70px;
+                text-align: right;
+              }
+            }
+          }
+        }
       }
     }
   }

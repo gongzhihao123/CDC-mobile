@@ -1,8 +1,8 @@
 <template>
   <div class="punchRecord">
-    <div class="punchRecordBackground">
+    <!-- <div class="punchRecordBackground">
         <van-image class="punchRecordImgBackground" :src="require('./../../../assets/img/poundRecordBackground.png')" />
-    </div>
+    </div> -->
     <div class="punchRecordUser">
         <div>
             <van-image v-if="currentChild.studentSex*1 === 1" class="punchRecordUserImg" :src="require('./../../../assets/img/userMan.png')" />
@@ -55,7 +55,7 @@
 </template>
 <script>
 import {
-  apiGetMyChildList,
+  // apiGetMyChildList,
   apiGetClockinList
 } from '@/services/api/index_cs'
 export default {
@@ -111,6 +111,34 @@ export default {
 }
 </script>
 <style lang="scss">
+.punchRecord {
+  .punchRecordUser {
+    height: 145px;
+    background: url(./../../../assets/img/poundRecordBackground.png) no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    > div {
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      .punchRecordUserImg {
+        width: 55px;
+        height: 55px;
+      }
+      .punchRecordUserInfo {
+        p {
+          margin: 5px 0 5px 15px;
+          font-size:14px;
+          font-family:PingFang SC;
+          font-weight:bold;
+          color:rgba(254,254,254,1);
+        }
+      }
+    }
+  }
+}
+
 .punchRecordInfoContent {
   > div {
     display: flex;

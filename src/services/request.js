@@ -6,7 +6,7 @@
 import axios from 'axios'
 import router from './../router/index'
 import * as config from './../config'
-import queryString from 'querystring'
+// import queryString from 'querystring'
 import { Toast } from 'vant'
 // import { getToken } from './common.js'
 const request = axios.create({
