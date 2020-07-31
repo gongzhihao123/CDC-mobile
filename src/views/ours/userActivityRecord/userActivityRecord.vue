@@ -1,5 +1,5 @@
 <template>
-  <div class="userActivityRecord">
+  <div class="userActivityRecord" ref="oursScroll">
     <div class="userActivityRecordHeader">我的分享</div>
     <div class="activlty">
       <van-tabs v-model="active" v-on:change="tabChange">
@@ -7,33 +7,25 @@
       </van-tabs>
     </div>
     <div class="share">
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        :error.sync="error"
-        error-text="请求失败，点击重新加载"
-      >
-        <div class="clockShareInfo" v-for="(share, index) in shareList" :key="index" >
-          <!-- <van-image class="clockShareInfoTitleImg" :src="readPath + share.wechatUserImg"></van-image> -->
-          <div class="clockShareInfoMain">
-            <div class="clockShareInfoHeader">{{ share.studentName }}</div>
-            <p>{{ share.content }}</p>
-            <div v-if="share.contentImg" class="clockShareInfoMainImgBox">
-              <van-image class="clockShareInfoMainImg" fit="cover" @click="imgPreview(share.contentImg)" :src="readPath + share.contentImg"></van-image>
-            </div>
-            <div class="clockShareInfoFoot">
-              <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
-              <div class="articleOperation">
-                <div>
-                  <van-button :icon="require('./../../../assets/img/articleParise.png')">点赞</van-button>
-                  <p>{{ share.thumbsupNumber }}</p>
-                </div>
+      <div class="clockShareInfo" v-for="(share, index) in shareList" :key="index" >
+        <!-- <van-image class="clockShareInfoTitleImg" :src="readPath + share.wechatUserImg"></van-image> -->
+        <div class="clockShareInfoMain">
+          <div class="clockShareInfoHeader">{{ share.studentName }}</div>
+          <p>{{ share.content }}</p>
+          <div v-if="share.contentImg" class="clockShareInfoMainImgBox">
+            <van-image class="clockShareInfoMainImg" fit="cover" @click="imgPreview(share.contentImg)" :src="readPath + share.contentImg"></van-image>
+          </div>
+          <div class="clockShareInfoFoot">
+            <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
+            <div class="articleOperation">
+              <div>
+                <van-button :icon="require('./../../../assets/img/articleParise.png')">点赞</van-button>
+                <p>{{ share.thumbsupNumber }}</p>
               </div>
             </div>
           </div>
         </div>
-      </van-list>
+      </div>
     </div>
   </div>
 </template>
@@ -109,12 +101,25 @@ export default {
       const imgUrl = window.location.origin + '/activity/common/attachment?filepath=' + url
       arr.push(imgUrl)
       ImagePreview(arr)
+    },
+    onOursScroll () {
+      const innerHeight = this.$refs.scroll.clientHeight
+      const outerHeight = document.documentElement.clientHeight
+      const scrollTop = document.documentElement.scrollTop
+      if (innerHeight <= outerHeight + scrollTop) {
+        this.pageNo++
+        this.getShareList()
+      }
     }
   },
   async mounted () {
+    window.addEventListener('oursScroll', this.onOursScroll)
     this.$set(this.currentChild, 'studentId', window.localStorage.getItem('currentChildId'))
     await this.getActivityList()
     await this.getShareList()
+  },
+  destroyed () {
+    window.removeEventListener('oursScroll', this.onOursScroll)
   }
 }
 </script>

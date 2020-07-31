@@ -2,7 +2,7 @@
   <div class="clockShare" ref="scroll">
     <div class="clockShareHeader">打卡分享</div>
     <div class="activlty">
-      <van-tabs v-model="active" v-on:change="tabChange">
+      <van-tabs v-model="active" v-on:change="tabChange" sticky>
         <van-tab v-for="activity in activityList" :key="activity.id" :name="activity.id" :title="activity.title"></van-tab>
       </van-tabs>
     </div>
@@ -100,9 +100,11 @@ export default {
       }
     },
     // 标签切换
-    tabChange (tabName) {
+    async tabChange (tabName) {
       this.activityId = tabName
-      this.getShareList()
+      this.pageNo = 1
+      this.shareList = []
+      await this.getShareList()
     },
     async getShareList () {
       await apiGetSharePageByActivity(this.pageNo, this.pageSize, { activityId: this.activityId })
@@ -193,6 +195,9 @@ export default {
     window.addEventListener('scroll', this.onScroll)
     await this.getActivityList()
     await this.getShareList()
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.onScroll)
   }
 }
 </script>

@@ -146,6 +146,7 @@ export default {
     height: 100%;
     margin: -20px 15px 0;
     padding: 20px 16px;
+    padding-bottom: 70px;
     background: #fff;
     border-radius: 15px;
     h2 {
