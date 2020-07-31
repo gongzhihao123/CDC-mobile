@@ -1,12 +1,14 @@
 <template>
   <div class="ours">
-    <div class="ours-header">首页</div>
     <div class="oursInfo">
         <!-- <van-image class="oursInfoBackgroundImg" :src="require('./../../assets/img/oursBackground.png')" /> -->
         <div class="user">
             <van-image v-if="currentChild.studentSex * 1 === 1" :src="require('./../../assets/img/userMan.png')" />
             <van-image v-if="currentChild.studentSex * 1 === 2" :src="require('./../../assets/img/userWoman.png')" />
-            <p class="userinfo-nickname">{{ currentChild.studentId !== undefined ? currentChild.studentName : userPhone }}</p>
+            <p class="userinfo-nickname" v-if="currentChild.studentId">{{ currentChild.studentName }}</p>
+            <div class="todoChange" v-if="!currentChild.studentId">
+              <van-button plain type="primary">请选择孩子</van-button>
+            </div>
         </div>
         <!-- <van-image bindtap="goSwitch" class="userChange" :src="require('./../../assets/img/userSwitch.png')" /> -->
     </div>
@@ -141,21 +143,12 @@ export default {
     this.getMyChildrenList()
     this.initCurrentChild()
     this.activeIndex = sessionStorage.getItem('activeIndex')
+    this.getStudentActivityList()
   }
 }
 </script>
 <style lang="scss">
 .ours {
-  .ours-header {
-    display: flex;
-    justify-content: center;
-    height: 45px;
-    line-height: 45px;
-    font-size: 16px;
-    color: #fff;
-    background: url(./../../assets/img/oursHeader.png) no-repeat;
-    background-size: 100% 100%;
-  }
   .oursInfo {
     background: url(./../../assets/img/oursBackground.png) no-repeat;
     background-size: 100% 100%;
@@ -250,6 +243,62 @@ export default {
       background: url(./../../assets/img/selectChild.png) no-repeat right;
       p {
         color:#5CD5A8 !important;
+      }
+    }
+  }
+  .oursActivity {
+    border-top: 1PX solid #E5E5E5;
+    > div {
+      .van-cell-group__title {
+        font-size:18px;
+        font-family:PingFang SC;
+        font-weight:bold;
+        color:rgba(51,51,51,1);
+      }
+      .van-cell-group {
+        .van-cell {
+          .van-cell__left-icon {
+            width: 65px;
+            height: 38px;
+            .van-icon__image {
+              width: 65px;
+              height: 38px;
+            }
+          }
+          .van-cell__title {
+            display: flex;
+            align-items: center;
+            > span {
+              font-size:16px;
+              font-family:PingFang SC;
+              font-weight:bold;
+              color:rgba(51,51,51,1);
+            }
+          }
+        }
+      }
+    }
+  }
+  .oursShare {
+    border-top: 1px solid #E5E5E5;
+    .van-cell {
+      display: flex;
+      align-items: center;
+      .van-cell__left-icon {
+        .van-icon__image {
+          width: 22px;
+          height: 22px;
+        }
+      }
+      .van-cell__title {
+        display: flex;
+        align-items: center;
+        > span {
+          font-size:16px;
+          font-family:PingFang SC;
+          font-weight:bold;
+          color:rgba(51,51,51,1);
+        }
       }
     }
   }

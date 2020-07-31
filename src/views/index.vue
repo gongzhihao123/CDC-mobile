@@ -40,7 +40,7 @@ export default {
   height: 100%;
   background: #fff;
   .indexHome {
-    margin-bottom: 70px;
+    padding-bottom: 70px;
   }
 }
 
