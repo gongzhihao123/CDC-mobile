@@ -53,7 +53,7 @@
       <div class="bindUserButton">
         <p @click="confirmButton">确 认</p>
       </div>
-      <van-dialog v-model="showCheckFlag" title="" @confirm="bindUserDefine">
+      <van-dialog v-model="showCheckFlag" title="" @confirm="bindUserDefine" show-cancel-button>
          <div class="bindUserPopupContent" >
             <p>请确认孩子信息：</p>
             <div>

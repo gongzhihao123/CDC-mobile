@@ -15,7 +15,7 @@
           <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=711414755&bvid=BV1PD4y1D7sY&cid=216046566&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
           <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=841447527&bvid=BV1954y1q7KS&cid=216043111&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
         </div>
-        <div class="weightRecord" v-if="isShowWeightRecord != 1" @click="navClockInGoRecord">
+        <div class="weightRecord" v-if="!fatInfo.needBeforeFlag || fatInfo.needAfterFlag" @click="navClockInGoRecord">
             <div class="weightRecordNow">
                 <p>当前身高体重</p>
             </div>
@@ -40,7 +40,8 @@
 </template>
 <script>
 import {
-  apiJoinClockin
+  apiJoinClockin,
+  apiGetAntifatInfo
 } from '@/services/api/index_cs'
 export default {
   data () {
@@ -51,35 +52,27 @@ export default {
       activityId: '',
       activityType: '',
       antifatDataId: '',
-      isBefore: false
+      fatInfo: {}
     }
   },
   mounted () {
-    const isBefore = this.$route.query.isBefore
-    if (isBefore) {
-      this.isBefore = isBefore
-    }
-    const antifatDataId = this.$route.query.antifatDataId
-    if (antifatDataId) {
-      console.log('antifatDataId', antifatDataId)
-      this.antifatDataId = antifatDataId
-    }
     this.activityId = this.$route.query.activityId
     this.activityType = this.$route.query.activityType
-
     if (this.activityType * 1 === 2) {
-      this.isShowWeightRecord = window.localStorage.getItem('isShowWeightRecord')
-      if (this.isShowWeightRecord === 1) {
-        // 第二次
-        this.judgeDate()
-      } else {
-        this.isShowWeightRecord = 0
-      }
-    } else {
-      this.isShowWeightRecord = 1
+      this.getAntifatInfo()
     }
   },
   methods: {
+    // 获取肥胖信息
+    getAntifatInfo () {
+      const studentId = window.localStorage.getItem('currentChildId')
+      apiGetAntifatInfo(this.activityId, studentId)
+        .then(res => {
+          if (res.code === 1) {
+            this.fatInfo = res.data
+          }
+        })
+    },
     /**
      * 判断当前时间是否在结束日期内
      */
@@ -119,7 +112,7 @@ export default {
     },
     // 跳转记录页
     navClockInGoRecord () {
-      this.$router.push({ path: '/record', query: { isBefore: this.isBefore, antifatDataId: this.antifatDataId } })
+      this.$router.push({ path: '/record', query: { activityId: this.activityId } })
     },
     /**
      * 跳转分享

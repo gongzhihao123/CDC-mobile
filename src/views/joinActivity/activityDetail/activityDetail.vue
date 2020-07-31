@@ -108,19 +108,20 @@ export default {
       apiJoinActivity(data)
         .then((res) => {
           if (res.code === 1) {
+            this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
             // 判断是否为控肥胖活动
-            if (this.activityType * 1 === 2 * 1) {
-              let antifatDataId = ''
-              if (res.data.beforeBmi === null) {
-                this.isBefore = true
-              } else {
-                this.isBefore = false
-              }
-              antifatDataId = res.data.id
-              this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, isBefore: this.isBefore, antifatDataId: antifatDataId, activityType: this.activityType } })
-            } else {
-              this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
-            }
+            // if (this.activityType * 1 === 2 * 1) {
+            //   // let antifatDataId = ''
+            //   // if (res.data.beforeBmi === null) {
+            //   //   this.isBefore = true
+            //   // } else {
+            //   //   this.isBefore = false
+            //   // }
+            //   // antifatDataId = res.data.id
+            //   this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
+            // } else {
+            //   this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
+            // }
           }
         })
         .catch(e => {
