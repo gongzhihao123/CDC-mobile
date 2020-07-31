@@ -15,7 +15,7 @@
           <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=711414755&bvid=BV1PD4y1D7sY&cid=216046566&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
           <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=841447527&bvid=BV1954y1q7KS&cid=216043111&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
         </div>
-        <div class="weightRecord" v-if="!fatInfo.needBeforeFlag || fatInfo.needAfterFlag" @click="navClockInGoRecord">
+        <div class="weightRecord" v-if="fatInfo.needBeforeFlag || fatInfo.needAfterFlag" @click="navClockInGoRecord">
             <div class="weightRecordNow">
                 <p>当前身高体重</p>
             </div>
@@ -112,7 +112,7 @@ export default {
     },
     // 跳转记录页
     navClockInGoRecord () {
-      this.$router.push({ path: '/record', query: { activityId: this.activityId } })
+      this.$router.push({ path: '/record', query: { activityId: this.activityId, activityType: this.activityType } })
     },
     /**
      * 跳转分享

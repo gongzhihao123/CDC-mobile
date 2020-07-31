@@ -90,7 +90,7 @@ export default {
       weight: '',
       weightImg: '',
       imageUrl: [],
-      recordDialog: true,
+      recordDialog: false,
       readFile: '',
       shapeImgUrl: [],
       shapeFileUrl: '',
@@ -189,7 +189,7 @@ export default {
         apiSubminAntifatData(this.antifatDataId, data).then(res => {
           this.$toast(res.message)
           if (res.code === 1) {
-            this.$router.push('/clockIn')
+            this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
           }
         }).catch(e => {
           console.log(e)
@@ -219,6 +219,7 @@ export default {
   },
   async mounted () {
     this.activityId = this.$route.query.activityId
+    this.activityType = this.$route.query.activityType
     await this.getAntifatInfo()
   }
 }

@@ -35,7 +35,7 @@
             :finished="listFinished"
             finished-text="没有更多了"
           >
-            <div class="activityInfo" v-for="item in articleList" :key="item.id" v-on:click="goArticleDetail(item)">
+            <div class="activityInfo" v-for="item in articleList" :key="item.id" v-on:click="clickArticle(item)">
               <van-image :src="readPath + item.thumbnailPath" />
               <div class="activityInfoContent">
                 <p>{{ item.title }}</p>
@@ -51,7 +51,8 @@
 <script>
 import {
   apiJoinActivity,
-  apiGetArticlePage
+  apiGetArticlePage,
+  apiClickArticle
 } from '@/services/api/index_cs'
 export default {
   data () {
@@ -126,6 +127,15 @@ export default {
         })
         .catch(e => {
           console.log(e)
+        })
+    },
+    /**
+     * 点击文章
+     */
+    clickArticle (e) {
+      apiClickArticle(e.id)
+        .then(res => {
+          this.goArticleDetail(e)
         })
     },
     /**
