@@ -130,7 +130,7 @@ export default {
      * 点赞
      */
     showThumbsupPopup (e) {
-      const currentChildId = sessionStorage.getItem('currentChildId')
+      const currentChildId = window.localStorage.getItem('currentChildId')
       const data = {
         activityId: e.activityId,
         shareStudentId: e.studentId,
@@ -139,8 +139,8 @@ export default {
       apiSpotPraise(e.id, data)
         .then(res => {
           if (res.code === 1) {
-            this.$toast(res.message)
             this.getShareList()
+            this.$toast(res.message)
           } else {
             this.$toast(res.message)
           }
