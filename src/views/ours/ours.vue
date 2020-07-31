@@ -218,7 +218,6 @@ export default {
           align-items: center;
           .van-image {
             width: 44px;
-            height: 44px;
             margin-right: 10px;
           }
           .oursChildrenList {
