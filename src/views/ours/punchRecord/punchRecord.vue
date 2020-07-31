@@ -137,6 +137,9 @@ export default {
       }
     }
   }
+  .punchRecordInfo {
+    margin-top: -10px;
+  }
 }
 
 .punchRecordInfoContent {
