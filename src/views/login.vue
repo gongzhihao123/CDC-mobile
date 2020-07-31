@@ -125,11 +125,11 @@ export default {
   .login { height: 100%; width: 100%;   }
   .loginBox { position: absolute; display:flex; flex-direction: column; justify-content: center; left: 50%; top: 50%; width: 100%; height: 100%; border-radius: 20px; overflow: hidden; background: #fff url(./../assets/img/login_mobile.png) 50% 50% no-repeat; background-size: cover; border: 1px solid #fff;}
   .loginBox > .form-item:first-child { margin-top: 70%; }
-  .login .form-item { display: inline-flex; position: relative; width: 360px; margin: 0 auto; padding-bottom: 30px;}
+  .login .form-item { display: inline-flex;  width: 360px; margin: 0 auto; margin-bottom: 30px;}
   .login .form-item input { width: 248px; height: 48px; padding-left: 20px; border-radius: 25px; font-size: 18px; color: #08AE8E; background-color: transparent; outline: none;}
   .login .form-item button { height: 50px; border: 0; border-radius: 25px; font-size: 18px; color: #fff; outline: none; cursor: pointer; background: linear-gradient(45deg, #07e6da, #08AE8E); }
-  .login .form-item .inputDiv { display: inline-flex; align-items: center; border: 1PX solid #08AE8E; border-radius: 25px;}
-  .login .form-item .inputDiv img {  height: 1.6rem; margin-left: 14px; vertical-align: middle;}
+  .login .form-item .inputDiv { display: inline-flex; align-items: center; height: 48px; border: 1PX solid #08AE8E; border-radius: 25px;}
+  .login .form-item .inputDiv img {  height: 28px; margin-left: 14px; vertical-align: middle;}
   .login .form-item .inputDiv:last-child { width: 100%; }
   .login .tip { position: absolute; left: 20px; top: 52px; font-size: 14px; color: #f50; }
   .login .reg-bar { margin: 20px auto 0; font-size: 14px; overflow: hidden;}
@@ -137,11 +137,11 @@ export default {
   .login .reg-bar span:hover { text-decoration: underline; }
   .login .reg-bar .reg { float: left; padding-left: 10px;}
   .login .reg-bar .reg span { vertical-align: middle; }
-  .login .reg-bar .reg img { vertical-align: middle; margin-left:3px; width: 1rem; }
+  .login .reg-bar .reg img { vertical-align: middle; margin-left:3px; width: 16px; }
 
   .login .reg-bar .forget { float: right; padding-right: 10px; }
   .login .reg-bar .forget span { vertical-align: middle; }
-  .login .reg-bar .forget img { vertical-align: middle; margin-left:3px; width: 1rem; }
+  .login .reg-bar .forget img { vertical-align: middle; margin-left:3px; width: 16px; }
   .login ::-webkit-input-placeholder { font-size: 18px; line-height: 1.4; color: #08AE8E;}
   .login :-moz-placeholder { font-size: 18px; line-height: 1.4; color: #08AE8E;}
   .login ::-moz-placeholder { font-size: 18px; line-height: 1.4; color: #08AE8E;}

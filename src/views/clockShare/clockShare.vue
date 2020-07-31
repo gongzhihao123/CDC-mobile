@@ -100,10 +100,6 @@ export default {
           this.getShareList()
         }
       }
-      this.$toast(
-        'innerHeight[ ' + innerHeight +
-      ' ] outerHeight[ ' + outerHeight +
-      ' ] scrollTop [ ' + scrollTop + ' ]')
     },
     // 标签切换
     async tabChange (tabName) {

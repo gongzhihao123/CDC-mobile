@@ -105,7 +105,7 @@ export default {
     onOursScroll () {
       const innerHeight = this.$refs.scroll.clientHeight
       const outerHeight = document.documentElement.clientHeight
-      const scrollTop = document.documentElement.scrollTop
+      const scrollTop = document.documentElement.scrollTop || window.pageYOfset || document.body.scrollTop
       if (innerHeight <= outerHeight + scrollTop) {
         this.pageNo++
         this.getShareList()
