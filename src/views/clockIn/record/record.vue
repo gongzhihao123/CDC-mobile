@@ -111,7 +111,7 @@ export default {
           if (res.code === 1) {
             file.status = 'done'
             file.message = '上传成功'
-            this.weightFileUrl = res.data.filePath
+            this.weightFileUrl = res.data.filepath
           } else {
             file.status = 'failed'
             file.message = '上传失败'
@@ -135,7 +135,7 @@ export default {
           if (res.code === 1) {
             file.status = 'done'
             file.message = '上传成功'
-            this.shapeFileUrl = res.data.filePath
+            this.shapeFileUrl = res.data.filepath
           } else {
             file.status = 'failed'
             file.message = '上传失败'

@@ -89,10 +89,10 @@ export default {
     },
     // 打卡按钮
     clockInButton () {
-      const studentInfo = {} // wx.getStorageSync('studentInfo')
+      const currentChildId = sessionStorage.getItem('currentChildId')
       const data = {
         activityId: this.activityId,
-        studentId: 1
+        studentId: currentChildId
       }
       apiJoinClockin(data).then(res => {
         if (res.data.code === 1) {

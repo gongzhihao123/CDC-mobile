@@ -77,8 +77,9 @@ export function apidelFile (data) {
 }
 
 // 上传分享
-export function apiSubminShare (activityId, data) {
-  return request.post('/api/join/share/' + activityId, data)
+export function apiSubminShare (data) {
+  console.log(data)
+  return request.post('/api/join/share', data)
     .then(res => res.data)
     .catch((e) => {})
 }

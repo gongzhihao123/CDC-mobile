@@ -1,13 +1,14 @@
 <template>
   <div class="ours">
+    <div class="ours-header">首页</div>
     <div class="oursInfo">
-        <van-image class="oursInfoBackgroundImg" :src="require('./../../assets/img/oursBackground.png')" />
+        <!-- <van-image class="oursInfoBackgroundImg" :src="require('./../../assets/img/oursBackground.png')" /> -->
         <div class="user">
             <van-image v-if="currentChild.studentSex * 1 === 1" :src="require('./../../assets/img/userMan.png')" />
             <van-image v-if="currentChild.studentSex * 1 === 2" :src="require('./../../assets/img/userWoman.png')" />
             <p class="userinfo-nickname">{{ currentChild.studentId !== undefined ? currentChild.studentName : userPhone }}</p>
         </div>
-        <van-image bindtap="goSwitch" class="userChange" :src="require('./../../assets/img/userSwitch.png')" />
+        <!-- <van-image bindtap="goSwitch" class="userChange" :src="require('./../../assets/img/userSwitch.png')" /> -->
     </div>
     <!-- 用户关系 -->
     <div class="oursRelation">
@@ -135,7 +136,7 @@ export default {
 </script>
 <style lang="scss">
 .ours {
-  .joinActivityHeader {
+  .ours-header {
     display: flex;
     justify-content: center;
     height: 45px;
@@ -145,13 +146,18 @@ export default {
     background: url(./../../assets/img/oursHeader.png) no-repeat;
     background-size: 100% 100%;
   }
-  .ours {
-    position: relative;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
+  // .ours {
+  //   position: relative;
+  //   height: 100px;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: space-between;
+  //   padding: 0 20px;
+  // }
+  .oursInfo {
+    background: url(./../../assets/img/oursBackground.png) no-repeat;
+    background-size: 100% 100%;
+    .user {}
   }
 }
 </style>

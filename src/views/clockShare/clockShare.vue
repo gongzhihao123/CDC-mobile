@@ -26,7 +26,7 @@
               <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
               <div class="articleOperation">
                 <div>
-                  <van-button @click="showReportPopup" :icon="require('./../../assets/img/articleReport.png')">举报</van-button>
+                  <van-button @click="showReportPopup(share.id)" :icon="require('./../../assets/img/articleReport.png')">举报</van-button>
                 </div>
                 <div>
                   <van-button @click="showThumbsupPopup" :icon="require('./../../assets/img/articleParise.png')">点赞</van-button>
@@ -70,6 +70,7 @@ export default {
       reasonContent: '',
       active: 1,
       activityList: [],
+      shareId: '',
       shareList: [],
       pageNo: 0,
       pageSize: 4,
@@ -120,7 +121,8 @@ export default {
         })
       this.finished = true
     },
-    showReportPopup () {
+    showReportPopup (e) {
+      this.shareId = e
       this.reportShow = true
     },
     showThumbsupPopup () {
@@ -130,16 +132,19 @@ export default {
        * 举报确认
        */
     reportHandleDefine () {
+      const currentChildId = sessionStorage.getItem('currentChildId')
+      const currentChildName = sessionStorage.getItem('currentChildName')
       const data = {
         reason: this.reason,
         reasonContent: this.reasonContent,
-        studentId: this.studentId,
-        studentName: this.studentName
+        studentId: currentChildId,
+        studentName: currentChildName
       }
-      apiReportHandle(1, data)
+      apiReportHandle(this.shareId, data)
         .then(res => {
+          this.$toast(res.message)
           if (res.code === 1) {
-            console.log(res)
+            this.getShareList()
           }
         })
     },

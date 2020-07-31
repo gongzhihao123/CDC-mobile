@@ -28,7 +28,8 @@ export default {
     return {
       uploadFileList: [],
       content: '',
-      shareImgUrl: ''
+      shareImgUrl: '',
+      activityId: ''
     }
   },
   computed: {
@@ -47,7 +48,7 @@ export default {
           if (res.code === 1) {
             file.status = 'done'
             file.message = '上传成功'
-            this.shareImgUrl = res.data.filePath
+            this.shareImgUrl = res.data.filepath
           } else {
             file.status = 'failed'
             file.message = '上传失败'
@@ -58,27 +59,24 @@ export default {
      * 分享提交
      */
     shareConfirm () {
-      if (!this.data.content) {
+      if (!this.content) {
         this.$toast('分享内容需超过十个字符')
         return
       }
-      const studentInfo = '' // sessionStorage.getItem('curren)
+      const currentChildId = sessionStorage.getItem('currentChildId')
+      const currentChildName = sessionStorage.getItem('currentChildName')
       const data = {
         activityId: this.activityId,
         contentImg: this.shareImgUrl,
         content: this.content,
-        studentId: studentInfo.studentId,
-        studentName: studentInfo.studentName
+        studentId: currentChildId,
+        studentName: currentChildName
       }
       apiSubminShare(data)
         .then(res => {
-          this.$toast(res.data.message)
-          if (res.data.code === 1) {
-            /**
-            wx.reLaunch({
-              url: './../clockShare/clockShare'
-            })
-            */
+          this.$toast(res.message)
+          if (res.code === 1) {
+            this.$router.push('/clockShare')
           }
         })
         .catch(e => {
@@ -87,6 +85,7 @@ export default {
     }
   },
   mounted () {
+    this.activityId = this.$route.query.activityId
   }
 }
 </script>
