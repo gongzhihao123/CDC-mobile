@@ -78,6 +78,7 @@ export default {
     this.activityId = this.$route.query.activityId
     this.activityType = this.$route.query.activityType
     this.activityTitle = this.$route.query.activityTitle
+    console.log(this.activityId, this.activityType, this.activityTitle)
     await this.getArticleList()
   },
   methods: {
