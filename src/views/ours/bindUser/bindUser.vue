@@ -134,7 +134,6 @@ export default {
       this.dateFlag = true
     },
     dateConfirm (e) {
-      console.log(this.timeFormat(e))
       this.birthday = this.timeFormat(e)
       this.dateFlag = false
     },
@@ -276,7 +275,7 @@ export default {
         })
     },
     bindUserDefine () {
-      const studentId = sessionStorage.getItem('currentChildId')
+      const studentId = window.localStorage.getItem('currentChildId')
       const data = {
         campusName: this.campusName,
         className: this.className,
