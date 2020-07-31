@@ -68,14 +68,14 @@ request.interceptors.response.use(function (response) {
   Toast.clear()
 
   // 此处对返回状态进行判定，可以处理登陆过期等各种状态。
-  // if (response.data.code === '0000') {
-  //   return Promise.resolve(response.data.appdata)
-  // } else if (response.data.code === '401') {
-  //   // 假定3202错误码，需重新登录
-  //   return router.replace('/login')
-  // } else {
-  //   return Promise.resolve(response)
-  // }
+  if (response.data.code === '0000') {
+    return Promise.resolve(response.data.appdata)
+  } else if (response.data.code === '401') {
+    // 假定3202错误码，需重新登录
+    return router.replace('/login')
+  } else {
+    return Promise.resolve(response)
+  }
 }, function (error) {
   // 对响应错误做点什么
   Toast.clear()
