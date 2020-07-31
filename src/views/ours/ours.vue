@@ -121,6 +121,7 @@ export default {
         path: '/punchRecord',
         query: {
           activityId: studentActivity.activity_id,
+          activityType: studentActivity.activity_type,
           clockInCount: studentActivity.clock_in_count,
           shareCount: studentActivity.share_count,
           thumbsupCount: studentActivity.thumbsup_count

@@ -3,12 +3,12 @@
       <div class="loginBox">
         <div class="logo"></div>
         <div class="form-item">
-            <input class="username" v-model="userName" type="text" @keyup.enter="submit" autocomplete="off" placeholder="账号">
-            <p class="tip" v-if="userFlag">请输入正确的账号</p>
+            <input class="username" v-model="userName" type="text" @keyup.enter="submit" autocomplete="off" placeholder="手机号码">
+            <p class="tip" v-if="userFlag">请输入正确的手机号码</p>
         </div>
         <div class="form-item" v-if="!isReg">
-            <input class="password" v-model="password" @keyup.enter="submit" type="password" autocomplete="off" placeholder="登录密码">
-            <p class="tip" v-if="passwordFlag">账号或密码不正确</p>
+            <input class="password" v-model="password" @keyup.enter="submit" type="password" autocomplete="off" placeholder="密码">
+            <p class="tip" v-if="passwordFlag">手机号码或密码不正确</p>
         </div>
         <div class="form-item" v-if="!isReg"><button @click="submit">登 录</button></div>
         <div class="form-item" v-if="isReg"><button @click="regConfirm">注 册</button></div>
@@ -42,10 +42,11 @@ export default {
         apiReg({ account: this.userName })
           .then(res => {
             if (res.code === 1) {
-              this.$toast(res.message)
+              console.log(res)
+              this.$toast.success(res.message)
               this.isReg = false
             } else {
-              this.$toast(res.message)
+              this.$toast.fail(res.message)
             }
           })
       }

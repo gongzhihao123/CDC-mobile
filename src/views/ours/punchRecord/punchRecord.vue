@@ -80,7 +80,7 @@ export default {
       this.$set(this.currentChild, 'studentClassName', sessionStorage.getItem('currentClassName'))
     },
     goActivityDetail () {
-      this.$router.push({ path: '/activityDetail', query: { activityid: this.activityId, activityType: 2 } })
+      this.$router.push({ path: '/activityDetail', query: { activityid: this.currentActivityId, activityType: this.currentActivityType } })
     },
     getClockinList () {
       apiGetClockinList(this.currentActivityId, this.currentChild.studentId).then(res => {
@@ -101,6 +101,7 @@ export default {
   },
   mounted () {
     this.currentActivityId = this.$route.query.activityId
+    this.currentActivityType = this.$route.query.activityType
     this.activityStudent.clockInCount = this.$route.query.clockInCount
     this.activityStudent.shareCount = this.$route.query.shareCount
     this.activityStudent.thumbsupCount = this.$route.query.thumbsupCount
