@@ -14,7 +14,8 @@
           <p class="SuggestInfoDetail">视频播放结束、眼保健操做完方可点击打卡分享，按照提示完成打卡与分享即可获得积分。活动结束后，按照积分排名，设有各类奖项及奖品。</p>
           <p>五、活动联系方式：</p>
           <p class="SuggestInfoDetail">活动咨询：王老师 69642117</p>
-          <p class="SuggestInfoDetail">技术咨询：曹老师 15611131830</p>
+          <!-- <p class="SuggestInfoDetail">技术咨询：曹老师 15611131830</p> -->
+          <p class="SuggestInfoDetail">技术咨询：曹老师 13146032798</p>
         </div>
       </div>
     </div>
