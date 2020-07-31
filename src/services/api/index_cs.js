@@ -63,6 +63,13 @@ export function apiSpotPraise (url, data) {
 }
 
 // 肥胖记录
+export function apiGetAntifatInfo (antifatDataId, studentId) {
+  return request.get('/api/join/antifatData/' + antifatDataId + '/' + studentId)
+    .then(res => res.data)
+    .catch((e) => {})
+}
+
+// 肥胖记录
 export function apiSubminAntifatData (antifatDataId, data) {
   return request.post('/api/join/antifatData/' + antifatDataId, data)
     .then(res => res.data)

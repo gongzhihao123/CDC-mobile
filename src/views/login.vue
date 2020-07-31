@@ -149,7 +149,7 @@ export default {
 
   @media screen and (max-width: 500px) {
       * { box-sizing: border-box; }
-      .login {  width: auto; height: 100%;  }
+      .login {  width: auto; height: 100%; min-height: 568px; }
       .loginBox {
         padding: 0 30px;
         position: static;

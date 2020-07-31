@@ -5,12 +5,12 @@
         <div class="heighSurace">
             <van-image class="registerSurfaceLogo" :src="require('./../../../assets/img/recordHigh.png')" />
             <p>当前身高(cm)</p>
-            <van-field v-model="hight" v-on:change="changeHight" />
+            <van-field v-model="hight" :value="hight" />
         </div>
         <div class="weightSurface">
             <van-image class="registerSurfaceLogo" :src="require('./../../../assets/img/recordWegith.png')" />
             <p>当前体重(kg)</p>
-            <van-field v-model="weight" v-on:change="changeWeight"  />
+            <van-field v-model="weight" :value="weight"  />
         </div>
         <div >
             <van-image class="registerSurfaceLogo" :src="require('./../../../assets/img/recordRaio.png')" />
@@ -49,12 +49,12 @@
         </div>
     </div>
     <div class="recordPopup">
-        <van-popup v-model="recordDialog" closeable round>
+        <van-popup v-model="recordDialog" closeable round @closed="closeDataShow">
             <div class="recordPopupContent">
                 <div class="recordPopupContentFront">
                     <p class="recordPopupContentFronttitle">参加活动前</p>
-                    <p>身高：<span>{{ dataCompare.beforeHight }}</span>cm</p>
-                    <p>体重：<span>{{ dataCompare.beforeWeight }}</span>kg</p>
+                    <p>身高：<span>{{ dataCompare.beforeHight }}</span> cm</p>
+                    <p>体重：<span>{{ dataCompare.beforeWeight }}</span> kg</p>
                     <p>BMI值：<span>{{ dataCompare.beforeBmi }}</span></p>
                 </div>
                 <div class="recordPopupContentCut">
@@ -63,8 +63,8 @@
                 </div>
                 <div class="recordPopupContentNow">
                     <p class="recordPopupContentFronttitle">当前</p>
-                    <p>身高：<span>{{ dataCompare.afterHight }}</span>cm</p>
-                    <p>体重：<span>{{ dataCompare.afterWeight }}</span>kg</p>
+                    <p>身高：<span>{{ dataCompare.afterHight }}</span> cm</p>
+                    <p>体重：<span>{{ dataCompare.afterWeight }}</span> kg</p>
                     <p>BMI值：<span>{{ dataCompare.afterBmi }}</span></p>
                 </div>
             </div>
@@ -76,29 +76,46 @@
 import {
   apiSubminAntifatData,
   apiUploadFile,
-  apidelFile
+  apidelFile,
+  apiGetAntifatInfo
 } from '@/services/api/index_cs'
 export default {
   data () {
     return {
+      activityId: '',
       antifatDataId: '',
-      isBefore: false,
+      isAfter: false,
       hight: '',
       heightImg: '',
       weight: '',
       weightImg: '',
       imageUrl: [],
-      recordDialog: false,
+      recordDialog: true,
       readFile: '',
       shapeImgUrl: [],
       shapeFileUrl: '',
       weightFileUrl: '',
       weightImgUrl: [],
       dataCompare: {},
-      commonUrl: ''
+      commonUrl: '',
+      fatInfo: {}
     }
   },
   methods: {
+    // 获取肥胖信息
+    getAntifatInfo () {
+      const studentId = window.localStorage.getItem('currentChildId')
+      apiGetAntifatInfo(this.activityId, studentId)
+        .then(res => {
+          console.log(res)
+          if (res.code === 1) {
+            console.log(res)
+            this.fatInfo = res.data
+            this.antifatDataId = res.data.antifat.id
+            console.log('s', this.antifatDataId)
+          }
+        })
+    },
     /**
      * 上传体重
      */
@@ -158,22 +175,10 @@ export default {
         })
     },
     /**
-     * 获取身高数据
-     */
-    changeHight (e) {
-      this.hight = e.detail.value
-    },
-    /**
-     * 获取体重数据
-     */
-    changeWeight (e) {
-      this.weight = e.detail.value
-    },
-    /**
      * 提交记录数据
      */
     recordConfirm () {
-      if (this.isBefore) {
+      if (this.fatInfo.antifat && this.fatInfo.antifat.beforeBmi === null) {
         // 活动前
         const data = {
           beforeHight: this.hight,
@@ -181,12 +186,10 @@ export default {
           beforeWeight: this.weight,
           beforeWeightImg: this.weightFileUrl
         }
-        apiSubminAntifatData(data).then(res => {
+        apiSubminAntifatData(this.antifatDataId, data).then(res => {
+          this.$toast(res.message)
           if (res.code === 1) {
-            // wx.setStorageSync('isShowWeightRecord', 1)
-            // wx.navigateBack({
-            //  delta: 1,
-            // })
+            this.$router.push('/clockIn')
           }
         }).catch(e => {
           console.log(e)
@@ -199,7 +202,8 @@ export default {
           afterWeight: this.weight,
           afterWeightImg: this.weightFileUrl
         }
-        apiSubminAntifatData(data).then(res => {
+        console.log(this.antifatDataId)
+        apiSubminAntifatData(this.antifatDataId, data).then(res => {
           if (res.code === 1) {
             this.dataCompare = res.data
             this.recordDialog = true
@@ -208,11 +212,14 @@ export default {
           console.log(e)
         })
       }
+    },
+    closeDataShow () {
+      this.recordDialog = false
     }
   },
-  mounted () {
-    this.isBefore = this.$route.query.isBefore
-    this.antifatDataId = this.$route.query.antifatDataId
+  async mounted () {
+    this.activityId = this.$route.query.activityId
+    await this.getAntifatInfo()
   }
 }
 </script>
@@ -392,9 +399,9 @@ export default {
             font-family: PingFang SC;
             font-weight: bold;
             color: rgba(102,102,102,1);
-            span {
-              color: #3CC3A0;
-            }
+          }
+          span {
+            color: #3CC3A0;
           }
         }
         .recordPopupContentCut {
@@ -421,6 +428,8 @@ export default {
             font-family: PingFang SC;
             font-weight: bold;
             color: rgba(102,102,102,1);
+          }
+          P {
             span {
               color: #3CC3A0;
             }

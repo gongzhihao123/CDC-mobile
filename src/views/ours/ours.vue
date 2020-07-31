@@ -366,13 +366,22 @@ export default {
       .editContent {
         .van-field {
           .van-cell__title {
-            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 50px;
+            span {
+              display: inline-block;
+              font-size: 16px;
+            }
           }
           .van-field__body {
             .van-field__control {
+              width: 100%;
+              height: 30px;
+              padding: 0 5px;
               background: #ccc;
               border-radius: 10px;
-              padding: 0 10px;
             }
           }
         }
