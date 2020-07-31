@@ -74,7 +74,7 @@ export default {
     }
   },
   async mounted () {
-    console.log(this.$route)
+    this.checkHasChild()
     this.activityId = this.$route.query.activityId
     this.activityType = this.$route.query.activityType
     this.activityTitle = this.$route.query.activityTitle
@@ -132,6 +132,13 @@ export default {
     goArticleDetail (e) {
       const time = e.publishedTime[0] + '-' + e.publishedTime[1] + '-' + e.publishedTime[2] + ' ' + e.publishedTime[3] + ':' + e.publishedTime[4] + ':' + e.publishedTime[5]
       this.$router.push({ path: '/article' + e.id, query: { time: time, clickCount: e.clickCount } })
+    },
+    checkHasChild () {
+      const currentChildId = window.localStorage.getItem('currentChildId')
+      if (currentChildId === null) {
+        this.$toast.fail('请先绑定孩子')
+        this.$router.push({ path: '/bindUser' })
+      }
     }
   }
 }
