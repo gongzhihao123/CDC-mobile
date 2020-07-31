@@ -179,9 +179,17 @@ export default {
       const imgUrl = window.location.origin + '/activity/common/attachment?filepath=' + url
       arr.push(imgUrl)
       ImagePreview(arr)
+    },
+    checkHasChild () {
+      const currentChildId = window.localStorage.getItem('currentChildId')
+      if (currentChildId === null) {
+        this.$toast.fail('请先绑定孩子')
+        this.$router.push({ path: '/bindUser' })
+      }
     }
   },
   async mounted () {
+    this.checkHasChild()
     window.addEventListener('scroll', this.onScroll)
     await this.getActivityList()
     await this.getShareList()
