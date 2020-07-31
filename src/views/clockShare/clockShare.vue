@@ -29,7 +29,7 @@
                   <van-button @click="showReportPopup(share.id)" :icon="require('./../../assets/img/articleReport.png')">举报</van-button>
                 </div>
                 <div>
-                  <van-button @click="showThumbsupPopup" :icon="require('./../../assets/img/articleParise.png')">点赞</van-button>
+                  <van-button @click="showThumbsupPopup(share)" :icon="require('./../../assets/img/articleParise.png')">点赞</van-button>
                   <p>{{ share.thumbsupNumber }}</p>
                 </div>
               </div>
@@ -54,7 +54,8 @@ import { ImagePreview } from 'vant'
 import {
   apiGetActivityList,
   apiGetSharePageByActivity,
-  apiReportHandle
+  apiReportHandle,
+  apiSpotPraise
 } from '@/services/api/index_cs'
 export default {
   data () {
@@ -125,8 +126,25 @@ export default {
       this.shareId = e
       this.reportShow = true
     },
-    showThumbsupPopup () {
-      this.thumbsupShow = true
+    /**
+     * 点赞
+     */
+    showThumbsupPopup (e) {
+      const currentChildId = sessionStorage.getItem('currentChildId')
+      const data = {
+        activityId: e.activityId,
+        shareStudentId: e.studentId,
+        studentId: currentChildId
+      }
+      apiSpotPraise(e.id, data)
+        .then(res => {
+          if (res.code === 1) {
+            this.$toast(res.message)
+            this.getShareList()
+          } else {
+            this.$toast(res.message)
+          }
+        })
     },
     /**
        * 举报确认
@@ -142,9 +160,11 @@ export default {
       }
       apiReportHandle(this.shareId, data)
         .then(res => {
-          this.$toast(res.message)
           if (res.code === 1) {
+            this.$toast(res.message)
             this.getShareList()
+          } else {
+            this.$toast(res.message)
           }
         })
     },

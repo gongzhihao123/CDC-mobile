@@ -24,9 +24,9 @@ const routes = [
     name: 'index',
     component: index,
     children: [
-      { path: '/home', name: 'home', component: () => import('./../views/home/index.vue') },
+      { path: '/home', name: 'home', meta: { active: '/home' }, component: () => import('./../views/home/index.vue') },
       // 活动
-      { path: '/joinActivity', name: 'joinActivity', component: () => import('./../views/joinActivity/index.vue') },
+      { path: '/joinActivity', name: 'joinActivity', meta: { active: '/joinActivity' }, component: () => import('./../views/joinActivity/index.vue') },
       { path: '/activityDetail', name: 'activityDetail', component: () => import('./../views/joinActivity/activityDetail/activityDetail.vue') },
       { path: '/activitySuggest1', name: 'activitySuggest1', component: () => import('./../views/joinActivity/activitySuggest1/activitySuggest1.vue') },
       { path: '/activitySuggest2', name: 'activitySuggest2', component: () => import('./../views/joinActivity/activitySuggest2/activitySuggest2.vue') },
@@ -42,11 +42,11 @@ const routes = [
       { path: '/clockIn', name: 'clockIn', component: () => import('./../views/clockIn/clockIn.vue') },
       { path: '/record', name: 'record', component: () => import('./../views/clockIn/record/record.vue') },
       { path: '/share', name: 'share', component: () => import('./../views/share/share.vue') },
-      { path: '/clockShare', name: 'clockShare', component: () => import('./../views/clockShare/clockShare.vue') },
+      { path: '/clockShare', name: 'clockShare', meta: { active: '/clockShare' }, component: () => import('./../views/clockShare/clockShare.vue') },
       // 健康小达人
-      { path: '/healthDarren', name: 'healthDarren', component: () => import('./../views/healthDarren/healthDarren.vue') },
+      { path: '/healthDarren', name: 'healthDarren', meta: { active: '/healthDarren' }, component: () => import('./../views/healthDarren/healthDarren.vue') },
       // 我的
-      { path: '/ours', name: 'ours', component: () => import('./../views/ours/ours.vue') },
+      { path: '/ours', name: 'ours', meta: { active: '/ours' }, component: () => import('./../views/ours/ours.vue') },
       { path: '/bindUser', name: 'bindUser', component: () => import('./../views/ours/bindUser/bindUser.vue') },
       { path: '/punchRecord', name: 'punchRecord', component: () => import('./../views/ours/punchRecord/punchRecord.vue') },
       { path: '/userActivityRecord', name: 'userActivityRecord', component: () => import('./../views/ours/userActivityRecord/userActivityRecord.vue') },

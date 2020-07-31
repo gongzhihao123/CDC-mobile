@@ -1,9 +1,9 @@
 <template>
   <div class="footer">
     <ul>
-      <li v-for="(item, index) in footList" :key="index" @click="nav(item.path)">
+      <li v-for="(item, index) in footList" :key="index" @click="nav(item.path, index)">
         <img :src="item.path === $route.path ? footList[index].active : footList[index].img" alt="">
-        <i>{{ item.name }}</i>
+        <i :class="{selectActive : $route.meta.active === item.path}">{{ item.name }}</i>
       </li>
     </ul>
   </div>
@@ -18,11 +18,13 @@ export default {
         { name: '打卡分享', path: '/clockShare', img: require('./../../assets/img/clockShareLogo.png'), active: require('./../../assets/img/clockShareLogoActive.png') },
         { name: '健康小达人', path: '/healthDarren', img: require('./../../assets/img/healthLogo.png'), active: require('./../../assets/img/healthLogoActive.png') },
         { name: '我的', path: '/ours', img: require('./../../assets/img/oursLogo.png'), active: require('./../../assets/img/oursLogoActive.png') }
-      ]
+      ],
+      isActivie: 1
     }
   },
   methods: {
-    nav (path) {
+    nav (path, index) {
+      this.isActivie = index
       this.$router.replace(path)
     }
   },
@@ -57,6 +59,9 @@ export default {
       }
       i {
         font-style: normal;
+      }
+      .selectActive {
+        color: #5CD5A8;
       }
     }
   }
