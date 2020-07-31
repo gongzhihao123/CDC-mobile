@@ -1,6 +1,6 @@
 <template>
   <div class="clockShare">
-    <!-- <div class="clockShareHeader">活动详情</div> -->
+    <div class="clockShareHeader">打卡分享</div>
     <div class="activlty">
       <van-tabs v-model="active" v-on:change="tabChange">
         <van-tab v-for="activity in activityList" :key="activity.id" :name="activity.id" :title="activity.title"></van-tab>
@@ -191,15 +191,15 @@ export default {
 </script>
 <style lang="scss">
 .clockShare {
-  // .clockShareHeader {
-  //   display: flex;
-  //   justify-content: center;
-  //   height: 45px;
-  //   line-height: 45px;
-  //   font-size: 16px;
-  //   color: #fff;
-  //   background: linear-gradient(45deg, #51D0A5,#1cbbb4)
-  // }
+  .clockShareHeader {
+    display: flex;
+    justify-content: center;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(45deg, #51D0A5,#1cbbb4)
+  }
   .share {
     padding: 0 10px;
     .clockShareInfo {

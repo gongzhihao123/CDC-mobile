@@ -1,6 +1,6 @@
 <template>
   <div class="healthDarren">
-    <div class="joinActivityHeader">健康小达人</div>
+    <div class="healthDarrenHeader">健康小达人</div>
     <div class="healthDarrenMain">
         <div class="healthDarrenMainheader">
             <img :src="require('./../../assets/img/healthDarrenHeader.png')" />
@@ -35,7 +35,7 @@ export default {
 </script>
 <style lang="scss">
 .healthDarren {
-  .joinActivityHeader {
+  .healthDarrenHeader {
     display: flex;
     justify-content: center;
     height: 45px;
