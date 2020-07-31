@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="快乐假期云活动">
     <router-view />
   </div>
 </template>
