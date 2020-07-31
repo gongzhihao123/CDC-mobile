@@ -111,14 +111,14 @@ export default {
             // 判断是否为控肥胖活动
             if (this.activityType * 1 === 2 * 1) {
               let antifatDataId = ''
-              let isBefore = false
+              let isBefore
               if (res.data.beforeBmi === null) {
                 isBefore = true
               } else {
                 isBefore = false
               }
               antifatDataId = res.data.id
-              this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, isBefore: this.isBefore, antifatDataId: antifatDataId, activityType: this.activityType } })
+              this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, isBefore: isBefore, antifatDataId: antifatDataId, activityType: this.activityType } })
             } else {
               this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
             }

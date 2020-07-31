@@ -110,7 +110,8 @@ export default {
   },
   mounted () {
     const token = window.localStorage.getItem('token')
-    if (token) {
+    if (token !== null) {
+      console.log(token !== null)
       this.$router.push('/home')
     }
   }
