@@ -28,12 +28,13 @@
             </div>
         </div>
       </div>
-      <van-popup v-model="showForget" round position="bottom" :style="{ height: '10%' }" >
+      <van-popup v-model="showForget" round position="bottom" :style="{ height: '16%' }" >
         <div class="fotgetPopup">
           <van-image :src="require('./../assets/img/forget_phone.jpg')" height="70" width="70"/>
           <div class="popContent">
             <p>请联系技术支持</p>
-            <p>曹老师 <a href="tel:15611131830">15611131830</a></p>
+            <!-- <p>曹老师 <a href="tel:15611131830">15611131830</a></p> -->
+            <p>曹老师 <a href="tel:13146032798">13146032798</a></p>
           </div>
         </div>
       </van-popup>
