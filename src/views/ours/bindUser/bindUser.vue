@@ -57,12 +57,12 @@
          <div class="bindUserPopupContent" >
             <p>请确认孩子信息：</p>
             <div>
-              <p><span>孩子姓名：</span> {{ checkUserInfo.name }}</p>
-              <p><span>性　　别：</span>{{ checkUserInfo.sex == 1 ? '男' : '女'  }}</p>
-              <p v-if="checkUserInfo.birthday"><span>出生日期：</span>{{ checkUserInfo.birthday[0] }}年{{ checkUserInfo.birthday[1] }}月{{ checkUserInfo.birthday[2] }}日</p>
-              <p><span>所在学校：</span>{{ checkUserInfo.schoolName }}</p>
-              <p><span>年　　级：</span>{{ checkUserInfo.gradeName }}</p>
-              <p><span>班　　级：</span>{{ checkUserInfo.className }}</p>
+              <p><span>姓名：</span> {{ checkUserInfo.name }}</p>
+              <p><span>性别：</span>{{ checkUserInfo.sex == 1 ? '男' : '女'  }}</p>
+              <p v-if="checkUserInfo.birthday"><span>生日：</span>{{ checkUserInfo.birthday[0] }}年{{ checkUserInfo.birthday[1] }}月{{ checkUserInfo.birthday[2] }}日</p>
+              <p><span>学校：</span>{{ checkUserInfo.schoolName }}</p>
+              <p><span>年级：</span>{{ checkUserInfo.gradeName }}</p>
+              <p><span>班级：</span>{{ checkUserInfo.className }}</p>
             </div>
         </div>
       </van-dialog>
@@ -354,11 +354,6 @@ export default {
               font-family: PingFang SC;
               font-weight: 500;
               color: rgba(51,51,51,1);
-              > span {
-                display: inline-block;
-                width: 70px;
-                text-align: right;
-              }
             }
           }
         }

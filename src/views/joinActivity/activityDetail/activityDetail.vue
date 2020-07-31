@@ -102,7 +102,7 @@ export default {
         activityId: this.activityId,
         activityType: this.activityType,
         activityTitle: this.activityTitle,
-        studentId: 1
+        studentId: currentChildId
       }
       apiJoinActivity(data)
         .then((res) => {

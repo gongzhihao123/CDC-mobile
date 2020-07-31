@@ -181,7 +181,7 @@ export default {
           beforeWeight: this.weight,
           beforeWeightImg: this.weightFileUrl
         }
-        apiSubminAntifatData().then(res => {
+        apiSubminAntifatData(data).then(res => {
           if (res.code === 1) {
             // wx.setStorageSync('isShowWeightRecord', 1)
             // wx.navigateBack({
@@ -199,7 +199,7 @@ export default {
           afterWeight: this.weight,
           afterWeightImg: this.weightFileUrl
         }
-        apiSubminAntifatData().then(res => {
+        apiSubminAntifatData(data).then(res => {
           if (res.code === 1) {
             this.dataCompare = res.data
             this.recordDialog = true
