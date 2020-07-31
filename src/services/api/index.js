@@ -24,3 +24,15 @@ export function apiReg (data) {
     .then(res => res.data)
     .catch((e) => {})
 }
+
+// 获取学校列表
+export function apiGetSchool (data) {
+  return request({
+    url: '/api/mine/schoolList',
+    method: 'get',
+    data: data,
+    isNeedLogin: true
+  })
+    .then(res => res.data)
+    .catch((e) => {})
+}
