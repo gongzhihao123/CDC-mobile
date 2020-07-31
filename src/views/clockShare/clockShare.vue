@@ -93,11 +93,17 @@ export default {
     onScroll () {
       const innerHeight = this.$refs.scroll.clientHeight
       const outerHeight = document.documentElement.clientHeight
-      const scrollTop = document.documentElement.scrollTop
+      const scrollTop = document.documentElement.scrollTop || window.pageYOfset || document.body.scrollTop
       if (innerHeight <= outerHeight + scrollTop) {
-        this.pageNo++
-        this.getShareList()
+        if (this.finished !== true) {
+          this.pageNo++
+          this.getShareList()
+        }
       }
+      this.$toast(
+        'innerHeight[ ' + innerHeight +
+      ' ] outerHeight[ ' + outerHeight +
+      ' ] scrollTop [ ' + scrollTop + ' ]')
     },
     // 标签切换
     async tabChange (tabName) {
@@ -111,9 +117,10 @@ export default {
         .then(res => {
           if (res.code === 1) {
             if (res.data.records.length > 0) {
-              console.log(res.data.records)
               this.shareList = this.shareList.concat(res.data.records)
+              this.finished = false
             } else {
+              this.finished = true
               this.$toast('已经到底啦')
             }
           }
@@ -121,7 +128,6 @@ export default {
         .catch(e => {
           this.error = true
         })
-      this.finished = true
     },
     showReportPopup (e) {
       this.shareId = e
@@ -140,7 +146,7 @@ export default {
       apiSpotPraise(e.id, data)
         .then(res => {
           if (res.code === 1) {
-            this.getShareList()
+            e.thumbsupNumber += 1
             this.$toast(res.message)
           } else {
             this.$toast(res.message)
