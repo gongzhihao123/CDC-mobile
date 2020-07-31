@@ -4,7 +4,7 @@
 // 加载动画Toast使用的是有赞的ui框架vant
 
 import axios from 'axios'
-import router from './../router'
+import router from './../router/index'
 import * as config from './../config'
 import queryString from 'querystring'
 import { Toast } from 'vant'
@@ -70,7 +70,7 @@ request.interceptors.response.use(function (response) {
   // 此处对返回状态进行判定，可以处理登陆过期等各种状态。
   if (response.data.code === '0000') {
     return Promise.resolve(response.data.appdata)
-  } else if (response.data.code === '3202') {
+  } else if (response.data.code === '401') {
     // 假定3202错误码，需重新登录
     return router.replace('/login')
   } else {
@@ -79,7 +79,9 @@ request.interceptors.response.use(function (response) {
 }, function (error) {
   // 对响应错误做点什么
   Toast.clear()
-
+  if (error.response.status === 401) {
+    return router.replace('/login')
+  }
   const errStr = error.toString()
   if (errStr.search('timeout') !== -1) {
     error = '请求超时'

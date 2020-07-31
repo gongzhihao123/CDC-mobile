@@ -55,7 +55,14 @@ export function apiReportHandle (url, data) {
     .catch((e) => {})
 }
 
-// 举报确定
+// 点赞
+export function apiSpotPraise (url, data) {
+  return request.post('/api/share/thumbsup/' + url, data)
+    .then(res => res.data)
+    .catch((e) => {})
+}
+
+// 肥胖记录
 export function apiSubminAntifatData (antifatDataId, data) {
   return request.post('/api/join/antifatData/' + antifatDataId, data)
     .then(res => res.data)

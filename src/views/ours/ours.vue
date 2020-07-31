@@ -14,17 +14,17 @@
     <div class="oursRelation">
         <div class="oursRelationHeader">
             <p>我的孩子</p>
-            <div bindtap="goAdd">
+            <div @click="goAdd">
                 <p>添加</p>
                 <van-image class="oursRelationAddImg" :src="require('./.././../assets/img/userAdd.png')" />
             </div>
         </div>
-        <div v-if="childrenList.length > 0" class="oursRelationList">
+        <div v-if="childrenList.length > 0" class="oursRelationList" >
             <div v-for="item in childrenList" :key="item.id" v-on:click="chooseMyChild(item)">
-                <div>
+                <div class="oursRelationListInfo" @click="selectChaneg(item.id)">
                     <van-image v-if="item.studentSex * 1 === 1" :src="require('./../../assets/img/userMan.png')" />
                     <van-image v-if="item.studentSex * 1 === 2" :src="require('./../../assets/img/userWoman.png')" />
-                    <div class="oursChildrenList">
+                    <div class="oursChildrenList" :class="{ selectChildrenActive:activeIndex * 1 === item.id * 1 }">
                         <div>
                             <p>{{ item.studentName }}</p>
                             <p>{{ item.studentGradeName + item.studentClassName }}</p>
@@ -61,6 +61,7 @@ export default {
     return {
       userPhone: '',
       currentChild: {},
+      activeIndex: '',
       token: '',
       childrenList: [],
       currentStudentActivityList: [],
@@ -74,6 +75,9 @@ export default {
     }
   },
   methods: {
+    goAdd () {
+      this.$router.push('/bindUser')
+    },
     getMyChildrenList () {
       apiGetMyChildList().then(res => {
         if (res.code === 1) {
@@ -91,6 +95,10 @@ export default {
       }).catch(e => {
         console.log(e)
       })
+    },
+    selectChaneg (id) {
+      this.activeIndex = id
+      sessionStorage.setItem('activeIndex', id)
     },
     initCurrentChild () {
       this.userPhone = sessionStorage.getItem('userName')
@@ -132,6 +140,7 @@ export default {
   mounted () {
     this.getMyChildrenList()
     this.initCurrentChild()
+    this.activeIndex = sessionStorage.getItem('activeIndex')
   }
 }
 </script>
@@ -147,18 +156,102 @@ export default {
     background: url(./../../assets/img/oursHeader.png) no-repeat;
     background-size: 100% 100%;
   }
-  // .ours {
-  //   position: relative;
-  //   height: 100px;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: space-between;
-  //   padding: 0 20px;
-  // }
   .oursInfo {
     background: url(./../../assets/img/oursBackground.png) no-repeat;
     background-size: 100% 100%;
-    .user {}
+    .user {
+      display: flex;
+      align-items: center;
+      padding: 17px 0 17px 30px;
+      .van-image {
+        width: 60px;
+        height: 60px;
+      }
+      p {
+        margin-left: 8px;
+        font-size:16px;
+        font-family:PingFang SC;
+        font-weight:bold;
+        color:rgba(255,255,255,1);
+      }
+    }
+  }
+  .oursRelation {
+    padding: 10px;
+    .oursRelationHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      > p {
+        font-size:18px;
+        font-family:PingFang SC;
+        font-weight:bold;
+        color:rgba(51,51,51,1);
+      }
+      > div {
+        display: flex;
+        align-items: center;
+        > p {
+          font-size:14px;
+          font-family:PingFang SC;
+          font-weight:500;
+          color:rgba(102,102,102,1);
+        }
+        .oursRelationAddImg {
+          width: 18px;
+          height: 18px;
+          margin-left: 6px;
+        }
+      }
+    }
+    .oursRelationList {
+      display: flex;
+      flex-direction: column;
+      > div {
+        margin: 5px 0;
+        .oursRelationListInfo {
+          display: flex;
+          align-items: center;
+          .van-image {
+            width: 44px;
+            height: 44px;
+            margin-right: 10px;
+          }
+          .oursChildrenList {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            > div {
+              display: flex;
+              margin-bottom: 5px;
+              p {
+                font-size:14px;
+                font-family:PingFang SC;
+                font-weight:bold;
+                color:rgba(51,51,51,1);
+              }
+              p:last-child {
+                margin-left: 8px;
+                color: #666666;
+              }
+            }
+            > p {
+              font-size:14px;
+              font-family:PingFang SC;
+              font-weight:bold;
+              color:#666666;
+            }
+          }
+        }
+      }
+    }
+    .selectChildrenActive {
+      background: url(./../../assets/img/selectChild.png) no-repeat right;
+      p {
+        color:#5CD5A8 !important;
+      }
+    }
   }
 }
 </style>

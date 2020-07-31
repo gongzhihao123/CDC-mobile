@@ -10,7 +10,7 @@
           <p>上传图片</p>
         </div>
         <div>
-          <van-uploader v-model="uploadFileList" :after-read="onUploadShare" multiple :max-count="1" />
+          <van-uploader v-model="uploadFileList" :after-read="onUploadShare" :max-size=" 10 * 1024 * 1024" @oversize="onOversize" multiple :max-count="1" />
         </div>
     </div>
     <div class="sharePopupButton">
@@ -54,6 +54,9 @@ export default {
             file.message = '上传失败'
           }
         })
+    },
+    onOversize () {
+      this.$toast('上传大小不能超过10M')
     },
     /**
      * 分享提交

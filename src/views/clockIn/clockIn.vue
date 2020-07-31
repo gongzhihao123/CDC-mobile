@@ -62,6 +62,7 @@ export default {
     }
     const antifatDataId = this.$route.query.antifatDataId
     if (antifatDataId) {
+      console.log('antifatDataId', antifatDataId)
       this.antifatDataId = antifatDataId
     }
     this.activityId = this.$route.query.activityId

@@ -17,11 +17,11 @@
             <p>上传照片</p>
             <div class="recordUpload">
               <div>
-                <van-uploader v-model="weightImgUrl" :after-read="onUploadWeight" :before-delete="removeWeightUpload" multiple :max-count="1" />
+                <van-uploader v-model="weightImgUrl" :after-read="onUploadWeight" :max-size=" 10 * 1024 * 1024" @oversize="onWeightOversize" multiple :max-count="1" />
                 <p>请上传体重照片</p>
               </div>
               <div>
-                <van-uploader v-model="shapeImgUrl" :after-read="onUploadheight" multiple :max-count="1" />
+                <van-uploader v-model="shapeImgUrl" :after-read="onUploadheight" :max-size=" 10 * 1024 * 1024" @oversize="onHeightOversize" multiple :max-count="1" />
                 <p>请上传体型照片</p>
               </div>
             </div>
@@ -75,7 +75,8 @@
 <script>
 import {
   apiSubminAntifatData,
-  apiUploadFile
+  apiUploadFile,
+  apidelFile
 } from '@/services/api/index_cs'
 export default {
   data () {
@@ -118,10 +119,24 @@ export default {
           }
         })
     },
+    onWeightOversize () {
+      this.$toast('上传大小不能超过10M')
+    },
+    onHeightOversize () {
+      this.$toast('上传大小不能超过10M')
+    },
     /***
      * 删除上传体重
      */
-    removeWeightUpload () {},
+    removeWeightUpload () {
+      apidelFile({ filepath: this.weightFileUrl })
+        .then(res => {
+          this.$toast(res.message)
+          if (res.code === 1) {
+            this.$toast(res.message)
+          }
+        })
+    },
     /**
      * 上传身高
      */
