@@ -20,15 +20,17 @@
           <div v-for="month in clockinList" :key="month.name">
             <span>{{ month.name + '月'}}</span>
             <div class="dateBox" >
-              <div v-for="day in month.days" :key="day.id">
-                <p v-if="day.clockInFlag" class="selectedDay">{{ day.day }}</p>
-                <p v-else class="nonSelectedDay">{{ day.day }}</p>
+              <div class="dateBoxInfo">
+                <div v-for="day in month.days" :key="day.id">
+                  <p v-if="day.clockInFlag" class="selectedDay">{{ day.day }}</p>
+                  <p v-else class="nonSelectedDay">{{ day.day }}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="punchRecordInfoButton">
-            <van-button v-on:click="goActivityDetail" type="info">去打卡</van-button>
+            <div v-on:click="goActivityDetail" type="info">去打卡</div>
         </div>
         <div class="userRank">
             <p>我当前的排名</p>
@@ -142,11 +144,16 @@ export default {
   }
   .punchRecordInfo {
     height: 100%;
-    margin: -10px 15px 0;
+    margin: -20px 15px 0;
     padding: 20px 16px;
     background: #fff;
     border-radius: 15px;
-    h2 {}
+    h2 {
+      font-size: 18px;
+      font-family:PingFang SC;
+      font-weight:bold;
+      color:rgba(51,51,51,1);
+    }
     .punchRecordInfoContent {
       > div {
         display: flex;
@@ -161,28 +168,103 @@ export default {
         .dateBox {
           width: 100%;
           display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          flex-wrap: wrap;
-          > div {
-            width: 13%;
-            .selectedDay {
-              padding: 6px;
-              background: #3CC3A0;
-              color: #fff;
-              display: inline-block;
-            }
-            .nonSelectedDay {
-              padding: 6px;
-              background: #fff;
-              display: inline-block;
+          justify-content: center;
+          .dateBoxInfo {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            > div {
+              width: 14.2%;
+              margin: 5px 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .selectedDay {
+                padding: 6px;
+                border-radius: 50%;
+                background: #3CC3A0;
+                color: #fff;
+                display: inline-block;
+              }
+              .nonSelectedDay {
+                padding: 6px;
+                background: #fff;
+                display: inline-block;
+              }
             }
           }
         }
       }
-      > div:last-child {
+      > div:first-child {
         .dateBox {
-          justify-content: center;
+          justify-content: flex-start;
+          .dateBoxInfo {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .punchRecordInfoButton {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+      border-bottom: 1px solid #E5E5E5;
+      div {
+        width: 50%;
+        display: block;
+        padding: 10px 8px;
+        margin: 6px  6px 12px;
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+        background: linear-gradient(45deg, #07e6da,#1cbbb4);
+        border-radius: 20px;
+      }
+    }
+    .userRank {
+      > p {
+        font-size:18px;
+        font-family:PingFang SC;
+        font-weight:bold;
+        color:rgba(51,51,51,1);
+      }
+      .userRankInfo {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0 60px;
+        > div {
+          display: flex;
+          flex-direction: column;
+          align-content: center;
+          align-items: center;
+          p:first-child {
+            font-size: 15px;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: rgba(102,102,102,1);
+          }
+          p:last-child {
+            margin-top: 22px;
+            font-size: 20px;
+            font-family: Calibri;
+            font-weight: bold;
+          }
+        }
+        > div:nth-child(2) {
+          p:last-child {
+            color: rgba(60,195,160,1);
+          }
+        }
+        > div:nth-child(3) {
+          p:last-child {
+            color: rgba(60,195,160,1);
+          }
+        }
+        > div:nth-child(4) {
+          p:last-child {
+            color: rgba(210,87,105,1);
+          }
         }
       }
     }
