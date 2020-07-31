@@ -63,7 +63,7 @@ export default {
       activityList: [],
       shareId: '',
       shareList: [],
-      pageNo: 0,
+      pageNo: 1,
       pageSize: 7,
       total: '',
       activityId: '',
@@ -111,6 +111,7 @@ export default {
         .then(res => {
           if (res.code === 1) {
             if (res.data.records.length > 0) {
+              console.log(res.data.records)
               this.shareList = this.shareList.concat(res.data.records)
             } else {
               this.$toast('已经到底啦')
