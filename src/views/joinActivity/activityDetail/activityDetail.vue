@@ -209,6 +209,47 @@ export default {
         border-radius: 20px;
       }
     }
+    .activityContent {
+      .stickyTitle {
+        margin: 10px 0;
+        .van-sticky {
+          margin: 10px 0;
+          p {
+            font-size:18px;
+            font-family:PingFang SC;
+            font-weight:bold;
+            color:rgba(51,51,51,1);
+          }
+        }
+      }
+      .articleList {
+        .activityInfo {
+          display: flex;
+          margin-bottom: 10px;
+          align-items: center;
+          .van-image {
+            width: 80px;
+            height: 57px;
+          }
+          .activityInfoContent {
+            width: 100%;
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            p {
+              font-size: 16px;
+            }
+            span {
+              font-size:14px;
+              font-family:PingFang SC;
+              font-weight:400;
+              color:rgba(153,153,153,1);
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>
