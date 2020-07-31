@@ -81,7 +81,7 @@ export default {
       this.$set(this.currentChild, 'studentClassName', window.localStorage.getItem('currentClassName'))
     },
     goActivityDetail () {
-      this.$router.push({ path: '/activityDetail', query: { activityid: this.currentActivityId, activityType: this.currentActivityType } })
+      this.$router.push({ path: '/activityDetail', query: { activityId: this.currentActivityId, activityType: this.currentActivityType } })
     },
     getClockinList () {
       apiGetClockinList(this.currentActivityId, this.currentChild.studentId).then(res => {

@@ -275,7 +275,7 @@ export default {
         })
     },
     bindUserDefine () {
-      const studentId = window.localStorage.getItem('currentChildId')
+      const studentId = this.checkUserInfo.id
       const data = {
         campusName: this.campusName,
         className: this.className,
@@ -289,8 +289,8 @@ export default {
       }
       apiBindCheckDefine(data)
         .then(res => {
+          this.$toast(res.message)
           if (res.code === 1) {
-            this.$toast(res.message)
             this.$router.push('/ours')
           }
         })

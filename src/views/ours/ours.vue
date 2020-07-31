@@ -83,6 +83,12 @@ export default {
       apiGetMyChildList().then(res => {
         if (res.code === 1) {
           this.childrenList = res.data
+          // 如果已绑定孩子 并且 还没有选择孩子 那么自动选择第一个孩子
+          const hasChild = this.childrenList && this.childrenList.length > 0
+          const noCurrentChild = !window.localStorage.getItem('currentChildId')
+          if (hasChild && noCurrentChild) {
+            this.chooseMyChild(this.childrenList[0])
+          }
         }
       }).catch(e => {
         console.log(e)
