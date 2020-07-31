@@ -13,6 +13,9 @@
         <div class="editPassword" @click="openEdit">
           <span >修改密码</span>
         </div>
+        <div class="editPassword" @click="exitLogin">
+          <span >退出登录</span>
+        </div>
     </div>
     <van-dialog v-model="editPasswordShow" title="修改密码" @cancel="editClose" @confirm="editConfirm" show-cancel-button>
       <div class="editContent">
@@ -187,6 +190,10 @@ export default {
     // 跳转活动详情
     goStudentShare () {
       this.$router.push({ path: '/userActivityRecord' })
+    },
+    exitLogin () {
+      window.localStorage.clear()
+      this.$router.push({ path: '/login' })
     }
   },
   mounted () {
