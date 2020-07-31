@@ -76,7 +76,7 @@ export default {
     return {
       relation: '',
       relationName: '',
-      relationList: [{ id: 1, name: '本人' }, { id: 2, name: '爸爸' }, { id: 3, name: '妈妈' }, { id: 4, name: '爷爷' }, { id: 5, name: '奶奶' }, { id: 6, name: '姥爷' }, { id: 7, name: '姥姥' }, { id: 8, name: '叔叔' }, { id: 9, name: '叔叔' }],
+      relationList: [{ id: 1, name: '本人' }, { id: 2, name: '爸爸' }, { id: 3, name: '妈妈' }, { id: 4, name: '爷爷' }, { id: 5, name: '奶奶' }, { id: 6, name: '姥爷' }, { id: 7, name: '姥姥' }, { id: 8, name: '其他' }],
       relationFlag: false,
       childName: '',
       sex: '',
@@ -262,6 +262,45 @@ export default {
           }
         })
     },
+    confirmCheck () {
+      if (!this.relation) {
+        this.$toast('请选择关系')
+        return false
+      }
+      if (!this.childName) {
+        this.$toast('孩子姓名不能为空')
+        return false
+      }
+      if (!this.sex) {
+        this.$toast('性别不能为空')
+        return false
+      }
+      if (!this.birthday) {
+        this.$toast('出生日期不能为空')
+        return false
+      }
+      if (!this.campusName) {
+        this.$toast('学校不能为空')
+        return false
+      }
+      if (!this.campusName) {
+        this.$toast('校区不能为空')
+        return false
+      }
+      if (!this.gradeName) {
+        this.$toast('学段不能为空')
+        return false
+      }
+      if (!this.gradeName) {
+        this.$toast('班级不能为空')
+        return false
+      }
+      if (!this.className) {
+        this.$toast('班级不能为空')
+        return false
+      }
+      return true
+    },
     // 确认提交
     confirmButton () {
       const data = {
@@ -280,13 +319,15 @@ export default {
         sectionName: this.sectionName,
         sex: this.sex
       }
-      apiBindCheck(data)
-        .then(res => {
-          if (res.code === 1) {
-            this.showCheckFlag = true
-            this.checkUserInfo = res.data
-          }
-        })
+      if (this.confirmCheck()) {
+        apiBindCheck(data)
+          .then(res => {
+            if (res.code === 1) {
+              this.showCheckFlag = true
+              this.checkUserInfo = res.data
+            }
+          })
+      }
     },
     bindUserDefine () {
       const studentId = this.checkUserInfo.id

@@ -48,7 +48,7 @@
                     <p>{{ activityStudent.shareCount }}</p>
                 </div>
                 <div>
-                    <p>点赞数</p>
+                    <p>被点赞数</p>
                     <p>{{ activityStudent.thumbsupCount }}</p>
                 </div>
             </div>
@@ -144,6 +144,7 @@ export default {
   }
   .punchRecordInfo {
     height: 100%;
+    min-height: 700px;
     margin: -20px 15px 0;
     padding: 20px 16px;
     padding-bottom: 100px;
@@ -184,8 +185,8 @@ export default {
               .selectedDay {
                 padding: 6px;
                 border-radius: 50%;
-                background: #3CC3A0;
-                color: #fff;
+                color: #3CC3A0;
+                font-weight: 900;
                 display: inline-block;
               }
               .nonSelectedDay {
