@@ -48,7 +48,7 @@
         </van-cell-group>
     </div>
     <div class="oursShare" v-if="currentChild.studentName">
-        <van-cell :icon="require('./../../assets/img/userShare.png')" :title="currentChild.studentName + '的分享'" is-link></van-cell>
+        <van-cell v-on:click="goStudentShare" :icon="require('./../../assets/img/userShare.png')" :title="currentChild.studentName + '的分享'" is-link></van-cell>
     </div>
   </div>
 </template>
@@ -136,6 +136,10 @@ export default {
           thumbsupCount: studentActivity.thumbsup_count
         }
       })
+    },
+    // 跳转活动详情
+    goStudentShare () {
+      this.$router.push({ path: '/userActivityRecord' })
     }
   },
   mounted () {
