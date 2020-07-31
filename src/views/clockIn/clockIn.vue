@@ -4,16 +4,16 @@
     <div class="clockInContent">
         <p class="clockInHeder">跟我做</p>
         <div class="clockInList" >
-          <iframe v-if="activityType == 1" src = "https://xbeibeix.com/api/bilibili/biliplayer/?url=BV16p4y1i7pf" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"/>
+          <!-- <iframe v-if="activityType == 1" src = "https://xbeibeix.com/api/bilibili/biliplayer/?url=BV16p4y1i7pf" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"/>
           <iframe v-if="activityType == 2" src = "https://xbeibeix.com/api/bilibili/biliplayer/?url=BV1G54y1S7CR" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"/>
           <iframe v-if="activityType == 2" src = "https://xbeibeix.com/api/bilibili/biliplayer/?url=BV1Gt4y1X7z5" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"/>
           <iframe v-if="activityType == 2" src = "https://xbeibeix.com/api/bilibili/biliplayer/?url=BV1PD4y1D7sY" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"/>
-          <iframe v-if="activityType == 2" src = "https://xbeibeix.com/api/bilibili/biliplayer/?url=BV1954y1q7KS" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"/>
-          <!-- <iframe v-if="activityType == 1" src="//player.bilibili.com/player.html?aid=968931122&bvid=BV16p4y1i7pf&cid=216047596&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+          <iframe v-if="activityType == 2" src = "https://xbeibeix.com/api/bilibili/biliplayer/?url=BV1954y1q7KS" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"/> -->
+          <iframe v-if="activityType == 1" src="//player.bilibili.com/player.html?aid=968931122&bvid=BV16p4y1i7pf&cid=216047596&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
           <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=838903282&bvid=BV1G54y1S7CR&cid=216039436&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
           <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=626453689&bvid=BV1Gt4y1X7z5&cid=216037615&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
           <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=711414755&bvid=BV1PD4y1D7sY&cid=216046566&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-          <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=841447527&bvid=BV1954y1q7KS&cid=216043111&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> -->
+          <iframe v-if="activityType == 2" src="//player.bilibili.com/player.html?aid=841447527&bvid=BV1954y1q7KS&cid=216043111&page=1&danmaku=0" style="width: 100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
         </div>
         <div class="weightRecord" v-if="isShowWeightRecord != 1" @click="navClockInGoRecord">
             <div class="weightRecordNow">
