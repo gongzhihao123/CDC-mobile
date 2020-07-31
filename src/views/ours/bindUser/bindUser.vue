@@ -128,8 +128,8 @@ export default {
       const day = time.getDate()
       let tempMonth = 0
       let tempDay = 0
-      month > 10 ? tempMonth = month : tempMonth = '0' + month
-      day > 10 ? tempDay = day : tempDay = '0' + day
+      month > 9 ? tempMonth = month : tempMonth = '0' + month
+      day > 9 ? tempDay = day : tempDay = '0' + day
       return year + '-' + tempMonth + '-' + tempDay
     },
     // 选择出生日期
