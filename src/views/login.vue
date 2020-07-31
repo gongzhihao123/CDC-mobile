@@ -1,20 +1,31 @@
 <template>
   <div class="login">
       <div class="loginBox">
-        <div class="logo"></div>
         <div class="form-item">
+          <div class="inputDiv">
+            <img round :src="require('./../assets/img/login_mobile_user.png')" />
             <input class="username" v-model="userName" type="text" @keyup.enter="submit" autocomplete="off" placeholder="手机号码">
             <p class="tip" v-if="userFlag">请输入正确的手机号码</p>
+          </div>
         </div>
         <div class="form-item" v-if="!isReg">
+          <div class="inputDiv">
+            <img :src="require('./../assets/img/login_mobile_password.png')" />
             <input class="password" v-model="password" @keyup.enter="submit" type="password" autocomplete="off" placeholder="密码">
             <p class="tip" v-if="passwordFlag">手机号码或密码不正确</p>
+          </div>
         </div>
         <div class="form-item" v-if="!isReg"><button @click="submit">登 录</button></div>
         <div class="form-item" v-if="isReg"><button @click="regConfirm">注 册</button></div>
         <div class="reg-bar">
-            <span class="reg" @click="reg">立即注册</span>
-            <span class="forget">忘记密码</span>
+            <div class="reg">
+              <span @click="reg">立即注册</span>
+              <img round :src="require('./../assets/img/login_mobile_user.png')" />
+              </div>
+            <div class="forget">
+              <span>忘记密码</span>
+              <img round :src="require('./../assets/img/login_mobile_fotget.png')" />
+            </div>
         </div>
       </div>
   </div>
@@ -76,12 +87,18 @@ export default {
           .then((res) => {
             if (res.code === 1) {
               this.$toast(res.message)
-              sessionStorage.setItem('userName', this.userName)
-              sessionStorage.setItem('token', res.data)
+              window.localStorage.setItem('userName', this.userName)
+              window.localStorage.setItem('token', res.data)
               this.$router.push('/home')
             }
           })
       }
+    }
+  },
+  mounted () {
+    const token = window.localStorage.getItem('token')
+    if (token) {
+      this.$router.push('/home')
     }
   }
 }
@@ -91,23 +108,29 @@ export default {
   html { height: 100%; }
   body { height: 100%; }
   .login { height: 100%; width: 100%;   }
-  .loginBox { position: absolute; left: 50%; top: 50%; width: 100%; height: 100%; border-radius: 20px; overflow: hidden; background: #fff url(./../assets/img/backgroud.png) 50% 50% no-repeat; background-size: cover; border: 1px solid #fff;}
-  .login .logo { width: 104px; height: 104px; margin: 50px auto 80px; background: url(./../assets/img/login.png) 0 0 no-repeat; }
-  .login .form-item { position: relative; width: 360px; margin: 0 auto; padding-bottom: 30px;}
-  .login .form-item input { width: 288px; height: 48px; padding-left: 70px; border: 1px solid #fff; border-radius: 25px; font-size: 18px; color: #fff; background-color: transparent; outline: none;}
-  .login .form-item button { height: 50px; border: 0; border-radius: 25px; font-size: 18px; color: #1f6f4a; outline: none; cursor: pointer; background-color: #fff; }
-  .login .username { background: url(./../assets/img/emil.png) 20px 14px no-repeat; }
-  .login .password { background: url(./../assets/img/password.png) 23px 11px no-repeat; }
+  .loginBox { position: absolute; display:flex; flex-direction: column; justify-content: center; left: 50%; top: 50%; width: 100%; height: 100%; border-radius: 20px; overflow: hidden; background: #fff url(./../assets/img/login_mobile.png) 50% 50% no-repeat; background-size: cover; border: 1px solid #fff;}
+  .loginBox > .form-item:first-child { margin-top: 220px; }
+  .login .form-item { display: inline-flex; position: relative; width: 360px; margin: 0 auto; padding-bottom: 30px;}
+  .login .form-item input { width: 248px; height: 48px; padding-left: 20px; border-radius: 25px; font-size: 18px; color: #08AE8E; background-color: transparent; outline: none;}
+  .login .form-item button { height: 50px; border: 0; border-radius: 25px; font-size: 18px; color: #fff; outline: none; cursor: pointer; background: linear-gradient(45deg, #07e6da, #08AE8E); }
+  .login .form-item .inputDiv { display: inline-flex; align-items: center; border: 1PX solid #08AE8E; border-radius: 25px;}
+  .login .form-item .inputDiv img {  height: 1.6rem; margin-left: 14px; vertical-align: middle;}
+  .login .form-item .inputDiv:last-child { width: 100%; }
   .login .tip { position: absolute; left: 20px; top: 52px; font-size: 14px; color: #f50; }
   .login .reg-bar { margin: 20px auto 0; font-size: 14px; overflow: hidden;}
-  .login .reg-bar span { color: #fff; text-decoration: none; }
+  .login .reg-bar span { color: #08AE8E; text-decoration: none; font-size: 16px;}
   .login .reg-bar span:hover { text-decoration: underline; }
-  .login .reg-bar .reg { float: left; }
-  .login .reg-bar .forget { float: right; }
-  .login ::-webkit-input-placeholder { font-size: 18px; line-height: 1.4; color: #fff;}
-  .login :-moz-placeholder { font-size: 18px; line-height: 1.4; color: #fff;}
-  .login ::-moz-placeholder { font-size: 18px; line-height: 1.4; color: #fff;}
-  .login :-ms-input-placeholder { font-size: 18px; line-height: 1.4; color: #fff;}
+  .login .reg-bar .reg { float: left; padding-left: 10px;}
+  .login .reg-bar .reg span { vertical-align: middle; }
+  .login .reg-bar .reg img { vertical-align: middle; margin-left:3px; width: 1rem; }
+
+  .login .reg-bar .forget { float: right; padding-right: 10px; }
+  .login .reg-bar .forget span { vertical-align: middle; }
+  .login .reg-bar .forget img { vertical-align: middle; margin-left:3px; width: 1rem; }
+  .login ::-webkit-input-placeholder { font-size: 18px; line-height: 1.4; color: #08AE8E;}
+  .login :-moz-placeholder { font-size: 18px; line-height: 1.4; color: #08AE8E;}
+  .login ::-moz-placeholder { font-size: 18px; line-height: 1.4; color: #08AE8E;}
+  .login :-ms-input-placeholder { font-size: 18px; line-height: 1.4; color: #08AE8E;}
 
   @media screen and (max-width: 500px) {
       * { box-sizing: border-box; }
@@ -118,7 +141,7 @@ export default {
         border: 0; border-radius: 0;
       }
       .logo { margin: 50px auto; }
-      .login .form-item { width: auto; }
-      .login .form-item input, .form-item button, .reg-bar { width: 100%; }
+      .login .form-item { width: 100%; }
+      .login .form-item input, .form-item button, .reg-bar { width: 100%; font-size: 24px; }
   }
 </style>

@@ -97,7 +97,7 @@ export default {
     },
     // 参加活动
     joinActivity () {
-      const currentChildId = sessionStorage.getItem('currentChildId')
+      const currentChildId = window.localStorage.getItem('currentChildId')
       const data = {
         activityId: this.activityId,
         activityType: this.activityType,

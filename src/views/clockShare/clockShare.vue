@@ -150,8 +150,8 @@ export default {
        * 举报确认
        */
     reportHandleDefine () {
-      const currentChildId = sessionStorage.getItem('currentChildId')
-      const currentChildName = sessionStorage.getItem('currentChildName')
+      const currentChildId = window.localStorage.getItem('currentChildId')
+      const currentChildName = window.localStorage.getItem('currentChildName')
       const data = {
         reason: this.reason,
         reasonContent: this.reasonContent,

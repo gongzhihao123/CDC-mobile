@@ -66,8 +66,8 @@ export default {
         this.$toast('分享内容需超过十个字符')
         return
       }
-      const currentChildId = sessionStorage.getItem('currentChildId')
-      const currentChildName = sessionStorage.getItem('currentChildName')
+      const currentChildId = window.localStorage.getItem('currentChildId')
+      const currentChildName = window.localStorage.getItem('currentChildName')
       const data = {
         activityId: this.activityId,
         contentImg: this.shareImgUrl,
