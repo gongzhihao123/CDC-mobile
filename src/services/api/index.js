@@ -84,3 +84,15 @@ export function apiBindCheck (data) {
     .then(res => res.data)
     .catch((e) => {})
 }
+
+// 绑定孩子确认
+export function apiBindCheckDefine (data) {
+  return request({
+    url: '/api/mine/bind',
+    method: 'post',
+    data: data,
+    isNeedLogin: true
+  })
+    .then(res => res.data)
+    .catch((e) => {})
+}

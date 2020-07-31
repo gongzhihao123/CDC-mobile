@@ -43,7 +43,7 @@
       <!-- 选择年级 -->
       <van-field readonly clickable name="picker" :value="gradeName" label="所在年级" placeholder="点击选择年级" @click="changeGrade" />
       <van-popup v-model="gradeflag" position="bottom">
-        <van-picker show-toolbar :columns="gradeList" value-key="name" @confirm="gradeConfirm" @cancel="sectionflag = false" />
+        <van-picker show-toolbar :columns="gradeList" value-key="name" @confirm="gradeConfirm" @cancel="gradeflag = false" />
       </van-popup>
       <!-- 选择班级 -->
       <van-field readonly clickable name="picker" :value="className" label="所在班级" placeholder="点击选择班级" @click="changeClass" />
@@ -70,7 +70,7 @@
   </div>
 </template>
 <script>
-import { apiGetSchool, apiGetCampus, apiGetGrade, apiGetClass, apiBindCheck } from '@/services/api/index'
+import { apiGetSchool, apiGetCampus, apiGetGrade, apiGetClass, apiBindCheck, apiBindCheckDefine } from '@/services/api/index'
 export default {
   data () {
     return {
@@ -134,7 +134,6 @@ export default {
       this.dateFlag = true
     },
     dateConfirm (e) {
-      console.log(this.timeFormat(e))
       this.birthday = this.timeFormat(e)
       this.dateFlag = false
     },
@@ -276,7 +275,25 @@ export default {
         })
     },
     bindUserDefine () {
-      this.$router.push('/ours')
+      const studentId = window.localStorage.getItem('currentChildId')
+      const data = {
+        campusName: this.campusName,
+        className: this.className,
+        gradeName: this.gradeName,
+        name: this.childName,
+        relation: this.relation,
+        schoolName: this.schoolName,
+        sectionName: this.sectionName,
+        sex: this.sex,
+        studentId: studentId
+      }
+      apiBindCheckDefine(data)
+        .then(res => {
+          if (res.code === 1) {
+            this.$toast(res.message)
+            this.$router.push('/ours')
+          }
+        })
     }
   }
 }

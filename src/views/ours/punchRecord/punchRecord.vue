@@ -15,6 +15,7 @@
     </div>
     <!-- 打卡记录 -->
     <div class="punchRecordInfo">
+        <h2>打卡记录</h2>
         <div class="punchRecordInfoContent">
           <div v-for="month in clockinList" :key="month.name">
             <span>{{ month.name + '月'}}</span>
@@ -112,6 +113,8 @@ export default {
 </script>
 <style lang="scss">
 .punchRecord {
+  height: 100%;
+  background: #E9E9E9;
   .punchRecordUser {
     height: 145px;
     background: url(./../../../assets/img/poundRecordBackground.png) no-repeat;
@@ -138,34 +141,48 @@ export default {
     }
   }
   .punchRecordInfo {
-    margin-top: -10px;
-  }
-}
-
-.punchRecordInfoContent {
-  > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .dateBox {
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
+    height: 100%;
+    margin: -10px 15px 0;
+    padding: 20px 16px;
+    background: #fff;
+    border-radius: 15px;
+    h2 {}
+    .punchRecordInfoContent {
       > div {
-        width: 13%;
-        .selectedDay {
-          padding: 6px;
-          background: #3CC3A0;
-          color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        > span {
           display: inline-block;
+          margin: 10px 0;
+          font-size: 14px;
         }
-        .nonSelectedDay {
-          padding: 6px;
-          background: #fff;
-          display: inline-block;
+        .dateBox {
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+          > div {
+            width: 13%;
+            .selectedDay {
+              padding: 6px;
+              background: #3CC3A0;
+              color: #fff;
+              display: inline-block;
+            }
+            .nonSelectedDay {
+              padding: 6px;
+              background: #fff;
+              display: inline-block;
+            }
+          }
+        }
+      }
+      > div:last-child {
+        .dateBox {
+          justify-content: center;
         }
       }
     }
