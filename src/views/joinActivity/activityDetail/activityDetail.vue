@@ -1,6 +1,6 @@
 <template>
   <div class="activityDetail">
-    <div class="joinActivityHeader">动起来活动</div>
+    <div class="joinActivityHeader">活动详情</div>
     <div class="activityDetailBox">
       <div class="activityTitle">
         <div class="activityHeader">

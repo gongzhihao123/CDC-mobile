@@ -26,7 +26,7 @@
                 </div>
               </div>
             </div>
-            <van-dialog v-model="reportShow" title="举报" overlay="false" show-cancel-button @confirm="reportHandleDefine" @cancel="reportHandleClose" @close="reportHandleClose">
+            <van-dialog v-model="reportShow" title="举报" show-cancel-button @confirm="reportHandleDefine" @cancel="reportHandleClose" @close="reportHandleClose">
               <div class="articlePopupContent">
                 <van-radio-group v-model="reason" direction="horizontal">
                   <van-radio v-for="item in classify" :key="item.id" :name="item.id">{{ item.name }}</van-radio>
