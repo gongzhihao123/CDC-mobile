@@ -62,11 +62,15 @@ export default {
       this.getAntifatInfo()
     } else {
       this.disableFlag = true
+      await this.countDown()
     }
-    await this.countDown()
   },
   methods: {
     countDown () {
+      this.$toast({
+        message: '请4分18秒后开始打卡',
+        duration: 3000
+      })
       let times = 258
       this.timer = setInterval(() => {
         times--

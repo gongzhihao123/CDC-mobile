@@ -79,7 +79,6 @@ export default {
     this.activityId = this.$route.query.activityId
     this.activityType = this.$route.query.activityType
     this.activityTitle = this.$route.query.activityTitle
-    console.log(this.activityId, this.activityType, this.activityTitle)
     await this.getArticleList()
   },
   methods: {
@@ -110,19 +109,6 @@ export default {
         .then((res) => {
           if (res.code === 1) {
             this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
-            // 判断是否为控肥胖活动
-            // if (this.activityType * 1 === 2 * 1) {
-            //   // let antifatDataId = ''
-            //   // if (res.data.beforeBmi === null) {
-            //   //   this.isBefore = true
-            //   // } else {
-            //   //   this.isBefore = false
-            //   // }
-            //   // antifatDataId = res.data.id
-            //   this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
-            // } else {
-            //   this.$router.push({ path: '/clockIn', query: { activityId: this.activityId, activityType: this.activityType } })
-            // }
           }
         })
         .catch(e => {
