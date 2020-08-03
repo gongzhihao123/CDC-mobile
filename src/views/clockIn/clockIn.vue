@@ -55,14 +55,27 @@ export default {
       fatInfo: {}
     }
   },
-  mounted () {
+  async mounted () {
     this.activityId = this.$route.query.activityId
     this.activityType = this.$route.query.activityType
     if (this.activityType * 1 === 2) {
       this.getAntifatInfo()
+    } else {
+      this.disableFlag = true
     }
+    await this.countDown()
   },
   methods: {
+    countDown () {
+      let times = 258
+      this.timer = setInterval(() => {
+        times--
+        if (times === 0) {
+          this.disableFlag = false
+          clearInterval(this.timer)
+        }
+      }, 1000)
+    },
     // 获取肥胖信息
     getAntifatInfo () {
       const studentId = window.localStorage.getItem('currentChildId')
