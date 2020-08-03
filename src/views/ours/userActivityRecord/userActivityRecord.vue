@@ -79,11 +79,12 @@ export default {
       await apiGetSharePageByActivity(this.pageNo, this.pageSize, { activityId: this.activityId, studentId: this.currentChild.studentId })
         .then(res => {
           if (res.code === 1) {
-            this.shareList = res.data.records
-            this.loading = false
-            this.total = res.data.total
-            if (this.shareList.length >= this.total) {
+            if (res.data.records.length > 0) {
+              this.shareList = this.shareList.concat(res.data.records)
+              this.finished = false
+            } else {
               this.finished = true
+              this.$toast('已经到底啦')
             }
           }
         })

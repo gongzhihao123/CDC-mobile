@@ -57,6 +57,7 @@ export default {
       }
       i {
         font-style: normal;
+        margin-top: 5px;
       }
       .selectActive {
         color: #5CD5A8;

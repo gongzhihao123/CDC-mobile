@@ -115,7 +115,6 @@ export default {
 </script>
 <style lang="scss">
 .punchRecord {
-  height: 100%;
   background: #E9E9E9;
   .punchRecordUser {
     height: 145px;
@@ -144,10 +143,9 @@ export default {
   }
   .punchRecordInfo {
     height: 100%;
-    min-height: 700px;
+    min-height: 500px;
     margin: -20px 15px 0;
     padding: 20px 16px;
-    padding-bottom: 100px;
     background: #fff;
     border-radius: 15px;
     h2 {

@@ -13,7 +13,7 @@
         <div class="editPassword" @click="openEdit">
           <span >修改密码</span>
         </div>
-        <div class="editPassword" @click="exitLogin">
+        <div class="logOut" @click="exitLogin">
           <span >退出登录</span>
         </div>
     </div>
@@ -215,7 +215,7 @@ export default {
     .user {
       display: flex;
       align-items: center;
-      padding: 17px 0 17px 30px;
+      padding: 17px 0 17px 15px;
       .van-image {
         width: 60px;
         height: 60px;
@@ -229,6 +229,13 @@ export default {
       }
     }
     .editPassword {
+      span {
+        padding: 8px 12px;
+        color: #fff;
+        background: #5CD5A8;
+      }
+    }
+    .logOut {
       margin-right: 20px;
       span {
         padding: 8px 12px;

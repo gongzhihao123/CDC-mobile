@@ -12,7 +12,7 @@
             <div class="clockShareInfoHeader">{{ share.studentName }}</div>
             <p>{{ share.content }}</p>
             <div v-if="share.contentImg" class="clockShareInfoMainImgBox">
-              <van-image class="clockShareInfoMainImg" fit="cover" @click="imgPreview(share.contentImg)" :src="readPath + share.contentImg"></van-image>
+              <van-image class="clockShareInfoMainImg"  @click="imgPreview(share.contentImg)" :src="readPath + share.contentImg"></van-image>
             </div>
             <div class="clockShareInfoFoot">
               <p>{{ share.createdTime[0] + '-' + share.createdTime[1] + '-' + share.createdTime[2] + ' ' + share.createdTime[3] + ':' + share.createdTime[4] + ':' + share.createdTime[5] }}</p>
@@ -237,10 +237,11 @@ export default {
         .clockShareInfoMainImgBox {
           height: 150px;
           width: 100%;
+          overflow: hidden;
           margin: 10px 0;
           overflow: hidden;
           .van-image {
-            height: 150px;
+            height: auto;
           }
         }
         > p {
