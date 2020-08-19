@@ -64,7 +64,6 @@ export default {
         apiReg({ account: this.userName })
           .then(res => {
             if (res.code === 1) {
-              console.log(res)
               this.$toast.success(res.message)
               this.isReg = false
             } else {

@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     readPath () {
-      return window.location.origin + '/activity/common/attachment?filepath='
+      return 'https://jk.meetyuu.com/app/'
     }
   },
   async mounted () {
